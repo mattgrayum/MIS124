@@ -7,36 +7,91 @@
         <h1 style="display: inline-block; position: relative; left: -17px; top: 35px;">Sacramento State</h1>
         <p style="display: inline-block; position: relative; left: 2px; top: 38px;"><i>Redefine the Possible</i></p>
     </div>
-    <div style="text-align: center; border-bottom: solid; border-width: thin;"><h1>2017 Tax Return 1040EZ Calculator</h1></div>
+    <div style="text-align: center; border-bottom: solid; border-width: thin; margin-bottom: 10px;"><h1>2017 Tax Return 1040EZ Calculator</h1></div>
 
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Getting started</h2>
-            <p>
-                ASP.NET Web Forms lets you build dynamic websites using a familiar drag-and-drop, event-driven model.
-            A design surface and hundreds of controls and components let you rapidly build sophisticated, powerful UI-driven sites with data access.
-            </p>
-            <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301948">Learn more &raquo;</a>
-            </p>
+    <div class="row" style="padding-top: 10px; padding-bottom: 10px">
+        <div class="col-md-6">
+            <asp:Label ID="lblIndivOrJoint" runat="server" Text="Is this an individual or joint tax return?"></asp:Label>
         </div>
-        <div class="col-md-4">
-            <h2>Get more libraries</h2>
-            <p>
-                NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.
-            </p>
-            <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301949">Learn more &raquo;</a>
-            </p>
+        <div class="col-md-6">
+            <asp:DropDownList ID="DropDownList1" runat="server">
+                <asp:ListItem>Individual</asp:ListItem>
+                <asp:ListItem>Joint</asp:ListItem>
+            </asp:DropDownList>
         </div>
-        <div class="col-md-4">
-            <h2>Web Hosting</h2>
-            <p>
-                You can easily find a web hosting company that offers the right mix of features and price for your applications.
-            </p>
-            <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
-            </p>
+    </div>
+    <div class="row" style="padding-top: 10px; padding-bottom: 10px">
+        <div class="col-md-6">
+            <asp:Label ID="lblWages" runat="server" Text="Wages, salaries, and tips"></asp:Label>
+        </div>
+        <div class="col-md-6">
+            <input id="txtWages" type="text" />
+        </div>
+    </div>
+    <div class="row" style="padding-top: 10px; padding-bottom: 10px">
+        <div class="col-md-6">
+            <asp:Label ID="lblInterest" runat="server" Text="Taxable interest"></asp:Label>
+        </div>
+        <div class="col-md-6">
+            <input id="txtInterest" type="text" />
+        </div>
+    </div>
+    <div class="row" style="padding-top: 10px; padding-bottom: 10px">
+        <div class="col-md-6">
+            <asp:Label ID="lblUnemployment" runat="server" Text="Unemployment compensation"></asp:Label>
+        </div>
+        <div class="col-md-6">
+            <input id="txtUnemployment" type="text" />
+        </div>
+    </div>
+    <div class="row" style="padding-top: 10px; padding-bottom: 10px">
+        <div class="col-md-6">
+            <asp:Label ID="lblDependent" runat="server" Text="If someone can claim you (or your spouse) as a dependent, check the boxes"></asp:Label>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-2">
+                    <input id="chkYou" type="checkbox" />
+                    <asp:Label ID="lblYou" runat="server" Text="You"></asp:Label>
+                </div>
+                <div class="col-md-10">
+                    <input id="chkSpouse" type="checkbox" />
+                    <asp:Label ID="lblSpouse" runat="server" Text="Spouse"></asp:Label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding-top: 10px; padding-bottom: 10px">
+        <div class="col-md-6">
+            <asp:Label ID="lblWithholding" runat="server" Text="Federal income tax whithheld from box 2 of your Form(s) W-2"></asp:Label>
+        </div>
+        <div class="col-md-6">
+            <input id="txtWithholding" type="text" />
+        </div>
+    </div>
+    <div class="row" style="padding-top: 10px; padding-bottom: 10px">
+        <div class="col-md-6">
+            <asp:Label ID="lblEarnedIncome" runat="server" Text="Earned income credit (EIC)"></asp:Label>
+        </div>
+        <div class="col-md-6">
+            <input id="txtEarnedIncome" type="text" />
+        </div>
+    </div>
+    <div class="row" style="padding-top: 10px; padding-bottom: 10px">
+        <div class="col-md-6">
+            <asp:Label ID="lblNontaxable" runat="server" Text="Nontaxable compay pay election"></asp:Label>
+        </div>
+        <div class="col-md-6">
+            <input id="txtNontaxable" type="text" /> 
+        </div>
+    </div>
+    <div class="row" style="padding-top: 10px; padding-bottom: 10px">
+        <div class="col-md-6">
+            
+        </div>
+        <div class="col-md-6">
+            <input id="btnCalculate" type="button" value="Calculate" style="width: 80px" />
+            <input id="btnClear" type="button" value="Clear" style="display: inline-block; width: 80px; margin-left: 15px;" />
         </div>
     </div>
 
