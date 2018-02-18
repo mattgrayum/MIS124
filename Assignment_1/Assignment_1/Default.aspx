@@ -2,11 +2,12 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="jumbotron">
-        <h1>ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-        <p><a href="http://www.asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <div class="jumbotron" style="background-color: #fff; border-bottom: solid; border-width: thin;">
+        <img src="images/th.jpg" style="width: 167px; height: 163px" />
+        <h1 style="display: inline-block; position: relative; left: -17px; top: 35px;">Sacramento State</h1>
+        <p style="display: inline-block; position: relative; left: 2px; top: 38px;"><i>Redefine the Possible</i></p>
     </div>
+    <div style="text-align: center; border-bottom: solid; border-width: thin;"><h1>2017 Tax Return 1040EZ Calculator</h1></div>
 
     <div class="row">
         <div class="col-md-4">
