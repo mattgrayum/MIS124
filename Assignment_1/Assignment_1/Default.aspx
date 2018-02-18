@@ -26,7 +26,7 @@
                 <asp:Label ID="lblWages" runat="server" Text="1. Wages, salaries, and tips"></asp:Label>
             </div>
             <div class="col-md-6">
-                <input id="txtWages" type="text" />
+                <asp:TextBox ID="txtWages" runat="server" value="97000"></asp:TextBox>
             </div>
         </div>
         <div class="row" style="padding-top: 10px; padding-bottom: 10px">
@@ -34,7 +34,7 @@
                 <asp:Label ID="lblInterest" runat="server" Text="2. Taxable interest"></asp:Label>
             </div>
             <div class="col-md-6">
-                <input id="txtInterest" type="text" />
+                <asp:TextBox ID="txtInterest" runat="server" value="1400"></asp:TextBox>
             </div>
         </div>
         <div class="row" style="padding-top: 10px; padding-bottom: 10px">
@@ -42,7 +42,7 @@
                 <asp:Label ID="lblUnemployment" runat="server" Text="3. Unemployment compensation"></asp:Label>
             </div>
             <div class="col-md-6">
-                <input id="txtUnemployment" type="text" />
+                <asp:TextBox ID="txtUnemployment" runat="server" value="0"></asp:TextBox>
             </div>
         </div>
         <div class="row" style="padding-top: 10px; padding-bottom: 10px">
@@ -52,11 +52,11 @@
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-2">
-                        <input id="chkYou" type="checkbox" />
+                        <asp:CheckBox ID="chkYou" runat="server" />
                         <asp:Label ID="lblYou" runat="server" Text="You"></asp:Label>
                     </div>
                     <div class="col-md-10">
-                        <input id="chkSpouse" type="checkbox" />
+                        <asp:CheckBox ID="chkSpouse" runat="server" />
                         <asp:Label ID="lblSpouse" runat="server" Text="Spouse"></asp:Label>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                 <asp:Label ID="lblWithholding" runat="server" Text="7. Federal income tax whithheld from box 2 of your Form(s) W-2"></asp:Label>
             </div>
             <div class="col-md-6">
-                <input id="txtWithholding" type="text" />
+                <asp:TextBox ID="txtWithholding" runat="server" value="10000"></asp:TextBox>
             </div>
         </div>
         <div class="row" style="padding-top: 10px; padding-bottom: 10px">
@@ -75,7 +75,7 @@
                 <asp:Label ID="lblEarnedIncome" runat="server" Text="8a. Earned income credit (EIC)"></asp:Label>
             </div>
             <div class="col-md-6">
-                <input id="txtEarnedIncome" type="text" />
+                <asp:TextBox ID="txtEarnedIncome" runat="server" value="0"></asp:TextBox>
             </div>
         </div>
         <div class="row" style="padding-top: 10px; padding-bottom: 10px">
@@ -83,7 +83,7 @@
                 <asp:Label ID="lblNontaxable" runat="server" Text="8b. Nontaxable compay pay election"></asp:Label>
             </div>
             <div class="col-md-6">
-                <input id="txtNontaxable" type="text" />
+                <asp:TextBox ID="txtNontaxable" runat="server" value="0"></asp:TextBox>
             </div>
         </div>
         <div class="row" style="padding-top: 10px; padding-bottom: 10px;">

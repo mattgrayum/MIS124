@@ -171,7 +171,7 @@
     </div>
 
     <div style="border-style: solid; border-width: thin; background-color: antiquewhite; margin-top: 10px; padding: 5px;">
-        <asp:Label ID="lblMessage" runat="server" Text="Enter your tax information and click calculate to view your results"></asp:Label>
+        <asp:Label ID="lblSuccessMessage" runat="server" Text="Your tax return has been succussfully calculated."></asp:Label>
     </div>
 
 </asp:Content>
