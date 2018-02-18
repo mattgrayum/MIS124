@@ -40,8 +40,7 @@
                 <asp:Label ID="lblInterest" runat="server" Text="2. Taxable interest"></asp:Label>
             </div>
             <div class="col-md-6">
-
-                <input id="txtInterest" type="text" />
+                <asp:TextBox ID="txtInterest" runat="server"></asp:TextBox>
             </div>
         </div>
 
