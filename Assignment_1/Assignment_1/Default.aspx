@@ -8,14 +8,14 @@
         <p style="display: inline-block; position: relative; left: 2px; top: 38px;"><i>Redefine the Possible</i></p>
     </div>
     <div style="text-align: center; border-bottom: solid; border-width: thin; margin-bottom: 10px;"><h1>2017 Tax Return 1040EZ Calculator</h1></div>
-
+    
     <div style="border-bottom: solid; border-width: thin; padding-bottom: 15px;">
         <div class="row" style="padding-top: 10px; padding-bottom: 10px">
             <div class="col-md-6">
                 <asp:Label ID="lblIndivOrJoint" runat="server" Text="Is this an individual or joint tax return?"></asp:Label>
             </div>
             <div class="col-md-6">
-                <asp:DropDownList ID="DropDownList1" runat="server">
+                <asp:DropDownList ID="lstIndividualOrJoint" runat="server">
                     <asp:ListItem>Individual</asp:ListItem>
                     <asp:ListItem>Joint</asp:ListItem>
                 </asp:DropDownList>

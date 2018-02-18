@@ -31,7 +31,7 @@
                 <asp:Label ID="lblWages" runat="server" Text="1. Wages, salaries, and tips"></asp:Label>
             </div>
             <div class="col-md-6">
-                <asp:TextBox ID="txtWages" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtWagesResult" runat="server"></asp:TextBox>
             </div>
         </div>
 
@@ -40,7 +40,7 @@
                 <asp:Label ID="lblInterest" runat="server" Text="2. Taxable interest"></asp:Label>
             </div>
             <div class="col-md-6">
-                <asp:TextBox ID="txtInterest" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtInterestResult" runat="server"></asp:TextBox>
             </div>
         </div>
 
@@ -49,7 +49,7 @@
                 <asp:Label ID="lblUnemployment" runat="server" Text="3. Unemployment compensation"></asp:Label>
             </div>
             <div class="col-md-6">
-                <asp:TextBox ID="txtUnemployment" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtUnemploymentResult" runat="server"></asp:TextBox>
             </div>
         </div>
 
@@ -106,7 +106,7 @@
                 <asp:Label ID="lblWithholding" runat="server" Text="7. Federal income tax whithheld from box 2 of your Form(s) W-2"></asp:Label>
             </div>
             <div class="col-md-6">
-                <asp:TextBox ID="txtWithholding" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtWithholdingResult" runat="server"></asp:TextBox>
             </div>
         </div>
 
@@ -115,7 +115,7 @@
                 <asp:Label ID="lblEarnedIncome" runat="server" Text="8a. Earned income credit (EIC)"></asp:Label>
             </div>
             <div class="col-md-6">
-                <asp:TextBox ID="txtEarnedIncome" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtEarnedIncomeResult" runat="server"></asp:TextBox>
             </div>
         </div>
 
@@ -124,7 +124,7 @@
                 <asp:Label ID="lblNontaxable" runat="server" Text="8b. Nontaxable compay pay election"></asp:Label>
             </div>
             <div class="col-md-6">
-                <asp:TextBox ID="txtNontaxable" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtNontaxableResult" runat="server"></asp:TextBox>
             </div>
         </div>
 

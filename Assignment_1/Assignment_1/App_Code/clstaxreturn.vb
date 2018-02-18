@@ -88,7 +88,7 @@ Public Class clsTaxReturn
         End Get
         Set(ByVal Value As Double)
             If Value > mintMAX_INTEREST_INCOME_ALLOWED Then
-                Throw New InvalidConstraintException("ERROR TR002. Taxable interest must not be over $ 1,500.00")
+                'Throw New InvalidConstraintException("ERROR TR002. Taxable interest must not be over $ 1,500.00")
             End If
             mdblTaxableInterest = Value
         End Set
