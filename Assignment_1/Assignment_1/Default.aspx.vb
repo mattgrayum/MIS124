@@ -2,8 +2,12 @@
 Partial Class _Default
     Inherits Page
 
+    '*******************************************************************************************************************
+    'ACTION ON "CALCULATE" BUTTON CLICK
+    '*******************************************************************************************************************
     Protected Sub BtnCalculate_Click(sender As Object, e As EventArgs) Handles btnCalculate.Click
 
+        ' Populate session variables with user-enetered values 
         If lstIndividualOrJoint.SelectedIndex = 0 Then
             Session("numberOfTaxpayers") = 1
             Session("individualOrJoint") = "Individual"
@@ -21,22 +25,32 @@ Partial Class _Default
         Session("eic") = txtEarnedIncome.Text
         Session("nontaxable") = txtNontaxable.Text
 
+        ' Redirect to Results Page
         Response.Redirect(url:="~/Result.aspx", endResponse:=False)
 
     End Sub
+    '*******************************************************************************************************************
+    'ACTION ON "CLEAR" BUTTON CLICK
+    '*******************************************************************************************************************
     Protected Sub BtnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
 
+        ' Set each input field to nothing
         txtWages.Text = ""
         txtInterest.Text = ""
         txtUnemployment.Text = ""
         chkYou.Checked = False
         chkSpouse.Checked = False
+        txtEarnedIncome = ""
         txtWithholding.Text = ""
         txtNontaxable.Text = ""
 
     End Sub
+    '*******************************************************************************************************************
+    'ACTION ON PAGE LOAD
+    '*******************************************************************************************************************
     Sub Page_Load(ByVal Sender As Object, ByVal E As EventArgs) Handles MyBase.Load
 
+        ' Set each input field to the value of the associated Session variable
         If Session("numberOfTaxpayers") IsNot Nothing Then
             lstIndividualOrJoint.SelectedIndex = Session("numberOfTaxpayers") - 1
         End If
