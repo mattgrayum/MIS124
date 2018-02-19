@@ -7,9 +7,9 @@
         <h1 style="display: inline-block; position: relative; left: -17px; top: 35px;">Sacramento State</h1>
         <p style="display: inline-block; position: relative; left: 2px; top: 38px;"><i>Redefine the Possible</i></p>
     </div>
-    <div style="text-align: center; border-bottom: solid; border-width: thin; margin-bottom: 10px;"><h1>2017 Tax Return 1040EZ Calculator - Calculation Results</h1></div>
+    <div style="text-align: center; border-bottom: solid; border-width: thin; margin-bottom: 10px;"><h2>2017 Tax Return 1040EZ Calculator - Calculation Results</h2></div>
 
-    <div style="border-bottom: solid; border-width: thin; padding-bottom: 15px;">
+    <div style="border-bottom: solid; border-width: thin; padding: 15px; background-color: oldlace">
         <div class="row" style="padding-top: 10px; padding-bottom: 10px">
             <div class="col-md-6">
                 <asp:Label ID="lblIndivOrJoint" runat="server" Text="Individual or joint tax return?"></asp:Label>
@@ -31,7 +31,7 @@
                 <asp:Label ID="lblWages" runat="server" Text="1. Wages, salaries, and tips"></asp:Label>
             </div>
             <div class="col-md-6">
-                <asp:TextBox ID="txtWagesResult" runat="server" EnableViewState="true"></asp:TextBox>
+                <asp:TextBox ID="txtWagesResult" runat="server" EnableViewState="true" ReadOnly="True"></asp:TextBox>
             </div>
         </div>
 
@@ -40,7 +40,7 @@
                 <asp:Label ID="lblInterest" runat="server" Text="2. Taxable interest"></asp:Label>
             </div>
             <div class="col-md-6">
-                <asp:TextBox ID="txtInterestResult" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtInterestResult" runat="server" ReadOnly="True"></asp:TextBox>
             </div>
         </div>
 
@@ -49,7 +49,7 @@
                 <asp:Label ID="lblUnemployment" runat="server" Text="3. Unemployment compensation"></asp:Label>
             </div>
             <div class="col-md-6">
-                <asp:TextBox ID="txtUnemploymentResult" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtUnemploymentResult" runat="server" ReadOnly="True"></asp:TextBox>
             </div>
         </div>
 
@@ -106,7 +106,7 @@
                 <asp:Label ID="lblWithholding" runat="server" Text="7. Federal income tax whithheld from box 2 of your Form(s) W-2"></asp:Label>
             </div>
             <div class="col-md-6">
-                <asp:TextBox ID="txtWithholdingResult" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtWithholdingResult" runat="server" ReadOnly="True"></asp:TextBox>
             </div>
         </div>
 
@@ -115,7 +115,7 @@
                 <asp:Label ID="lblEarnedIncome" runat="server" Text="8a. Earned income credit (EIC)"></asp:Label>
             </div>
             <div class="col-md-6">
-                <asp:TextBox ID="txtEarnedIncomeResult" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtEarnedIncomeResult" runat="server" ReadOnly="True"></asp:TextBox>
             </div>
         </div>
 
@@ -124,7 +124,7 @@
                 <asp:Label ID="lblNontaxable" runat="server" Text="8b. Nontaxable compay pay election"></asp:Label>
             </div>
             <div class="col-md-6">
-                <asp:TextBox ID="txtNontaxableResult" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtNontaxableResult" runat="server" ReadOnly="True"></asp:TextBox>
             </div>
         </div>
 
@@ -188,7 +188,7 @@
 
     </div>
 
-    <div style="border-style: solid; border-width: thin; background-color: antiquewhite; margin-top: 10px; padding: 5px;">
+    <div style="border-style: solid; border-width: thin; background-color: oldlace; margin-top: 10px; padding: 5px; text-align: center;">
         <asp:Label ID="lblSuccessMessage" runat="server" Text="Your tax return has been succussfully calculated."></asp:Label>
     </div>
 

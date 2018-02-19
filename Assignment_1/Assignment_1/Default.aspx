@@ -7,9 +7,9 @@
         <h1 style="display: inline-block; position: relative; left: -17px; top: 35px;">Sacramento State</h1>
         <p style="display: inline-block; position: relative; left: 2px; top: 38px;"><i>Redefine the Possible</i></p>
     </div>
-    <div style="text-align: center; border-bottom: solid; border-width: thin; margin-bottom: 10px;"><h1>2017 Tax Return 1040EZ Calculator</h1></div>
+    <div style="text-align: center; border-bottom: solid; border-width: thin; margin-bottom: 10px;"><h2>2017 Tax Return 1040EZ Calculator</h2></div>
     
-    <div style="border-bottom: solid; border-width: thin; padding-bottom: 15px;">
+    <div style="border-bottom: solid; border-width: thin; padding: 15px; background-color: oldlace">
         <div class="row" style="padding-top: 10px; padding-bottom: 10px">
             <div class="col-md-6">
                 <asp:Label ID="lblIndivOrJoint" runat="server" Text="Is this an individual or joint tax return?"></asp:Label>
@@ -107,7 +107,7 @@
             </div>
         </div>
     </div>
-    <asp:Panel ID="pnlMessage" runat="server" style="border-style: solid; border-width: thin; background-color: antiquewhite; margin-top: 10px; padding: 5px;">
+    <asp:Panel ID="pnlMessage" runat="server" style="border-style: solid; border-width: thin; background-color: oldlace; margin-top: 10px; padding: 5px; text-align: center;">
         <asp:Label ID="lblMessage" runat="server" Text="Enter your tax information and click calculate to view your results"></asp:Label>
     </asp:Panel>
     

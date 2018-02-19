@@ -9,7 +9,7 @@ Partial Class _Default
 
         If CType(txtWages.Text, Double) > MAX_WAGES Then
             lblMessage.Text = "You can use Form 1040EZ only if your Taxable Income (line 6) is less than $100,000."
-            pnlMessage.Attributes.Add("style", "color: white; background-color: red;")
+            pnlMessage.Attributes.Add("style", "border-style: solid; border-width: thin; margin-top: 10px; padding: 5px; text-align: center; color: white; background-color: red;")
             txtWages.Attributes.Add("style", "background-color: #fcbdbd")
             txtWages.Focus()
             Exit Sub
@@ -52,6 +52,12 @@ Partial Class _Default
         txtWithholding.Text = ""
         txtNontaxable.Text = ""
 
+        ' Reset wages textbox and bottom message box in case user had entered invalid data and caused them to change
+        lblMessage.Text = "Enter your tax information and click calculate to view your results"
+        pnlMessage.Attributes.Add("style", "border-style: solid; border-width: thin; background-color: oldlace; margin-top: 10px; padding: 5px; text-align: center;")
+        txtWages.Attributes.Add("style", "background-color: #fff")
+        txtWages.Focus()
+
     End Sub
     '*******************************************************************************************************************
     'ACTION ON PAGE LOAD
@@ -60,6 +66,7 @@ Partial Class _Default
 
         ' Set each input field to the value of the associated Session variable
         If Not IsPostBack Then
+
             If Session("numberOfTaxpayers") IsNot Nothing Then
                 lstIndividualOrJoint.SelectedIndex = Session("numberOfTaxpayers") - 1
             End If
@@ -87,7 +94,11 @@ Partial Class _Default
             If Session("nontaxable") IsNot Nothing Then
                 txtNontaxable.Text = Session("nontaxable")
             End If
+
         End If
 
+        ' Set focus to the wages textbox so user doesn't have to click into it
+        txtWages.Focus()
     End Sub
+
 End Class
