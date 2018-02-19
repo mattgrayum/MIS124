@@ -1,8 +1,8 @@
-﻿<%@ Page Title="Home Page" Language="VB" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="Result.aspx.vb" Inherits="_Default" %>
+﻿<%@ Page Title="Home Page" Language="VB" EnableViewState="true" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="Result.aspx.vb" Inherits="_Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="jumbotron" style="background-color: #fff; border-bottom: solid; border-width: thin;">
+    <div style="background-color: #fff; border-bottom: solid; border-width: thin;">
         <img src="images/th.jpg" style="width: 167px; height: 163px" />
         <h1 style="display: inline-block; position: relative; left: -17px; top: 35px;">Sacramento State</h1>
         <p style="display: inline-block; position: relative; left: 2px; top: 38px;"><i>Redefine the Possible</i></p>
@@ -20,7 +20,7 @@
 
                     </div>
                     <div class="col-md-6">
-                        <%--TODO: Provide results from user entry--%><asp:Label ID="lblIndividualOrJoint" runat="server" Text="Individual/Joint"></asp:Label>
+                        <asp:Label ID="lblIndividualOrJointResult" runat="server" Text="Individual/Joint"></asp:Label>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                 <asp:Label ID="lblWages" runat="server" Text="1. Wages, salaries, and tips"></asp:Label>
             </div>
             <div class="col-md-6">
-                <asp:TextBox ID="txtWagesResult" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtWagesResult" runat="server" EnableViewState="true"></asp:TextBox>
             </div>
         </div>
 
@@ -63,7 +63,7 @@
 
                     </div>
                     <div class="col-md-6">
-                        <%--TODO: Provide results from user entry--%><asp:Label ID="lblGrossIncomeResult" runat="server" Text="Gross Income"></asp:Label>
+                        <asp:Label ID="lblGrossIncomeResult" runat="server" Text="" style="color: green; font-weight: 700;"></asp:Label>
                     </div>
                 </div>
             </div>
@@ -76,10 +76,10 @@
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-6">
-                        <%--TODO: Provide results from user entry--%><asp:Label ID="lblNumDependents" runat="server" Text="Dependents"></asp:Label>
+                        <asp:Label ID="lblNumDependents" runat="server" Text="Dependents"></asp:Label>
                     </div>
                     <div class="col-md-6">
-                        <%--TODO: Provide results from user entry--%><asp:Label ID="lblDependentResult" runat="server" Text="Dependent Deduct"></asp:Label>
+                        <asp:Label ID="lblDependentResult" runat="server" Text="" style="color: green; font-weight: 700;"></asp:Label>
                     </div>
                 </div>
            </div>
@@ -95,7 +95,7 @@
 
                     </div>
                     <div class="col-md-6">
-                        <asp:Label ID="lblTaxableIncome" runat="server" Text="Taxable Income"></asp:Label>
+                        <asp:Label ID="lblTaxableIncome" runat="server" Text="" style="color: green; font-weight: 700;"></asp:Label>
                     </div>
                 </div>
             </div>
@@ -138,7 +138,7 @@
 
                     </div>
                     <div class="col-md-6">
-                        <asp:Label ID="lblTotalPaymentsResult" runat="server" Text="Total Payments"></asp:Label>
+                        <asp:Label ID="lblTotalPaymentsResult" runat="server" Text="" style="color: green; font-weight: 700;"></asp:Label>
                     </div>
                 </div>
             </div>
@@ -146,7 +146,7 @@
 
         <div class="row" style="padding-top: 10px; padding-bottom: 10px">
             <div class="col-md-6">
-                <asp:Label ID="lblFinalTax" runat="server" Text="14. This is the amount you owe"></asp:Label>
+                <asp:Label ID="lblCalculatedTax" runat="server" Text="10. Calculated your tax."></asp:Label>
             </div>
             <div class="col-md-6">
                 <div class="row">
@@ -154,7 +154,25 @@
 
                     </div>
                     <div class="col-md-6">
-                        <asp:Label ID="lblFinalTaxResult" runat="server" Text="Final Tax"></asp:Label>
+                        <asp:Label ID="lblCalculatedTaxResult" runat="server" Text="" style="color: green; font-weight: 700;"></asp:Label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top: 10px; padding-bottom: 10px">
+            <div class="col-md-6">
+                <asp:Label ID="lblRefundMsg" runat="server" Text="" style="color: green; font-weight: 700;"></asp:Label>
+                <asp:Label ID="lblTaxOwedMsg" runat="server" Text="" style="color: red; font-weight: 700;"></asp:Label>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+
+                    </div>
+                    <div class="col-md-6">
+                        <asp:Label ID="lblTaxRefund" runat="server" Text="" style="color: green; font-weight: 700;"></asp:Label>
+                        <asp:Label ID="lblTaxOwed" runat="server" Text="" style="color: red; font-weight: 700;"></asp:Label>
                     </div>
                 </div>
             </div>

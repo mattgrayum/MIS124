@@ -1,8 +1,8 @@
-﻿<%@ Page Title="Home Page" Language="VB" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="Default.aspx.vb" Inherits="_Default" %>
+﻿<%@ Page Title="Home Page" Language="VB" EnableViewState="true" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="Default.aspx.vb" Inherits="_Default" %>
 
-<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-
-    <div class="jumbotron" style="background-color: #fff; border-bottom: solid; border-width: thin;">
+<asp:content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    
+    <div style="background-color: #fff; border-bottom: solid; border-width: thin;">
         <img src="images/th.jpg" style="width: 167px; height: 163px" />
         <h1 style="display: inline-block; position: relative; left: -17px; top: 35px;">Sacramento State</h1>
         <p style="display: inline-block; position: relative; left: 2px; top: 38px;"><i>Redefine the Possible</i></p>
@@ -26,7 +26,7 @@
                 <asp:Label ID="lblWages" runat="server" Text="1. Wages, salaries, and tips"></asp:Label>
             </div>
             <div class="col-md-6">
-                <asp:TextBox ID="txtWages" runat="server" value="97000"></asp:TextBox>
+                <asp:TextBox ID="txtWages" runat="server" EnableViewState="true"></asp:TextBox>
             </div>
         </div>
         <div class="row" style="padding-top: 10px; padding-bottom: 10px">
@@ -34,7 +34,7 @@
                 <asp:Label ID="lblInterest" runat="server" Text="2. Taxable interest"></asp:Label>
             </div>
             <div class="col-md-6">
-                <asp:TextBox ID="txtInterest" runat="server" value="1400"></asp:TextBox>
+                <asp:TextBox ID="txtInterest" runat="server"></asp:TextBox>
             </div>
         </div>
         <div class="row" style="padding-top: 10px; padding-bottom: 10px">
@@ -42,7 +42,7 @@
                 <asp:Label ID="lblUnemployment" runat="server" Text="3. Unemployment compensation"></asp:Label>
             </div>
             <div class="col-md-6">
-                <asp:TextBox ID="txtUnemployment" runat="server" value="0"></asp:TextBox>
+                <asp:TextBox ID="txtUnemployment" runat="server"></asp:TextBox>
             </div>
         </div>
         <div class="row" style="padding-top: 10px; padding-bottom: 10px">
@@ -67,7 +67,7 @@
                 <asp:Label ID="lblWithholding" runat="server" Text="7. Federal income tax whithheld from box 2 of your Form(s) W-2"></asp:Label>
             </div>
             <div class="col-md-6">
-                <asp:TextBox ID="txtWithholding" runat="server" value="10000"></asp:TextBox>
+                <asp:TextBox ID="txtWithholding" runat="server"></asp:TextBox>
             </div>
         </div>
         <div class="row" style="padding-top: 10px; padding-bottom: 10px">
@@ -75,7 +75,7 @@
                 <asp:Label ID="lblEarnedIncome" runat="server" Text="8a. Earned income credit (EIC)"></asp:Label>
             </div>
             <div class="col-md-6">
-                <asp:TextBox ID="txtEarnedIncome" runat="server" value="0"></asp:TextBox>
+                <asp:TextBox ID="txtEarnedIncome" runat="server"></asp:TextBox>
             </div>
         </div>
         <div class="row" style="padding-top: 10px; padding-bottom: 10px">
@@ -83,7 +83,7 @@
                 <asp:Label ID="lblNontaxable" runat="server" Text="8b. Nontaxable compay pay election"></asp:Label>
             </div>
             <div class="col-md-6">
-                <asp:TextBox ID="txtNontaxable" runat="server" value="0"></asp:TextBox>
+                <asp:TextBox ID="txtNontaxable" runat="server"></asp:TextBox>
             </div>
         </div>
         <div class="row" style="padding-top: 10px; padding-bottom: 10px;">

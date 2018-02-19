@@ -5,7 +5,7 @@
 'Date:              Jan 6, 2017
 'Purpose:           Perform the necessary calculations for the 1040EZ tax return.
 '***********************************************************************************************************************
-Imports MIS124ClassLibrary
+'Imports MIS124ClassLibrary
 
 Public Class clsTaxReturn
 
