@@ -95,8 +95,9 @@
             </div>
         </div>
     </div>
-    <div style="border-style: solid; border-width: thin; background-color: antiquewhite; margin-top: 10px; padding: 5px;">
+    <asp:Panel ID="pnlMessage" runat="server" style="border-style: solid; border-width: thin; background-color: antiquewhite; margin-top: 10px; padding: 5px;">
         <asp:Label ID="lblMessage" runat="server" Text="Enter your tax information and click calculate to view your results"></asp:Label>
-    </div>
+    </asp:Panel>
+    
 
 </asp:Content>

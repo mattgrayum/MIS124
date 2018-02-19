@@ -1,11 +1,19 @@
 ﻿
 Partial Class _Default
     Inherits Page
-
+    Private Const MAX_WAGES = 99999.99
     '*******************************************************************************************************************
     'ACTION ON "CALCULATE" BUTTON CLICK
     '*******************************************************************************************************************
     Protected Sub BtnCalculate_Click(sender As Object, e As EventArgs) Handles btnCalculate.Click
+
+        If CType(txtWages.Text, Double) > MAX_WAGES Then
+            lblMessage.Text = "You can use Form 1040EZ only if your Taxable Income (line 6) is less than $100,000."
+            pnlMessage.Attributes.Add("style", "color: white; background-color: red;")
+            txtWages.Attributes.Add("style", "background-color: #fcbdbd")
+            txtWages.Focus()
+            Exit Sub
+        End If
 
         ' Populate session variables with user-enetered values 
         If lstIndividualOrJoint.SelectedIndex = 0 Then
@@ -40,7 +48,7 @@ Partial Class _Default
         txtUnemployment.Text = ""
         chkYou.Checked = False
         chkSpouse.Checked = False
-        txtEarnedIncome = ""
+        txtEarnedIncome.Text = ""
         txtWithholding.Text = ""
         txtNontaxable.Text = ""
 

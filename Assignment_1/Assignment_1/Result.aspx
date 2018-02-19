@@ -162,7 +162,7 @@
 
         <div class="row" style="padding-top: 10px; padding-bottom: 10px">
             <div class="col-md-6">
-                <asp:Label ID="lblRefundMsg" runat="server" Text="" style="color: green; font-weight: 700;"></asp:Label>
+                <asp:Label ID="lblRefundMsg" runat="server" Text="" style="color: black; font-weight: 700;"></asp:Label>
                 <asp:Label ID="lblTaxOwedMsg" runat="server" Text="" style="color: red; font-weight: 700;"></asp:Label>
             </div>
             <div class="col-md-6">
@@ -171,7 +171,7 @@
 
                     </div>
                     <div class="col-md-6">
-                        <asp:Label ID="lblTaxRefund" runat="server" Text="" style="color: green; font-weight: 700;"></asp:Label>
+                        <asp:Label ID="lblTaxRefund" runat="server" Text="" style="color: black; font-weight: 700;"></asp:Label>
                         <asp:Label ID="lblTaxOwed" runat="server" Text="" style="color: red; font-weight: 700;"></asp:Label>
                     </div>
                 </div>
