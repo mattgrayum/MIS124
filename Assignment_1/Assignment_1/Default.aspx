@@ -26,6 +26,7 @@
                 <asp:Label ID="lblWages" runat="server" Text="1. Wages, salaries, and tips"></asp:Label>
             </div>
             <div class="col-md-6">
+                <asp:RequiredFieldValidator ID="rfvWages" runat="server" ControlToValidate="txtWages" ErrorMessage="You must enter a value here" style="color: red;"></asp:RequiredFieldValidator>
                 <asp:TextBox ID="txtWages" runat="server"></asp:TextBox>
             </div>
         </div>
@@ -34,6 +35,7 @@
                 <asp:Label ID="lblInterest" runat="server" Text="2. Taxable interest"></asp:Label>
             </div>
             <div class="col-md-6">
+                <asp:RequiredFieldValidator ID="rfvInterest" runat="server" ControlToValidate="txtInterest" ErrorMessage="You must enter a value here" style="color: red;"></asp:RequiredFieldValidator>
                 <asp:TextBox ID="txtInterest" runat="server"></asp:TextBox>
             </div>
         </div>
@@ -42,6 +44,7 @@
                 <asp:Label ID="lblUnemployment" runat="server" Text="3. Unemployment compensation"></asp:Label>
             </div>
             <div class="col-md-6">
+                <asp:RequiredFieldValidator ID="rfvUnemployment" runat="server" ControlToValidate="txtUnemployment" ErrorMessage="You must enter a value here" style="color: red;"></asp:RequiredFieldValidator>
                 <asp:TextBox ID="txtUnemployment" runat="server"></asp:TextBox>
             </div>
         </div>
@@ -67,6 +70,7 @@
                 <asp:Label ID="lblWithholding" runat="server" Text="7. Federal income tax whithheld from box 2 of your Form(s) W-2"></asp:Label>
             </div>
             <div class="col-md-6">
+                <asp:RequiredFieldValidator ID="rfvWithholding" runat="server" ControlToValidate="txtWithholding" ErrorMessage="You must enter a value here" style="color: red;"></asp:RequiredFieldValidator>
                 <asp:TextBox ID="txtWithholding" runat="server"></asp:TextBox>
             </div>
         </div>
@@ -75,6 +79,7 @@
                 <asp:Label ID="lblEarnedIncome" runat="server" Text="8a. Earned income credit (EIC)"></asp:Label>
             </div>
             <div class="col-md-6">
+                <asp:RequiredFieldValidator ID="rfvEarnedIncome" runat="server" ControlToValidate="txtEarnedIncome" ErrorMessage="You must enter a value here" style="color: red;"></asp:RequiredFieldValidator>
                 <asp:TextBox ID="txtEarnedIncome" runat="server"></asp:TextBox>
             </div>
         </div>
@@ -83,6 +88,7 @@
                 <asp:Label ID="lblNontaxable" runat="server" Text="8b. Nontaxable compay pay election"></asp:Label>
             </div>
             <div class="col-md-6">
+                <asp:RequiredFieldValidator ID="rfvNontaxable" runat="server" ControlToValidate="txtNontaxable" ErrorMessage="You must enter a value here" style="color: red;"></asp:RequiredFieldValidator>
                 <asp:TextBox ID="txtNontaxable" runat="server"></asp:TextBox>
             </div>
         </div>
