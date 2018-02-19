@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Home Page" Language="VB" EnableViewState="true" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="Default.aspx.vb" Inherits="_Default" %>
+﻿<%@ Page Title="Home Page" Language="VB" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="Default.aspx.vb" Inherits="_Default" %>
 
 <asp:content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     
@@ -26,7 +26,7 @@
                 <asp:Label ID="lblWages" runat="server" Text="1. Wages, salaries, and tips"></asp:Label>
             </div>
             <div class="col-md-6">
-                <asp:TextBox ID="txtWages" runat="server" EnableViewState="true"></asp:TextBox>
+                <asp:TextBox ID="txtWages" runat="server"></asp:TextBox>
             </div>
         </div>
         <div class="row" style="padding-top: 10px; padding-bottom: 10px">

@@ -4,21 +4,21 @@ Partial Class _Default
 
     Protected Sub BtnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
 
-        Response.Redirect("Default.aspx", False)
+        Response.Redirect(url:="~/Default.aspx", endResponse:=False)
 
     End Sub
     Sub Page_Load(ByVal Sender As Object, ByVal E As EventArgs) Handles MyBase.Load
 
-        Dim strIndividualOrJoint As String = Session.Item("individualOrJoint")
-        Dim dblWages As Double = Session.Item("wages")
-        Dim dblTaxableInterest As Double = Session.Item("interest")
-        Dim dblUnemploymentCompensation As Double = Session.Item("unemployment")
-        Dim dblIncomeTaxWithheld As Double = Session.Item("withholding")
-        Dim dblEIC As Double = Session.Item("eic")
-        Dim dblCompatPay As Double = Session.Item("nontaxable")
-        Dim intNumberOfTaxpayers As Integer = Session.Item("numberOfTaxpayers")
-        Dim boolYouChecked As Boolean = Session.Item("you")
-        Dim boolSpouseChecked As Boolean = Session.Item("spouse")
+        Dim strIndividualOrJoint As String = Session("individualOrJoint")
+        Dim dblWages As Double = Session("wages")
+        Dim dblTaxableInterest As Double = Session("interest")
+        Dim dblUnemploymentCompensation As Double = Session("unemployment")
+        Dim dblIncomeTaxWithheld As Double = Session("withholding")
+        Dim dblEIC As Double = Session("eic")
+        Dim dblCompatPay As Double = Session("nontaxable")
+        Dim intNumberOfTaxpayers As Integer = Session("numberOfTaxpayers")
+        Dim boolYouChecked As Boolean = Session("you")
+        Dim boolSpouseChecked As Boolean = Session("spouse")
 
         Dim intNumberOfDependentTaxpayers As Integer = 0
         If (boolYouChecked) Then
@@ -54,20 +54,6 @@ Partial Class _Default
             lblTaxOwedMsg.Text = "14. This is the amount you owe."
             lblTaxOwed.Text = FormatCurrency(dblFinalTax, 2)
         End If
-
-
-
-        'ViewState("wages") = dblWages
-        'ViewState("interest") = dblTaxableInterest
-        'ViewState("unemployment") = dblUnemploymentCompensation
-        'ViewState("withholding") = dblIncomeTaxWithheld
-        'ViewState("eic") = dblEIC
-        'ViewState("nontaxable") = dblCompatPay
-        'ViewState("numberOfTaxpayers") = intNumberOfTaxpayers
-        'ViewState("you") = boolYouChecked
-        'ViewState("spouse") = boolSpouseChecked
-
-
 
     End Sub
 End Class
