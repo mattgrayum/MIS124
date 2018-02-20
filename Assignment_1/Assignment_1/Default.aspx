@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="Home Page" Language="VB" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.vb" Inherits="_Default" %>
 
-<asp:content ID="BodyContent" ContentPlaceHolderID="contentTaxForm" runat="server" style="max-width: 800px">
+<asp:content ID="BodyContent" ContentPlaceHolderID="contentTaxForm" runat="server">
 
     <div style="text-align: center; border-bottom: solid; border-width: thin; margin-bottom: 10px; width: 100%"><h2>2017 Tax Return 1040EZ Calculator</h2></div>
     
