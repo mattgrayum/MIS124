@@ -2,17 +2,6 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="row" style="background-color: #fff; border-bottom: solid; border-width: thin;"">
-        <div class="col-md-9">
-            <img src="images/th.jpg" style="width: 167px; height: 150px" />
-            <h1 style="display: inline-block; position: relative; left: -17px; top: 35px;">Sacramento State</h1>
-            <p style="display: inline-block; position: relative; left: 2px; top: 38px;"><i>Redefine the Possible</i></p>
-        </div>
-    
-        <div class="col-md-3" style="float: right; height: 150px">
-            <asp:Label ID="lblName" runat="server" style="position: absolute; bottom: 10%; width: 100%; text-align: right; padding-right: 20px; font-size: 20px;"></asp:Label>
-        </div>
-    </div>
     <div style="text-align: center; border-bottom: solid; border-width: thin; margin-bottom: 10px;"><h2>2017 Tax Return 1040EZ Calculator - Calculation Results</h2></div>
 
     <div style="border-bottom: solid; border-width: thin; padding: 15px; background-color: oldlace">
