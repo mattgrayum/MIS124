@@ -12,8 +12,13 @@ Partial Class _Default
     '*******************************************************************************************************************
     'ACTION ON PAGE LOAD
     '*******************************************************************************************************************
+
     ' -- Calculates tax information from data entered on previous page
     Sub Page_Load(ByVal Sender As Object, ByVal E As EventArgs) Handles MyBase.Load
+
+        ' Populate user's name in the top right corner of the page
+        Dim myCookie As String = Request.Cookies("UserName").Value
+        lblName.Text = "Welcome " & myCookie
 
         ' Populate variables with Session data
         Dim strIndividualOrJoint As String = Session("individualOrJoint")
