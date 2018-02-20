@@ -32,7 +32,6 @@ Partial Class _Default
         Session("withholding") = txtWithholding.Text
         Session("eic") = txtEarnedIncome.Text
         Session("nontaxable") = txtNontaxable.Text
-        Session("name") = txtName.Text
 
         ' Redirect to Results Page
         Response.Redirect(url:="~/Result.aspx", endResponse:=False)
@@ -96,29 +95,12 @@ Partial Class _Default
                 txtNontaxable.Text = Session("nontaxable")
             End If
 
-            Dim myCookie As HttpCookie = Request.Cookies("UserName")
-
-            If myCookie IsNot Nothing Then
-                txtName.Attributes.Add("style", value:="display: none;")
-                lblName.Text = "Welcome " & myCookie.Value
-            End If
-
         End If
 
         ' Set focus to the wages textbox so user doesn't have to click into it
         txtWages.Focus()
     End Sub
 
-    Protected Sub txtName_TextChanged(sender As Object, e As EventArgs)
-        lblName.Text = "Welcome " & txtName.Text
-        txtName.Attributes.Add("style", value:="display: none;")
 
-        Try
-            Dim myCookie As New HttpCookie("UserName", txtName.Text)
-            myCookie.Expires = DateTime.MaxValue
-            Response.Cookies.Add(myCookie)
-        Catch ex As Exception
-            lblMessage.Text = ex.Message
-        End Try
-    End Sub
+
 End Class
