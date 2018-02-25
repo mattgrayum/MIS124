@@ -2,16 +2,17 @@
 Partial Class _Default
     Inherits Page
     Private Const MAX_WAGES = 99999.99
+    Private Const MAX_INTEREST = 1500.0
     '*******************************************************************************************************************
     'ACTION ON "CALCULATE" BUTTON CLICK
     '*******************************************************************************************************************
     Protected Sub BtnCalculate_Click(sender As Object, e As EventArgs) Handles btnCalculate.Click
 
         If CType(txtWages.Text, Double) > MAX_WAGES Then
-            lblMessage.Text = "You can use Form 1040EZ only if your Taxable Income (line 6) is less than $100,000."
-            pnlMessage.Attributes.Add("style", "border-style: solid; border-width: thin; margin-top: 10px; padding: 5px; text-align: center; color: white; background-color: red;")
-            txtWages.Attributes.Add("style", "background-color: #fcbdbd")
-            txtWages.Focus()
+            errorMsg(txtWages, "You may not use 1040EZ form if your wages are $100,000 or more.", lblMessage, pnlMessage)
+            Exit Sub
+        ElseIf CType(txtInterest.Text, Double) > MAX_INTEREST Then
+            errorMsg(txtInterest, "You may not use form 1040EZ if you earned more than $1,500 in taxable interest.", lblMessage, pnlMessage)
             Exit Sub
         End If
 
@@ -96,12 +97,19 @@ Partial Class _Default
                 txtNontaxable.Text = Session("nontaxable")
             End If
 
-
-
         End If
 
         ' Set focus to the wages textbox so user doesn't have to click into it
-        txtWages.Focus()
+        If Not IsPostBack() Then
+            txtWages.Focus()
+        End If
+    End Sub
+
+    Protected Sub errorMsg(textbox As TextBox, message As String, label As Label, panel As Panel)
+        label.Text = message
+        panel.Attributes.Add("style", "border-style: solid; border-width: thin; margin-top: 10px; padding: 5px; text-align: center; color: white; background-color: red;")
+        textbox.Attributes.Add("style", "background-color: #fcbdbd")
+        textbox.Focus()
     End Sub
 
 
