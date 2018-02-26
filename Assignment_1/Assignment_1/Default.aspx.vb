@@ -1,6 +1,7 @@
 ﻿
 Partial Class _Default
     Inherits Page
+
     Private Const MAX_WAGES = 99999.99
     Private Const MAX_INTEREST = 1500.0
     '*******************************************************************************************************************
@@ -8,11 +9,11 @@ Partial Class _Default
     '*******************************************************************************************************************
     Protected Sub BtnCalculate_Click(sender As Object, e As EventArgs) Handles btnCalculate.Click
 
-        If CType(txtWages.Text, Double) > MAX_WAGES Then
-            errorMsg(txtWages, "You may not use 1040EZ form if your wages are $100,000 or more.", lblMessage, pnlMessage)
+        ' Validate wages and interest earned are below max values
+        If Not ValidateLessThanMax(txtWages, "You may not use 1040EZ form if your wages are $100,000 or more.", lblMessage, pnlMessage, MAX_WAGES) Then
             Exit Sub
-        ElseIf CType(txtInterest.Text, Double) > MAX_INTEREST Then
-            errorMsg(txtInterest, "You may not use form 1040EZ if you earned more than $1,500 in taxable interest.", lblMessage, pnlMessage)
+        End If
+        If Not ValidateLessThanMax(txtInterest, "You may not use form 1040EZ if you earned more than $1,500 in taxable interest.", lblMessage, pnlMessage, MAX_INTEREST) Then
             Exit Sub
         End If
 
@@ -33,7 +34,6 @@ Partial Class _Default
         Session("withholding") = txtWithholding.Text
         Session("eic") = txtEarnedIncome.Text
         Session("nontaxable") = txtNontaxable.Text
-
 
         ' Redirect to Results Page
         Response.Redirect(url:="~/Result.aspx", endResponse:=False)
@@ -104,13 +104,59 @@ Partial Class _Default
             txtWages.Focus()
         End If
     End Sub
-
-    Protected Sub errorMsg(textbox As TextBox, message As String, label As Label, panel As Panel)
+    '*******************************************************************************************************************
+    ' Method ErrorMsg
+    '   This function displays an error message and chages
+    '   the color of the offending text box light red
+    ' Returns:
+    '   Nothing
+    ' Parameters:
+    '   textbox As TextBox
+    '   message As String
+    '   label As Label
+    '   panel As Panel
+    '*******************************************************************************************************************
+    Protected Sub ErrorMsg(textbox As TextBox, message As String, label As Label, panel As Panel)
         label.Text = message
         panel.Attributes.Add("style", "border-style: solid; border-width: thin; margin-top: 10px; padding: 5px; text-align: center; color: white; background-color: red;")
         textbox.Attributes.Add("style", "background-color: #fcbdbd")
         textbox.Focus()
     End Sub
-
-
+    '*******************************************************************************************************************
+    ' Method ResetTextbox
+    '   This function sets the background color of a textbox
+    '   to white - call this function to reset the color
+    '   of a textbox in case it was turned red by an invalid entry
+    ' Returns:
+    '   Nothing
+    ' Parameters:
+    '   textbox as TextBox
+    '*******************************************************************************************************************
+    Protected Sub ResetTextbox(textbox As TextBox)
+        textbox.Attributes.Add("style", "background-color: #fff")
+    End Sub
+    '*******************************************************************************************************************
+    ' Function ValidateLessThanMax
+    '   This function checks to see if the entered value exceeds the 
+    '   maximum allowed amount and if so, calls an error display function.
+    '   If the value is valid, the function resets the color of the 
+    '   textbox in case it was set to an error color previously.
+    ' Returns:
+    '   Boolean
+    ' Parameters:
+    '   textbox As TextBox
+    '   message As String
+    '   label As Label
+    '   panel As Panel
+    '   max as Double
+    '*******************************************************************************************************************
+    Protected Function ValidateLessThanMax(textbox As TextBox, message As String, label As Label, panel As Panel, max As Double) As Boolean
+        If CType(textbox.Text, Double) > max Then
+            ErrorMsg(textbox, message, label, panel)
+            Return False
+        Else
+            ResetTextbox(textbox)
+            Return True
+        End If
+    End Function
 End Class
