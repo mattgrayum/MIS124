@@ -173,6 +173,7 @@ Partial Class _Default
         If lstIndividualOrJoint.SelectedIndex = 1 Then
             chkSpouse.Enabled = True
         Else
+            chkSpouse.Checked = False
             chkSpouse.Enabled = False
         End If
     End Sub
