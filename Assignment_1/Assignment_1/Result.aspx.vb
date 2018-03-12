@@ -36,10 +36,8 @@ Partial Class _Default
             intNumberOfDependentTaxpayers += 1
         End If
 
-        Dim strServerPath As String = "C:\Users\Matthew Grayum\source\repos\MIS124\Assignment_1\Assignment_1\"
-
         ' Instantiate a clsTaxReturn object
-        Dim taxReturn As clsTaxReturn = New clsTaxReturn(dblWages, dblTaxableInterest, dblUnemploymentCompensation, dblIncomeTaxWithheld, dblEIC, dblCompatPay, intNumberOfTaxpayers, intNumberOfDependentTaxpayers, strServerPath)
+        Dim taxReturn As clsTaxReturn = New clsTaxReturn(dblWages, dblTaxableInterest, dblUnemploymentCompensation, dblIncomeTaxWithheld, dblEIC, dblCompatPay, intNumberOfTaxpayers, intNumberOfDependentTaxpayers, Server.MapPath(path:="."))
 
         ' Call the calculateTaxReturn() method of the clsTaxReturn class and assign the returned value to a variable
         Dim dblFinalTax As Double = taxReturn.calculateTaxReturn()

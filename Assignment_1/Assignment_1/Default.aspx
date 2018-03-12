@@ -10,7 +10,7 @@
                 <asp:Label ID="lblIndivOrJoint" runat="server" Text="Is this an individual or joint tax return?"></asp:Label>
             </div>
             <div class="col-md-6">
-                <asp:DropDownList ID="lstIndividualOrJoint" runat="server">
+                <asp:DropDownList ID="lstIndividualOrJoint" runat="server" AutoPostBack="True">
                     <asp:ListItem>Individual</asp:ListItem>
                     <asp:ListItem>Joint</asp:ListItem>
                 </asp:DropDownList>

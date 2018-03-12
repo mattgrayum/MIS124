@@ -66,6 +66,12 @@ Partial Class _Default
     '*******************************************************************************************************************
     Sub Page_Load(ByVal Sender As Object, ByVal E As EventArgs) Handles MyBase.Load
 
+        'Default is 'Individual' selected in the listbox and 'Spouse' checkbox disabled
+        If Not IsPostBack Then
+            lstIndividualOrJoint.SelectedIndex = 0
+            chkSpouse.Enabled = False
+        End If
+
         ' Set each input field to the value of the associated Session variable
         If Not IsPostBack Then
 
@@ -159,4 +165,15 @@ Partial Class _Default
             Return True
         End If
     End Function
+    '*******************************************************************************************************************
+    'ACTION ON SELECTED INDEX CHANGE FOR LISTBOX lstIndividualOrJoint
+    '*******************************************************************************************************************
+    Protected Sub lstIndividualOrJoint_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstIndividualOrJoint.SelectedIndexChanged
+        'Disable 'Spouse' checkbox if user selects 'Individual' in the listbox
+        If lstIndividualOrJoint.SelectedIndex = 1 Then
+            chkSpouse.Enabled = True
+        Else
+            chkSpouse.Enabled = False
+        End If
+    End Sub
 End Class
