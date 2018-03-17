@@ -52,29 +52,10 @@ Public Partial Class SiteMaster
     End Sub
 
     Protected Sub Page_Load(sender As Object, e As EventArgs)
-        Dim myCookie As HttpCookie = Request.Cookies("UserName")
 
-        If myCookie IsNot Nothing Then
-            txtName.Attributes.Add("style", value:="display: none;")
-            lblName.Text = "Welcome " & myCookie.Value
-        End If
     End Sub
 
     Protected Sub Unnamed_LoggingOut(sender As Object, e As LoginCancelEventArgs)
         Context.GetOwinContext().Authentication.SignOut()
-    End Sub
-
-    Protected Sub txtName_TextChanged(sender As Object, e As EventArgs)
-        lblName.Text = "Welcome " & txtName.Text
-        txtName.Attributes.Add("style", value:="display: none;")
-
-        Try
-            Dim myCookie As New HttpCookie("UserName", txtName.Text)
-            myCookie.Expires = DateTime.MaxValue
-            Response.Cookies.Add(myCookie)
-        Catch ex As Exception
-            lblMessage.Text = ex.Message
-            lblMessage.Attributes.Add("style", "display: block;")
-        End Try
     End Sub
 End Class
