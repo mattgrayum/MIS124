@@ -2,33 +2,40 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div style="text-align: center; border-bottom: solid; border-width: thin; margin-bottom: 10px; width: 100%">
-            <h2>2017 Tax Return 1040EZ Version 2.0 - Main Page</h2>
+        <div style="text-align: center; margin-bottom: 10px; padding: 10px; width: 100%">
+                <h2>2017 Tax Return 1040EZ Version 2.0 - Main Page</h2>
+        </div>
+
+     <div style="background-color: oldlace;">
+        <div class="row" style="border-bottom: thin solid;  border-top: thin solid black;width: 100%; padding: 15px; margin:0;">
+            <div class="col-md-3">
+                <p>Step 1: Select your Tax Payer ID</p>
+            </div>
+            <div class="col-md-6">
+                <p>Step 2. Verify your Information. If your information has changed, please provide your current information.</p>
+            </div>
+            <div class="col-md-3">
+                <p>Step 3: Type your Tax Year</p>
+            </div>
+        </div>
+
+        <div class="row" style="border-bottom: thin solid; width: 100%; padding: 15px; margin:0;">
+            <div class="col-md-3">
+                <asp:ListBox ID="lstTaxPayerID" runat="server"></asp:ListBox>
+            </div>
+            <div class="col-md-6">
+                <asp:DetailsView ID="dtlTaxPayer" runat="server" Height="50px" Width="125px"></asp:DetailsView>
+            </div>
+            <div class="col-md-3">
+                <asp:TextBox ID="txtTaxYear" runat="server" value="2017"></asp:TextBox>
+            </div>
+        </div>
+
+        <div class="row" style="border-bottom: thin solid; width: 100%; padding: 15px; margin:0;">
+            <asp:Button ID="btnViewTaxReturn" runat="server" Text="View Tax Return" />
+        </div>
     </div>
 
-    <div class="row" style="border-bottom: 1px solid black; width: 100%;">
-        <div class="col-md-3">
-            <p>Step 1: Select your Tax Payer ID</p>
-        </div>
-        <div class="col-md-6">
-            <p>Step 2. Verify your Information. If your information has changed, please provide your current information.</p>
-        </div>
-        <div class="col-md-3">
-            <p>Step 3: Type your Tax Year</p>
-        </div>
-    </div>
-
-    <div class="row" style="border-bottom: 1px solid black; width: 100%;">
-        <div class="col-md-3">
-          
-        </div>
-        <div class="col-md-6">
-            
-        </div>
-        <div class="col-md-3">
-            
-        </div>
-    </div>
 
 
 
