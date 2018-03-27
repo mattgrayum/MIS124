@@ -11,7 +11,13 @@
             </tr>
             <tr>
                 <td class="auto-style3">
-                    <asp:GridView ID="GridView1" runat="server"></asp:GridView>
+                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="dsGridView">
+                        <Columns>
+                            <asp:BoundField DataField="ISBN" HeaderText="ISBN" SortExpression="ISBN" />
+                            <asp:BoundField DataField="Title" HeaderText="Title" SortExpression="Title" />
+                        </Columns>
+                    </asp:GridView>
+                    <asp:SqlDataSource ID="dsGridView" runat="server" ConnectionString="<%$ ConnectionStrings:SacRetailConnectionString3 %>" SelectCommand="SELECT [ISBN], [Title] FROM [Titles] ORDER BY [ISBN]"></asp:SqlDataSource>
                     &nbsp;</td>
                 <td class="auto-style2">
                     <asp:DetailsView ID="DetailsView1" runat="server" Height="50px" Width="125px"></asp:DetailsView>

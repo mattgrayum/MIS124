@@ -23,6 +23,15 @@ Partial Public Class _Default
     Protected WithEvents GridView1 As Global.System.Web.UI.WebControls.GridView
     
     '''<summary>
+    '''dsGridView control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents dsGridView As Global.System.Web.UI.WebControls.SqlDataSource
+    
+    '''<summary>
     '''DetailsView1 control.
     '''</summary>
     '''<remarks>
