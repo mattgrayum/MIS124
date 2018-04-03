@@ -21,7 +21,8 @@
 
         <div class="row" style="border-bottom: thin solid; width: 100%; padding: 15px; margin:0;">
             <div class="col-md-3">
-                <asp:ListBox ID="lstTaxPayerID" runat="server"></asp:ListBox>
+                <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSource1" DataTextField="TaxPayerLastName" DataValueField="TaxPayerID"></asp:DropDownList>
+                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:TaxReturn2014ConnectionString %>" SelectCommand="SELECT [TaxPayerID], [TaxPayerLastName] FROM [tblTaxPayer] ORDER BY [TaxPayerLastName]"></asp:SqlDataSource>
             </div>
             <div class="col-md-6">
                 <asp:DetailsView ID="dtlTaxPayer" runat="server" Height="50px" Width="125px"></asp:DetailsView>
