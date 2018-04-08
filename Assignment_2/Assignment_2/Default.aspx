@@ -21,11 +21,27 @@
 
         <div class="row" style="border-bottom: thin solid; width: 100%; padding: 15px; margin:0;">
             <div class="col-md-3">
-                <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSource1" DataTextField="TaxPayerLastName" DataValueField="TaxPayerID"></asp:DropDownList>
-                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:TaxReturn2014ConnectionString %>" SelectCommand="SELECT [TaxPayerID], [TaxPayerLastName] FROM [tblTaxPayer] ORDER BY [TaxPayerLastName]"></asp:SqlDataSource>
+                <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSource1" DataTextField="TaxPayerLastName" DataValueField="TaxPayerID" AutoPostBack="True"></asp:DropDownList>
+                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:TaxReturn2014_Rodger %>" SelectCommand="SELECT [TaxPayerID], [TaxPayerLastName] FROM [tblTaxPayer]"></asp:SqlDataSource>
             </div>
             <div class="col-md-6">
-                <asp:DetailsView ID="dtlTaxPayer" runat="server" Height="50px" Width="125px"></asp:DetailsView>
+                <asp:DetailsView ID="dtlTaxPayer" runat="server" Height="50px" Width="125px" AutoGenerateRows="False" DataKeyNames="TaxPayerID" DataSourceID="SqlDataSource2">
+                    <Fields>
+                        <asp:BoundField DataField="TaxPayerID" HeaderText="TaxPayerID" ReadOnly="True" SortExpression="TaxPayerID" />
+                        <asp:BoundField DataField="TaxPayerLastName" HeaderText="TaxPayerLastName" SortExpression="TaxPayerLastName" />
+                        <asp:BoundField DataField="TaxPayerFirstName" HeaderText="TaxPayerFirstName" SortExpression="TaxPayerFirstName" />
+                        <asp:BoundField DataField="TaxPayerInitial" HeaderText="TaxPayerInitial" SortExpression="TaxPayerInitial" />
+                        <asp:BoundField DataField="TaxPayerAddress" HeaderText="TaxPayerAddress" SortExpression="TaxPayerAddress" />
+                        <asp:BoundField DataField="TaxPayerCity" HeaderText="TaxPayerCity" SortExpression="TaxPayerCity" />
+                        <asp:BoundField DataField="TaxPayerState" HeaderText="TaxPayerState" SortExpression="TaxPayerState" />
+                        <asp:BoundField DataField="TaxPayerZip" HeaderText="TaxPayerZip" SortExpression="TaxPayerZip" />
+                    </Fields>
+                </asp:DetailsView>
+                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:TaxReturn2014_Rodger %>" SelectCommand="SELECT [TaxPayerID], [TaxPayerLastName], [TaxPayerFirstName], [TaxPayerInitial], [TaxPayerAddress], [TaxPayerCity], [TaxPayerState], [TaxPayerZip] FROM [tblTaxPayer] WHERE ([TaxPayerID] = @TaxPayerID)">
+                    <SelectParameters>
+                        <asp:ControlParameter ControlID="DropDownList1" Name="TaxPayerID" PropertyName="SelectedValue" Type="Int64" />
+                    </SelectParameters>
+                </asp:SqlDataSource>
             </div>
             <div class="col-md-3">
                 <asp:TextBox ID="txtTaxYear" runat="server" value="2017"></asp:TextBox>

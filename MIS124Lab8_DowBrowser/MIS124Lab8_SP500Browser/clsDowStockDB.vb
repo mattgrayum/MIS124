@@ -5,27 +5,38 @@ Public Class clsDowStockDB
 
     Public Shared Function getStock(ByVal strTicker As String) As clsDowStock
         'TODO:
+
         '1. Call the getConnection function from the clsConnection class and get a sqlConnection object
-        '2. Create a string with the following syntax: "SELECT StockName, DivShare, Ticker FROM [DowIndustrialsSQL].[dbo].[tblDowStocks] WHERE Ticker ='" & strTicker & "'"
+        Dim myConnection As SqlConnection = clsConnection.getConnection()
+        '2. Create a string with the following syntax: "SELECT StockName, DivShare, Ticker FROM [DowStocks].[dbo].[tblDowStocks] WHERE Ticker ='" & strTicker & "'"
         '   Notice the single quotes in the statement above
+        Dim mySQLStatement As String = "SELECT StockName, DivShare, Ticker FROM [DowStocks].[dbo].[tblDowStocks] WHERE Ticker ='" & strTicker & "'"
         '3. Create a SqlCommand object with the SQL statment of step 2 and connection of step 1
+        Dim myCommand As New SqlCommand(mySQLStatement, myConnection)
         '4. Open the connection
+        myConnection.Open()
         '5. Execute the Sqlcommand object's Reader 
+        Dim myReader As SqlDataReader = myCommand.ExecuteReader(CommandBehavior.SingleRow)
         '6. Read data from the reader
-        '7. Put the data read from the reader into a clsDowStock object
-        '   There are 2 ways to program the read function:
-        '   OPTION 1:
-        '      myDowStock = New DowStock(strTicker, _
-        '                   reader("StockName").ToString.Trim, _
-        '                   CDbl(reader("DivShare")))
-        '    OPTION 2:
-        '      myDowStock = New clsDowStock(strTicker, _
-        '                 reader.GetString(0).Trim, _
-        '                 CDbl(reader.GetDecimal(1)))
-        '8. If no data is found throw and exception like 
-        '       Throw New ArgumentException("The stock ticker that you entered does not exist in the database." & vbCrLf & vbCrLf & _
-        '                            "Please check your records and type a valid stock ticker")
-        Return New clsDowStock("Sample Ticker", "Sample Stock Name", 3.5)
+        Dim myStock As clsDowStock = Nothing
+            If myReader.Read() Then
+                myStock = New clsDowStock(myReader.GetDecimal(0), myReader.GetString(1), myReader.GetString(2))
+            End If
+
+            '7. Put the data read from the reader into a clsDowStock object
+            '   There are 2 ways to program the read function:
+            '   OPTION 1:
+            '      myDowStock = New DowStock(strTicker, _
+            '                   reader("StockName").ToString.Trim, _
+            '                   CDbl(reader("DivShare")))
+            '    OPTION 2:
+            '      myDowStock = New clsDowStock(strTicker, _
+            '                 reader.GetString(0).Trim, _
+            '                 CDbl(reader.GetDecimal(1)))
+            '8. If no data is found throw and exception like 
+            '       Throw New ArgumentException("The stock ticker that you entered does not exist in the database." & vbCrLf & vbCrLf & _
+            '                            "Please check your records and type a valid stock ticker")
+            Return myStock
 
     End Function
 

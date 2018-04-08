@@ -39,4 +39,13 @@ Partial Public Class _Default
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents DetailsView1 As Global.System.Web.UI.WebControls.DetailsView
+    
+    '''<summary>
+    '''dsDetailView control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents dsDetailView As Global.System.Web.UI.WebControls.SqlDataSource
 End Class

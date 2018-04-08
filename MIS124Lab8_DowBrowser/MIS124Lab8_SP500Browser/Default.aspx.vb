@@ -7,6 +7,13 @@
 
     Protected Sub btnFind_Click(sender As Object, e As EventArgs) Handles btnFind.Click
         'Write the implementation below
+        Try
+            Dim myStock As clsDowStock = clsDowStockDB.getStock(txtStockTicker.Text)
+            txtStockName.Text = myStock.StockName
+            txtDividendPerShare.Text = myStock.Dividend
+        Catch ex As Exception
+            MsgBox.Show(ex.Message)
+        End Try
 
     End Sub
 
