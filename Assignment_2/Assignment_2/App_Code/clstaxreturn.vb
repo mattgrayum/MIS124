@@ -22,20 +22,24 @@ Public Class clsTaxReturn
     'DECLARATION OF MODULE VARIABLES
     '*******************************************************************************************************************
     ' -- Variables to keep track of various information needed to calculate taxes
-    Private mdblWages As Double, _
-            mdblTaxableInterest As Double, _
-            mdblUnemploymentCompensation As Double, _
-            mdblAdjustedGrossIncome As Double, _
-            mdblExcemptionAmount As Double, _
-            mdblTaxableIncome As Double, _
-            mdblIncomeTaxWithheld As Double, _
-            mdblEIC As Double, _
-            mdblCompatPay As Double, _
-            mdblTotalPayments As Double, _
-            mdblTax As Double, _
+    Private mintTaxPayerID As Integer,
+            mstrYear As String,
+            mboolIsJointReturn As Byte,
+            mdblWages As Double,
+            mdblTaxableInterest As Double,
+            mdblUnemploymentCompensation As Double,
+            mstrDependentStatus As String,
+            mdblIncomeTaxWithheld As Double,
+            mdblEIC As Double,
+            mdblCompatPay As Double,
+            mdblAdjustedGrossIncome As Double,
+            mdblExcemptionAmount As Double,
+            mdblTaxableIncome As Double,
+            mdblTotalPayments As Double,
+            mdblTax As Double,
             mdblBalance As Double
 
-    Private mintNumberOfTaxpayers As Integer, _
+    Private mintNumberOfTaxpayers As Integer,
             mintNumberOfDependentTaxpayers As Integer
 
     Private mstrServerPath As String 'String stores the location of the Tax
@@ -48,25 +52,28 @@ Public Class clsTaxReturn
         ' Empty default constructor
     End Sub
 
-    Public Sub New(ByVal dblWages As Double, _
-                    ByVal dblTaxableInterest As Double, _
-                    ByVal dblUnemploymentCompensation As Double, _
-                    ByVal dblIncomeTaxWithheld As Double, _
-                    ByVal dblEIC As Double, _
-                    ByVal dblCompatPay As Double, _
-                    ByVal intNumberOfTaxpayers As Integer, _
-                    ByVal intNumberOfDependentTaxpayers As Integer,
-                    ByVal strServerPath As String)
+    Public Sub New(ByVal intTaxPayerID As Integer,
+                   ByVal strYear As String,
+                   ByVal boolIsJointReturn As Boolean,
+                    ByVal dblWages As Double,
+                    ByVal dblTaxableInterest As Double,
+                    ByVal dblUnemploymentCompensation As Double,
+                   ByVal strDependentStatus As String,
+                    ByVal dblIncomeTaxWithheld As Double,
+                    ByVal dblEIC As Double,
+                    ByVal dblCompatPay As Double)
 
+        mintTaxPayerID = intTaxPayerID
+        mstrYear = strYear
+        IsJointReturn = boolIsJointReturn
         Wages = dblWages
         TaxableInterest = dblTaxableInterest
         UnemploymentCompensation = dblUnemploymentCompensation
+        mstrDependentStatus = strDependentStatus
         IncomeTaxWithheld = dblIncomeTaxWithheld
         EIC = dblEIC
         dblCompatPay = dblCompatPay
-        NumberOfTaxpayers = intNumberOfTaxpayers
-        NumberOfDependentTaxpayers = intNumberOfDependentTaxpayers
-        ServerPath = strServerPath
+
     End Sub
 
     '*******************************************************************************************************************
@@ -74,6 +81,24 @@ Public Class clsTaxReturn
     '*******************************************************************************************************************
     ' -- Various properties to set and access data
 
+    Public ReadOnly Property TaxPayerID As Integer
+        Get
+            Return mintTaxPayerID
+        End Get
+    End Property
+    Public ReadOnly Property Year As Double
+        Get
+            Return mstrYear
+        End Get
+    End Property
+    Public Property IsJointReturn() As Boolean
+        Get
+            Return mboolIsJointReturn
+        End Get
+        Set(ByVal Value As Boolean)
+            mboolIsJointReturn = Value
+        End Set
+    End Property
     Public Property Wages() As Double
         Get
             Return mdblWages
@@ -99,6 +124,14 @@ Public Class clsTaxReturn
         End Get
         Set(ByVal Value As Double)
             mdblUnemploymentCompensation = Value
+        End Set
+    End Property
+    Public Property DependentStatus() As String
+        Get
+            Return mstrDependentStatus
+        End Get
+        Set(ByVal Value As String)
+            mstrDependentStatus = Value
         End Set
     End Property
     Public ReadOnly Property AdjustedGrossIncome() As Double
