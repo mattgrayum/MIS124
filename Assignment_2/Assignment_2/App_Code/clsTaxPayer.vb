@@ -3,7 +3,7 @@ Imports System.Data.SqlClient
 Imports Microsoft.VisualBasic
 
 Public Class clsTaxPayer
-    Private ReadOnly mstrTaxPayerID As Integer
+    Private ReadOnly mintTaxPayerID As Integer
     Private ReadOnly mstrLastName As String
     Private ReadOnly mstrFirstName As String
     Private ReadOnly mstrMidInitial As String
@@ -11,11 +11,10 @@ Public Class clsTaxPayer
     Private ReadOnly mstrCity As String
     Private ReadOnly mstrState As String
     Private ReadOnly mstrZip As String
-    Private ReadOnly mstrTimeCreated As Date
 
     Public ReadOnly Property TaxPayerID As Integer
         Get
-            Return mstrTaxPayerID
+            Return mintTaxPayerID
         End Get
     End Property
 
@@ -61,12 +60,6 @@ Public Class clsTaxPayer
         End Get
     End Property
 
-    Public ReadOnly Property TimeCreated As Date
-        Get
-            Return mstrTimeCreated
-        End Get
-    End Property
-
     Public Sub New()
 
     End Sub
@@ -80,7 +73,7 @@ Public Class clsTaxPayer
                    ByVal strState As String,
                    ByVal strZip As String)
 
-        mstrTaxPayerID = intID
+        mintTaxPayerID = intID
         mstrLastName = strLName
         mstrFirstName = strFName
         mstrMidInitial = strMInit
@@ -92,7 +85,7 @@ Public Class clsTaxPayer
 
     Public Function getJointTaxPayer() As JointTaxPayer
         Dim connection As SqlConnection = clsDBConnection.getConnection()
-        Dim strSQL As String = "SELECT * FROM dbo.tblJointTaxPayer WHERE TaxPayerID = 1;"
+        Dim strSQL As String = "SELECT * FROM dbo.tblJointTaxPayer WHERE TaxPayerID = " & mintTaxPayerID & ";"
         Dim dbCommand As New SqlCommand(strSQL, connection)
         connection.Open()
         Dim dbReader As SqlDataReader = dbCommand.ExecuteReader(CommandBehavior.SingleRow)
@@ -102,8 +95,9 @@ Public Class clsTaxPayer
             joint.firstName = dbReader.GetString(1)
             joint.middleInitial = dbReader.GetString(2)
         Else
-            Throw New ArgumentException("ERROR: SQL103. The Joint Tax Payer for the Tax Payer ID that you entered does not exist in the database." & vbCrLf & vbCrLf &
-                                       "Please check your records and enter a valid Tax Payer ID")
+            joint.lastName = ""
+            joint.firstName = ""
+            joint.middleInitial = ""
         End If
 
         Return joint

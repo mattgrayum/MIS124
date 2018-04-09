@@ -17,6 +17,7 @@ Partial Class DisplayTaxReturn
         lstIndividualOrJoint.SelectedIndex = 0
         If taxReturn.IsJointReturn Then
             lstIndividualOrJoint.SelectedIndex = 1
+            jointTaxPayerName.Attributes.Add("style", "display: block")
             Dim jointTaxPayer As JointTaxPayer = taxPayer.getJointTaxPayer()
             txtSpouseLastName.Text = jointTaxPayer.lastName
             txtSpouseFirstName.Text = jointTaxPayer.firstName

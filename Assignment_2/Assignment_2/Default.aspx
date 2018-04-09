@@ -21,7 +21,7 @@
 
         <div class="row" style="border-bottom: thin solid; width: 100%; padding: 15px; margin:0;">
             <div class="col-md-3">
-                <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSource1" DataTextField="TaxPayerLastName" DataValueField="TaxPayerID" AutoPostBack="True"></asp:DropDownList>
+                <asp:DropDownList ID="lstTaxPayers" runat="server" DataSourceID="SqlDataSource1" DataTextField="TaxPayerLastName" DataValueField="TaxPayerID" AutoPostBack="True"></asp:DropDownList>
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:TaxReturn2014_Rodger %>" SelectCommand="SELECT [TaxPayerID], [TaxPayerLastName] FROM [tblTaxPayer]"></asp:SqlDataSource>
             </div>
             <div class="col-md-6">
@@ -39,12 +39,12 @@
                 </asp:DetailsView>
                 <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:TaxReturn2014_Rodger %>" SelectCommand="SELECT [TaxPayerID], [TaxPayerLastName], [TaxPayerFirstName], [TaxPayerInitial], [TaxPayerAddress], [TaxPayerCity], [TaxPayerState], [TaxPayerZip] FROM [tblTaxPayer] WHERE ([TaxPayerID] = @TaxPayerID)">
                     <SelectParameters>
-                        <asp:ControlParameter ControlID="DropDownList1" Name="TaxPayerID" PropertyName="SelectedValue" Type="Int64" />
+                        <asp:ControlParameter ControlID="lstTaxPayers" Name="TaxPayerID" PropertyName="SelectedValue" Type="Int64" />
                     </SelectParameters>
                 </asp:SqlDataSource>
             </div>
             <div class="col-md-3">
-                <asp:TextBox ID="txtTaxYear" runat="server" value="2017"></asp:TextBox>
+                <asp:TextBox ID="txtTaxYear" runat="server"></asp:TextBox>
             </div>
         </div>
 

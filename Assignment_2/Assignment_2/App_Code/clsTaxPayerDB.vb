@@ -7,7 +7,7 @@ Public Class clsTaxPayerDB
     Public Shared Function getTaxPayer(ByVal ID As Integer) As clsTaxPayer
 
         Dim connection As SqlConnection = clsDBConnection.getConnection()
-        Dim strSQL As String = "SELECT * FROM dbo.tblTaxPayer WHERE TaxPayerID = 1;"
+        Dim strSQL As String = "SELECT * FROM dbo.tblTaxPayer WHERE TaxPayerID =" & ID & ";"
         Dim dbCommand As New SqlCommand(strSQL, connection)
         connection.Open()
         Dim dbReader As SqlDataReader = dbCommand.ExecuteReader(CommandBehavior.SingleRow)
@@ -26,7 +26,7 @@ Public Class clsTaxPayerDB
 
     Public Shared Function getTaxReturn(ByVal ID As Integer, ByVal Year As String) As clsTaxReturn
         Dim connection As SqlConnection = clsDBConnection.getConnection()
-        Dim strSQL As String = "SELECT * FROM dbo.tblTaxReturn WHERE TaxPayerID = 1 AND TaxYear = 2014;"
+        Dim strSQL As String = "SELECT * FROM dbo.tblTaxReturn WHERE TaxPayerID = " & ID & " AND TaxYear = " & Year & ";"
         Dim dbCommand As New SqlCommand(strSQL, connection)
         connection.Open()
         Dim dbReader As SqlDataReader = dbCommand.ExecuteReader(CommandBehavior.SingleRow)
