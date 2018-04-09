@@ -8,7 +8,7 @@
     <div style="background-color: #ffe8bf;">
         <div class="row" style="border-bottom: thin solid;  border-top: thin solid black;width: 100%; padding: 15px; margin:0;">
             <asp:Label ID="Label1" runat="server" Text="Tax Payer ID: " style="display: inline-block;"></asp:Label>
-            <asp:Label ID="lblTaxPayerID" runat="server" Text="6 (placeholder)" style="display: inline-block;"></asp:Label>
+            <asp:Label ID="lblTaxPayerID" runat="server" style="display: inline-block;"></asp:Label>
         </div>
         <div class="row" style="border-bottom: thin solid;  border-top: thin solid black;width: 100%; padding: 15px; margin:0;">
             <div class="col-md-4">

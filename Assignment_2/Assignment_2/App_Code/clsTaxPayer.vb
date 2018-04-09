@@ -76,8 +76,7 @@ Public Class clsTaxPayer
                    ByVal strAddr As String,
                    ByVal strCity As String,
                    ByVal strState As String,
-                   ByVal strZip As String,
-                   ByVal dtTimeCreated As Date)
+                   ByVal strZip As String)
 
         mstrTaxPayerID = intID
         mstrLastName = strLName
@@ -87,6 +86,5 @@ Public Class clsTaxPayer
         mstrCity = strCity
         mstrState = strState
         mstrZip = strZip
-        mstrTimeCreated = dtTimeCreated
     End Sub
 End Class
