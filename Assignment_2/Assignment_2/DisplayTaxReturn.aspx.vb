@@ -17,6 +17,10 @@ Partial Class DisplayTaxReturn
         lstIndividualOrJoint.SelectedIndex = 0
         If taxReturn.IsJointReturn Then
             lstIndividualOrJoint.SelectedIndex = 1
+            Dim jointTaxPayer As JointTaxPayer = taxPayer.getJointTaxPayer()
+            txtSpouseLastName.Text = jointTaxPayer.lastName
+            txtSpouseFirstName.Text = jointTaxPayer.firstName
+            txtSpouseInitial.Text = jointTaxPayer.middleInitial
         End If
         txtWages.Text = taxReturn.Wages
         txtInterest.Text = taxReturn.TaxableInterest

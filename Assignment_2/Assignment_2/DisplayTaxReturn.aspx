@@ -232,7 +232,7 @@
                     </div>
                 </div>
              </div>
-            <div class="col-md-6" id="spouse-no-record" style="margin-top: 10px; display: none;">
+            <div class="col-md-6" id="spouse-no-record" style="margin-top: 10px; display: block;">
                 <asp:Label ID="Label18" runat="server" Text="Spouse Last Name:" style="margin-top: 10px; display:block; padding: 5px;"></asp:Label>
                 <asp:TextBox ID="txtSpouseLastName" runat="server" style="display:block; width: 80%;"></asp:TextBox>
                 <asp:Label ID="Label19" runat="server" Text="Spouse First Name:" style="margin-top: 10px; display:block; padding: 5px;"></asp:Label>

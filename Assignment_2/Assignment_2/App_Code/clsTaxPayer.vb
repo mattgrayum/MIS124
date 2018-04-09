@@ -1,4 +1,6 @@
-﻿Imports Microsoft.VisualBasic
+﻿Imports System.Data
+Imports System.Data.SqlClient
+Imports Microsoft.VisualBasic
 
 Public Class clsTaxPayer
     Private ReadOnly mstrTaxPayerID As Integer
@@ -87,4 +89,23 @@ Public Class clsTaxPayer
         mstrState = strState
         mstrZip = strZip
     End Sub
+
+    Public Function getJointTaxPayer() As JointTaxPayer
+        Dim connection As SqlConnection = clsDBConnection.getConnection()
+        Dim strSQL As String = "SELECT * FROM dbo.tblJointTaxPayer WHERE TaxPayerID = 1;"
+        Dim dbCommand As New SqlCommand(strSQL, connection)
+        connection.Open()
+        Dim dbReader As SqlDataReader = dbCommand.ExecuteReader(CommandBehavior.SingleRow)
+        Dim joint As JointTaxPayer = Nothing
+        If dbReader.Read() Then
+            joint.lastName = dbReader.GetString(0)
+            joint.firstName = dbReader.GetString(1)
+            joint.middleInitial = dbReader.GetString(2)
+        Else
+            Throw New ArgumentException("ERROR: SQL103. The Joint Tax Payer for the Tax Payer ID that you entered does not exist in the database." & vbCrLf & vbCrLf &
+                                       "Please check your records and enter a valid Tax Payer ID")
+        End If
+
+        Return joint
+    End Function
 End Class
