@@ -25,7 +25,7 @@
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:TaxReturn2014_Rodger %>" SelectCommand="SELECT [TaxPayerID], [TaxPayerLastName] FROM [tblTaxPayer]"></asp:SqlDataSource>
             </div>
             <div class="col-md-6">
-                <asp:DetailsView ID="dtlTaxPayer" runat="server" Height="50px" Width="125px" AutoGenerateRows="False" DataKeyNames="TaxPayerID" DataSourceID="SqlDataSource2">
+                <asp:DetailsView ID="dtlTaxPayer" runat="server" Height="50px" Width="125px" AutoGenerateRows="False" DataKeyNames="TaxPayerID" DataSourceID="SqlDataSource2" AutoGenerateEditButton="True">
                     <Fields>
                         <asp:BoundField DataField="TaxPayerID" HeaderText="TaxPayerID" ReadOnly="True" SortExpression="TaxPayerID" />
                         <asp:BoundField DataField="TaxPayerLastName" HeaderText="TaxPayerLastName" SortExpression="TaxPayerLastName" />
@@ -37,14 +37,51 @@
                         <asp:BoundField DataField="TaxPayerZip" HeaderText="TaxPayerZip" SortExpression="TaxPayerZip" />
                     </Fields>
                 </asp:DetailsView>
-                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:TaxReturn2014_Rodger %>" SelectCommand="SELECT [TaxPayerID], [TaxPayerLastName], [TaxPayerFirstName], [TaxPayerInitial], [TaxPayerAddress], [TaxPayerCity], [TaxPayerState], [TaxPayerZip] FROM [tblTaxPayer] WHERE ([TaxPayerID] = @TaxPayerID)">
+                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:TaxReturn2014_Rodger %>" SelectCommand="SELECT [TaxPayerID], [TaxPayerLastName], [TaxPayerFirstName], [TaxPayerInitial], [TaxPayerAddress], [TaxPayerCity], [TaxPayerState], [TaxPayerZip] FROM [tblTaxPayer] WHERE ([TaxPayerID] = @TaxPayerID)" ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [tblTaxPayer] WHERE [TaxPayerID] = @original_TaxPayerID AND [TaxPayerLastName] = @original_TaxPayerLastName AND [TaxPayerFirstName] = @original_TaxPayerFirstName AND [TaxPayerInitial] = @original_TaxPayerInitial AND [TaxPayerAddress] = @original_TaxPayerAddress AND [TaxPayerCity] = @original_TaxPayerCity AND [TaxPayerState] = @original_TaxPayerState AND [TaxPayerZip] = @original_TaxPayerZip" InsertCommand="INSERT INTO [tblTaxPayer] ([TaxPayerID], [TaxPayerLastName], [TaxPayerFirstName], [TaxPayerInitial], [TaxPayerAddress], [TaxPayerCity], [TaxPayerState], [TaxPayerZip]) VALUES (@TaxPayerID, @TaxPayerLastName, @TaxPayerFirstName, @TaxPayerInitial, @TaxPayerAddress, @TaxPayerCity, @TaxPayerState, @TaxPayerZip)" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [tblTaxPayer] SET [TaxPayerLastName] = @TaxPayerLastName, [TaxPayerFirstName] = @TaxPayerFirstName, [TaxPayerInitial] = @TaxPayerInitial, [TaxPayerAddress] = @TaxPayerAddress, [TaxPayerCity] = @TaxPayerCity, [TaxPayerState] = @TaxPayerState, [TaxPayerZip] = @TaxPayerZip WHERE [TaxPayerID] = @original_TaxPayerID AND [TaxPayerLastName] = @original_TaxPayerLastName AND [TaxPayerFirstName] = @original_TaxPayerFirstName AND [TaxPayerInitial] = @original_TaxPayerInitial AND [TaxPayerAddress] = @original_TaxPayerAddress AND [TaxPayerCity] = @original_TaxPayerCity AND [TaxPayerState] = @original_TaxPayerState AND [TaxPayerZip] = @original_TaxPayerZip">
+                    <DeleteParameters>
+                        <asp:Parameter Name="original_TaxPayerID" Type="Int64" />
+                        <asp:Parameter Name="original_TaxPayerLastName" Type="String" />
+                        <asp:Parameter Name="original_TaxPayerFirstName" Type="String" />
+                        <asp:Parameter Name="original_TaxPayerInitial" Type="String" />
+                        <asp:Parameter Name="original_TaxPayerAddress" Type="String" />
+                        <asp:Parameter Name="original_TaxPayerCity" Type="String" />
+                        <asp:Parameter Name="original_TaxPayerState" Type="String" />
+                        <asp:Parameter Name="original_TaxPayerZip" Type="String" />
+                    </DeleteParameters>
+                    <InsertParameters>
+                        <asp:Parameter Name="TaxPayerID" Type="Int64" />
+                        <asp:Parameter Name="TaxPayerLastName" Type="String" />
+                        <asp:Parameter Name="TaxPayerFirstName" Type="String" />
+                        <asp:Parameter Name="TaxPayerInitial" Type="String" />
+                        <asp:Parameter Name="TaxPayerAddress" Type="String" />
+                        <asp:Parameter Name="TaxPayerCity" Type="String" />
+                        <asp:Parameter Name="TaxPayerState" Type="String" />
+                        <asp:Parameter Name="TaxPayerZip" Type="String" />
+                    </InsertParameters>
                     <SelectParameters>
                         <asp:ControlParameter ControlID="lstTaxPayers" Name="TaxPayerID" PropertyName="SelectedValue" Type="Int64" />
                     </SelectParameters>
+                    <UpdateParameters>
+                        <asp:Parameter Name="TaxPayerLastName" Type="String" />
+                        <asp:Parameter Name="TaxPayerFirstName" Type="String" />
+                        <asp:Parameter Name="TaxPayerInitial" Type="String" />
+                        <asp:Parameter Name="TaxPayerAddress" Type="String" />
+                        <asp:Parameter Name="TaxPayerCity" Type="String" />
+                        <asp:Parameter Name="TaxPayerState" Type="String" />
+                        <asp:Parameter Name="TaxPayerZip" Type="String" />
+                        <asp:Parameter Name="original_TaxPayerID" Type="Int64" />
+                        <asp:Parameter Name="original_TaxPayerLastName" Type="String" />
+                        <asp:Parameter Name="original_TaxPayerFirstName" Type="String" />
+                        <asp:Parameter Name="original_TaxPayerInitial" Type="String" />
+                        <asp:Parameter Name="original_TaxPayerAddress" Type="String" />
+                        <asp:Parameter Name="original_TaxPayerCity" Type="String" />
+                        <asp:Parameter Name="original_TaxPayerState" Type="String" />
+                        <asp:Parameter Name="original_TaxPayerZip" Type="String" />
+                    </UpdateParameters>
                 </asp:SqlDataSource>
             </div>
             <div class="col-md-3">
-                <asp:TextBox ID="txtTaxYear" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtTaxYear" runat="server" value="2014"></asp:TextBox>
             </div>
         </div>
 

@@ -1,4 +1,4 @@
-﻿
+﻿Imports System.Windows
 Partial Class DisplayTaxReturn
     Inherits System.Web.UI.Page
 
@@ -14,6 +14,7 @@ Partial Class DisplayTaxReturn
         txtMI.Text = taxPayer.MidInitial
         txtZipCode.Text = taxPayer.Zip
 
+        lblTaxYear.Text = taxReturn.Year
         lstIndividualOrJoint.SelectedIndex = 0
         If taxReturn.IsJointReturn Then
             lstIndividualOrJoint.SelectedIndex = 1
@@ -43,5 +44,13 @@ Partial Class DisplayTaxReturn
     Protected Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         ' Redirect back to the Default Page
         Response.Redirect(url:="~/Default.aspx", endResponse:=False)
+    End Sub
+    Protected Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+        Dim updateDialog As FormView = New FormView()
+        updateDialog.DataSource = Session("taxReturn")
+        updateDialog.DataBind()
+
+
+
     End Sub
 End Class

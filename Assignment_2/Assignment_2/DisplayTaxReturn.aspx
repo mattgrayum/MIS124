@@ -34,9 +34,8 @@
         
     <div style="background-color: oldlace; padding: 15px; border-bottom: thin solid;">
         <div class="row" style="padding-top: 10px; padding-bottom: 10px">
-
-
-            <div class="col-md-6">
+            <div runat="server" id="taxReturnDisplay" class="col-md-6" style="display: block;">
+                <asp:Label ID="lblTaxYear" runat="server" Enabled="False" style="display: none;"></asp:Label>
                 <div class="row" style="padding-top: 10px; padding-bottom: 10px">
                     <div class="col-md-6">
                         <asp:Label ID="lblIndivOrJoint" runat="server" Text="Is this an individual or joint tax return?"></asp:Label>
