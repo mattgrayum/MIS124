@@ -14,7 +14,22 @@ Partial Class DisplayTaxReturn
         txtMI.Text = taxPayer.MidInitial
         txtZipCode.Text = taxPayer.Zip
 
-
+        lstIndividualOrJoint.SelectedIndex = 0
+        If taxReturn.IsJointReturn Then
+            lstIndividualOrJoint.SelectedIndex = 1
+        End If
+        txtWages.Text = taxReturn.Wages
+        txtInterest.Text = taxReturn.TaxableInterest
+        txtUnemployment.Text = taxReturn.UnemploymentCompensation
+        If taxReturn.DependentStatus.Chars(0).ToString = "1" Then
+            chkYou.Checked = True
+        End If
+        If taxReturn.DependentStatus.Chars(1).ToString = "1" Then
+            chkSpouse.Checked = True
+        End If
+        txtWithholding.Text = taxReturn.IncomeTaxWithheld
+        txtEarnedIncome.Text = taxReturn.EIC
+        txtNontaxable.Text = taxReturn.CompatPay
     End Sub
     Protected Sub btnCalculate_Click(sender As Object, e As EventArgs) Handles btnCalculate.Click
         ' Redirect to the Result Page
