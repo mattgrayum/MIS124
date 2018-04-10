@@ -14,14 +14,14 @@ Partial Class DisplayTaxReturn
             txtCity.Text = taxPayer.City
             txtMI.Text = taxPayer.MidInitial
             txtZipCode.Text = taxPayer.Zip
+            lblTaxYear.Text = Session("taxYear")
 
             If taxReturn Is Nothing Then
-                lblTaxYear.Text = Session("taxYear")
-                MsgBox("A tax return does not exist for this tax payer and this year." & vbCrLf &
-                       "Please enter the tax return information in the spaces provided here and click 'Insert'.")
+                btnUpdate.Attributes.Add("style", "display: none")
+                btnInsert.Attributes.Add("style", "display: inline-block")
 
             Else
-                lblTaxYear.Text = taxReturn.Year
+
                 lstIndividualOrJoint.SelectedIndex = 0
                 If taxReturn.IsJointReturn Then
                     lstIndividualOrJoint.SelectedIndex = 1

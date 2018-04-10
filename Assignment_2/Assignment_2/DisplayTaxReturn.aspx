@@ -137,7 +137,7 @@
                         <asp:Button ID="btnUpdate" runat="server" Text="Update" style="width: 80px; display: inline-block;" />
                     </div>
                     <div class="col-md-2">
-                        <asp:Button ID="btnInsert" runat="server" Text="Insert" style="width: 80px; display: inline-block;" />
+                        <asp:Button ID="btnInsert" runat="server" Text="Insert" style="width: 80px; display: none;" />
                     </div>
                     <div class="col-md-2">
                         <asp:Button ID="btnClear" runat="server" Text="Clear" style="display: inline-block; width: 80px;"/>
