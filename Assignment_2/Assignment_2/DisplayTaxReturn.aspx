@@ -41,7 +41,7 @@
                         <asp:Label ID="lblIndivOrJoint" runat="server" Text="Is this an individual or joint tax return?"></asp:Label>
                     </div>
                     <div class="col-md-6">
-                        <asp:DropDownList ID="lstIndividualOrJoint" runat="server" AutoPostBack="True">
+                        <asp:DropDownList ID="lstIndividualOrJoint" runat="server">
                             <asp:ListItem>Individual</asp:ListItem>
                             <asp:ListItem>Joint</asp:ListItem>
                         </asp:DropDownList>
@@ -125,18 +125,24 @@
                     </div>
                 </div>
                 <div class="row" style="padding-top: 10px; padding-bottom: 10px; margin:auto 10px;">
-                    <div class="col-md-3">
-                        <asp:Button ID="btnBack" runat="server" Text="Go Back" style="width: 80px; display: inline-block; margin: 15px;" />
+                    
+                    <div class="col-md-2">
+                        <asp:Button ID="btnBack" runat="server" Text="<< Go Back" style="width: 90px; display: inline-block;" />
                     </div>
-                    <div class="col-md-3">
-                        <asp:Button ID="btnCalculate" runat="server" Text="Calculate" style="width: 80px; display: inline-block; margin: 15px;"/>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2">
+                        <asp:Button ID="btnCalculate" runat="server" Text="Calculate" style="width: 80px; display: inline-block;"/>
                     </div>
-                    <div class="col-md-3">
-                        <asp:Button ID="btnUpdate" runat="server" Text="Update" style="width: 80px; display: inline-block; margin: 15px;" />
+                    <div class="col-md-2">
+                        <asp:Button ID="btnUpdate" runat="server" Text="Update" style="width: 80px; display: inline-block;" />
                     </div>
-                    <div class="col-md-3">
-                        <asp:Button ID="btnClear" runat="server" Text="Clear" style="display: inline-block; width: 80px; margin: 15px;"/>
+                    <div class="col-md-2">
+                        <asp:Button ID="btnInsert" runat="server" Text="Insert" style="width: 80px; display: inline-block;" />
                     </div>
+                    <div class="col-md-2">
+                        <asp:Button ID="btnClear" runat="server" Text="Clear" style="display: inline-block; width: 80px;"/>
+                    </div>
+                    <div class="col-md-1"></div>
                 </div>
              </div>
 

@@ -13,7 +13,6 @@
             txtProductName.Text = myProduct.ProductName
             txtUnitsInStock.Text = myProduct.UnitsInStock
             txtRetailPrice.Text = FormatCurrency(myProduct.RetailPrice, 2)
-            chkDiscontinued.Enabled = True
             chkDiscontinued.Checked = False
             If myProduct.Discontinued = "YES" Then
                 chkDiscontinued.Checked = True

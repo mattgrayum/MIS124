@@ -24,14 +24,14 @@ Public Class clsTaxReturn
     ' -- Variables to keep track of various information needed to calculate taxes
     Private mintTaxPayerID As Integer,
             mstrYear As String,
-            mboolIsJointReturn As Byte,
-            mdblWages As Double,
-            mdblTaxableInterest As Double,
-            mdblUnemploymentCompensation As Double,
-            mstrDependentStatus As String,
-            mdblIncomeTaxWithheld As Double,
-            mdblEIC As Double,
-            mdblCompatPay As Double,
+            mboolIsJointReturn As Boolean,
+            mdecWages As Decimal,
+            mdecTaxableInterest As Decimal,
+            mdecUnemploymentCompensation As Decimal,
+            mchrDependentStatus As Char(),
+            mdecIncomeTaxWithheld As Decimal,
+            mdecEIC As Decimal,
+            mdecCompatPay As Decimal,
             mdblAdjustedGrossIncome As Double,
             mdblExcemptionAmount As Double,
             mdblTaxableIncome As Double,
@@ -55,24 +55,24 @@ Public Class clsTaxReturn
     Public Sub New(ByVal intTaxPayerID As Integer,
                    ByVal strYear As String,
                    ByVal boolIsJointReturn As Boolean,
-                    ByVal dblWages As Double,
-                    ByVal dblTaxableInterest As Double,
-                    ByVal dblUnemploymentCompensation As Double,
-                   ByVal strDependentStatus As String,
-                    ByVal dblIncomeTaxWithheld As Double,
-                    ByVal dblEIC As Double,
-                    ByVal dblCompatPay As Double)
+                    ByVal decWages As Decimal,
+                    ByVal decTaxableInterest As Decimal,
+                    ByVal decUnemploymentCompensation As Decimal,
+                   ByVal chrDependentStatus As Char(),
+                    ByVal decIncomeTaxWithheld As Decimal,
+                    ByVal decEIC As Decimal,
+                    ByVal decCompatPay As Decimal)
 
         mintTaxPayerID = intTaxPayerID
         mstrYear = strYear
         IsJointReturn = boolIsJointReturn
-        Wages = dblWages
-        TaxableInterest = dblTaxableInterest
-        UnemploymentCompensation = dblUnemploymentCompensation
-        mstrDependentStatus = strDependentStatus
-        IncomeTaxWithheld = dblIncomeTaxWithheld
-        EIC = dblEIC
-        dblCompatPay = dblCompatPay
+        Wages = decWages
+        TaxableInterest = decTaxableInterest
+        UnemploymentCompensation = decUnemploymentCompensation
+        mchrDependentStatus = chrDependentStatus
+        IncomeTaxWithheld = decIncomeTaxWithheld
+        EIC = decEIC
+        mdecCompatPay = decCompatPay
 
     End Sub
 
@@ -86,7 +86,7 @@ Public Class clsTaxReturn
             Return mintTaxPayerID
         End Get
     End Property
-    Public ReadOnly Property Year As Double
+    Public ReadOnly Property Year As String
         Get
             Return mstrYear
         End Get
@@ -99,39 +99,39 @@ Public Class clsTaxReturn
             mboolIsJointReturn = Value
         End Set
     End Property
-    Public Property Wages() As Double
+    Public Property Wages() As Decimal
         Get
-            Return mdblWages
+            Return mdecWages
         End Get
-        Set(ByVal Value As Double)
-            mdblWages = Value
+        Set(ByVal Value As Decimal)
+            mdecWages = Value
         End Set
     End Property
-    Public Property TaxableInterest() As Double
+    Public Property TaxableInterest() As Decimal
         Get
-            Return mdblTaxableInterest
+            Return mdecTaxableInterest
         End Get
-        Set(ByVal Value As Double)
+        Set(ByVal Value As Decimal)
             If Value > mintMAX_INTEREST_INCOME_ALLOWED Then
                 Throw New System.Data.InvalidConstraintException("ERROR TR002. Taxable interest must not be over $ 1,500.00")
             End If
-            mdblTaxableInterest = Value
+            mdecTaxableInterest = Value
         End Set
     End Property
-    Public Property UnemploymentCompensation() As Double
+    Public Property UnemploymentCompensation() As Decimal
         Get
-            Return mdblUnemploymentCompensation
+            Return mdecUnemploymentCompensation
         End Get
-        Set(ByVal Value As Double)
-            mdblUnemploymentCompensation = Value
+        Set(ByVal Value As Decimal)
+            mdecUnemploymentCompensation = Value
         End Set
     End Property
-    Public Property DependentStatus() As String
+    Public Property DependentStatus() As Char()
         Get
-            Return mstrDependentStatus
+            Return mchrDependentStatus
         End Get
-        Set(ByVal Value As String)
-            mstrDependentStatus = Value
+        Set(ByVal Value As Char())
+            mchrDependentStatus = Value
         End Set
     End Property
     Public ReadOnly Property AdjustedGrossIncome() As Double
@@ -149,29 +149,29 @@ Public Class clsTaxReturn
             Return mdblTaxableIncome
         End Get
     End Property
-    Public Property IncomeTaxWithheld() As Double
+    Public Property IncomeTaxWithheld() As Decimal
         Get
-            Return mdblIncomeTaxWithheld
+            Return mdecIncomeTaxWithheld
         End Get
-        Set(ByVal Value As Double)
-            mdblIncomeTaxWithheld = Value
+        Set(ByVal Value As Decimal)
+            mdecIncomeTaxWithheld = Value
         End Set
     End Property
-    Public Property EIC() As Double
+    Public Property EIC() As Decimal
         Get
-            Return mdblEIC
+            Return mdecEIC
         End Get
-        Set(ByVal Value As Double)
-            mdblEIC = Value
+        Set(ByVal Value As Decimal)
+            mdecEIC = Value
         End Set
     End Property
 
-    Public Property CompatPay() As Double
+    Public Property CompatPay() As Decimal
         Get
-            Return mdblCompatPay
+            Return mdecCompatPay
         End Get
-        Set(ByVal Value As Double)
-            mdblCompatPay = Value
+        Set(ByVal Value As Decimal)
+            mdecCompatPay = Value
         End Set
     End Property
 
@@ -217,7 +217,7 @@ Public Class clsTaxReturn
     '*******************************************************************************************************************
     ' -- Calculates adjusted gross income
     Private Sub calculateAdjustedGrossIncome()
-        Me.mdblAdjustedGrossIncome = Me.mdblWages + Me.mdblTaxableInterest + Me.mdblUnemploymentCompensation
+        Me.mdblAdjustedGrossIncome = Me.mdecWages + Me.mdecTaxableInterest + Me.mdecUnemploymentCompensation
     End Sub
 
     '*******************************************************************************************************************
@@ -228,7 +228,7 @@ Public Class clsTaxReturn
         If Me.mintNumberOfDependentTaxpayers = 0 Then
             mdblExcemptionAmount = mintNumberOfTaxpayers * (mintEXCEMPTION_DEDUCTION + mintSTANDARD_DEDUCTION)
         Else
-            Dim decA As Double = Me.mdblWages + 350
+            Dim decA As Double = Me.mdecWages + 350
             Dim decC As Double
             If decA > 1000 Then
                 decC = decA
@@ -268,7 +268,7 @@ Public Class clsTaxReturn
     '*******************************************************************************************************************
     ' -- Calculates total payments
     Private Sub calculateTotalPayments()
-        Me.mdblTotalPayments = Me.mdblIncomeTaxWithheld + Me.mdblEIC + mdblCompatPay
+        Me.mdblTotalPayments = Me.mdecIncomeTaxWithheld + Me.mdecEIC + mdecCompatPay
     End Sub
 
     'Calculate LINE 10
