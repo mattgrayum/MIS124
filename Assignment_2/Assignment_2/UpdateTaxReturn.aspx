@@ -2,7 +2,7 @@
 
 <asp:content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div style="text-align: center; border-bottom: solid; border-width: thin; margin-bottom: 10px; width: 100%"><h2>2017 Tax Return 1040EZ Calculator</h2></div>
+    <div style="text-align: center; border-bottom: solid; border-width: thin; margin-bottom: 10px; width: 100%"><h2>Update or Add Tax Return Information</h2></div>
     
     <div style="border-bottom: solid; border-width: thin; padding: 15px; background-color: oldlace">
         <div class="row" style="padding-top: 10px; padding-bottom: 10px">

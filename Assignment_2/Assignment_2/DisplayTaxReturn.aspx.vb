@@ -46,10 +46,8 @@ Partial Class DisplayTaxReturn
         Response.Redirect(url:="~/Default.aspx", endResponse:=False)
     End Sub
     Protected Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        Dim updateDialog As FormView = New FormView()
-        updateDialog.DataSource = Session("taxReturn")
-        updateDialog.DataBind()
 
+        Response.Redirect(url:="~/UpdateTaxReturn.aspx", endResponse:=False)
 
 
     End Sub
