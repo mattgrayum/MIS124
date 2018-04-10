@@ -12,7 +12,7 @@
             Dim myProduct As clsProduct = clsProductDB.getProduct(Int(txtProductID.Text))
             txtProductName.Text = myProduct.ProductName
             txtUnitsInStock.Text = myProduct.UnitsInStock
-            txtRetailPrice.Text = myProduct.RetailPrice
+            txtRetailPrice.Text = FormatCurrency(myProduct.RetailPrice, 2)
             chkDiscontinued.Enabled = True
             chkDiscontinued.Checked = False
             If myProduct.Discontinued = "YES" Then
