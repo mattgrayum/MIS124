@@ -12,7 +12,7 @@
             txtStockName.Text = myStock.StockName
             txtDividendPerShare.Text = myStock.Dividend
         Catch ex As Exception
-            MsgBox.Show(ex.Message)
+
         End Try
 
     End Sub
