@@ -94,10 +94,7 @@ Public Class clsTaxPayer
             joint.lastName = dbReader.GetString(0)
             joint.firstName = dbReader.GetString(1)
             joint.middleInitial = dbReader.GetString(2)
-        Else
-            joint.lastName = ""
-            joint.firstName = ""
-            joint.middleInitial = ""
+            joint.taxPayerID = mintTaxPayerID
         End If
 
         Return joint

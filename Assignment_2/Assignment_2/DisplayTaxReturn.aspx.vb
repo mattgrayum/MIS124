@@ -17,19 +17,15 @@ Partial Class DisplayTaxReturn
             lblTaxYear.Text = Session("taxYear")
 
             If taxReturn Is Nothing Then
-                btnUpdate.Attributes.Add("style", "display: none")
-                btnInsert.Attributes.Add("style", "display: inline-block")
+                btnUpdate.Visible = False
+                btnInsert.Visible = True
 
             Else
-
+                btnUpdate.Visible = True
+                btnInsert.Visible = False
                 lstIndividualOrJoint.SelectedIndex = 0
                 If taxReturn.IsJointReturn Then
-                    lstIndividualOrJoint.SelectedIndex = 1
-                    jointTaxPayerName.Attributes.Add("style", "display: block")
-                    Dim jointTaxPayer As JointTaxPayer = taxPayer.getJointTaxPayer()
-                    txtSpouseLastName.Text = jointTaxPayer.lastName
-                    txtSpouseFirstName.Text = jointTaxPayer.firstName
-                    txtSpouseInitial.Text = jointTaxPayer.middleInitial
+                    setupJointReturnForm(taxPayer)
                 End If
                 txtWages.Text = taxReturn.Wages.ToString("0.00")
                 txtInterest.Text = taxReturn.TaxableInterest.ToString("0.00")
@@ -90,4 +86,43 @@ Partial Class DisplayTaxReturn
                                 CType(txtWithholding.Text, Decimal), CType(txtEarnedIncome.Text, Decimal),
                                 CType(txtNontaxable.Text, Decimal))
     End Function
+    Protected Sub btnAddSpouse_Click(sender As Object, e As EventArgs) Handles btnAddSpouse.Click
+        Dim addedRows As Integer = clsTaxPayerDB.insertJointTaxPayer(CollectJointTaxPayerDataFromPage())
+    End Sub
+
+    Protected Sub btnUpdateSpouse_Click(sender As Object, e As EventArgs) Handles btnUpdateSpouse.Click
+        Dim updatedRows As Integer = clsTaxPayerDB.updateJointTaxPayer(CollectJointTaxPayerDataFromPage())
+    End Sub
+    Public Function CollectJointTaxPayerDataFromPage() As JointTaxPayer
+        Dim jointTaxPayer As JointTaxPayer
+        jointTaxPayer.lastName = txtSpouseLastName.Text
+        jointTaxPayer.firstName = txtSpouseFirstName.Text
+        jointTaxPayer.middleInitial = txtSpouseInitial.Text
+        jointTaxPayer.taxPayerID = Int(lblTaxPayerID.Text)
+        Return jointTaxPayer
+    End Function
+    Protected Sub lstIndividualOrJoint_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstIndividualOrJoint.SelectedIndexChanged
+        If lstIndividualOrJoint.SelectedIndex = 1 Then
+            setupJointReturnForm(Session("taxPayer"))
+        Else
+            jointTaxPayerName.Visible = False
+        End If
+    End Sub
+
+    Public Sub setupJointReturnForm(ByRef taxPayer As clsTaxPayer)
+
+        lstIndividualOrJoint.SelectedIndex = 1
+        jointTaxPayerName.Visible = True
+        Dim jointTaxPayer As JointTaxPayer = taxPayer.getJointTaxPayer()
+        btnAddSpouse.Visible = False
+        btnUpdateSpouse.Visible = True
+        If jointTaxPayer.taxPayerID = 0 Then
+            btnAddSpouse.Visible = True
+            btnUpdateSpouse.Visible = False
+        End If
+        txtSpouseLastName.Text = jointTaxPayer.lastName
+        txtSpouseFirstName.Text = jointTaxPayer.firstName
+        txtSpouseInitial.Text = jointTaxPayer.middleInitial
+
+    End Sub
 End Class

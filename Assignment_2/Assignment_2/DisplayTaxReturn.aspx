@@ -41,7 +41,7 @@
                         <asp:Label ID="lblIndivOrJoint" runat="server" Text="Is this an individual or joint tax return?"></asp:Label>
                     </div>
                     <div class="col-md-6">
-                        <asp:DropDownList ID="lstIndividualOrJoint" runat="server">
+                        <asp:DropDownList ID="lstIndividualOrJoint" runat="server" AutoPostBack="True">
                             <asp:ListItem>Individual</asp:ListItem>
                             <asp:ListItem>Joint</asp:ListItem>
                         </asp:DropDownList>
@@ -137,7 +137,7 @@
                         <asp:Button ID="btnUpdate" runat="server" Text="Update" style="width: 80px; display: inline-block;" />
                     </div>
                     <div class="col-md-2">
-                        <asp:Button ID="btnInsert" runat="server" Text="Insert" style="width: 80px; display: none;" />
+                        <asp:Button ID="btnInsert" runat="server" Text="Insert" style="width: 80px; display: inline-block" />
                     </div>
                     <div class="col-md-2">
                         <asp:Button ID="btnClear" runat="server" Text="Clear" style="display: inline-block; width: 80px;"/>
@@ -147,105 +147,16 @@
              </div>
 
 
-            <div class="col-md-6" id="spouse-tax-return" style="display: none;">
-                <div class="row" style="padding-top: 10px; padding-bottom: 10px">
-                    <div class="col-md-6">
-                        <asp:Label ID="Label8" runat="server" Text="Is this an individual or joint tax return?"></asp:Label>
-                    </div>
-                    <div class="col-md-6">
-                        <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True">
-                            <asp:ListItem>Individual</asp:ListItem>
-                            <asp:ListItem>Joint</asp:ListItem>
-                        </asp:DropDownList>
-                    </div>
-                </div>
-                <div class="row" style="padding-top: 10px; padding-bottom: 10px">
-                    <div class="col-md-6">
-                        <asp:Label ID="Label9" runat="server" Text="1. Wages, salaries, and tips"></asp:Label>
-                    </div>
-                    <div class="col-md-6">
-                        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtWages" ErrorMessage="* Required" style="color: red; position: relative;"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ControlToValidate="txtWages" ErrorMessage="* Invalid dollar amount" ForeColor="Red" SetFocusOnError="True" ValidationExpression="^\d+(\.\d\d)?$" style="position: relative;" ViewStateMode="Disabled" EnableViewState="False"></asp:RegularExpressionValidator>
-                    </div>
-                </div>
-                <div class="row" style="padding-top: 10px; padding-bottom: 10px">
-                    <div class="col-md-6">
-                        <asp:Label ID="Label10" runat="server" Text="2. Taxable interest"></asp:Label>
-                    </div>
-                    <div class="col-md-6">
-                        <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtInterest" ErrorMessage="* Required" style="color: red;"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" ControlToValidate="txtInterest" ErrorMessage="* Invalid dollar amount" ForeColor="Red" SetFocusOnError="True" ValidationExpression="^\d+(\.\d\d)?$" style="position: relative;" ViewStateMode="Disabled" EnableViewState="False"></asp:RegularExpressionValidator>
-                    </div>
-                </div>
-                <div class="row" style="padding-top: 10px; padding-bottom: 10px">
-                    <div class="col-md-6">
-                        <asp:Label ID="Label11" runat="server" Text="3. Unemployment compensation"></asp:Label>
-                    </div>
-                    <div class="col-md-6">
-                        <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtUnemployment" ErrorMessage="* Required" style="color: red;"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator8" runat="server" ControlToValidate="txtUnemployment" ErrorMessage="* Invalid dollar amount" ForeColor="Red" SetFocusOnError="True" ValidationExpression="^\d+(\.\d\d)?$" style="position: relative;" ViewStateMode="Disabled" EnableViewState="False"></asp:RegularExpressionValidator>
-                    </div>
-                </div>
-                <div class="row" style="padding-top: 10px; padding-bottom: 10px">
-                    <div class="col-md-6">
-                        <asp:Label ID="Label12" runat="server" Text="5. If someone can claim you (or your spouse) as a dependent, check the boxes"></asp:Label>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <asp:CheckBox ID="CheckBox1" runat="server" />
-                                <asp:Label ID="Label13" runat="server" Text="You"></asp:Label>
-                            </div>
-                            <div class="col-md-8">
-                                <asp:CheckBox ID="CheckBox2" runat="server" />
-                                <asp:Label ID="Label14" runat="server" Text="Spouse"></asp:Label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="padding-top: 10px; padding-bottom: 10px">
-                    <div class="col-md-6">
-                        <asp:Label ID="Label15" runat="server" Text="7. Federal income tax whithheld from box 2 of your Form(s) W-2"></asp:Label>
-                    </div>
-                    <div class="col-md-6">
-                        <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtWithholding" ErrorMessage="* Required" style="color: red;"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator9" runat="server" ControlToValidate="txtWithholding" ErrorMessage="* Invalid dollar amount" ForeColor="Red" SetFocusOnError="True" ValidationExpression="^\d+(\.\d\d)?$" style="position: relative;" ViewStateMode="Disabled" EnableViewState="False"></asp:RegularExpressionValidator>
-                    </div>
-                </div>
-                <div class="row" style="padding-top: 10px; padding-bottom: 10px">
-                    <div class="col-md-6">
-                        <asp:Label ID="Label16" runat="server" Text="8a. Earned income credit (EIC)"></asp:Label>
-                    </div>
-                    <div class="col-md-6">
-                        <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="txtEarnedIncome" ErrorMessage="* Required" style="color: red;"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator10" runat="server" ControlToValidate="txtEarnedIncome" ErrorMessage="* Invalid dollar amount" ForeColor="Red" SetFocusOnError="True" ValidationExpression="^\d+(\.\d\d)?$" style="position: relative;" ViewStateMode="Disabled" EnableViewState="False"></asp:RegularExpressionValidator>
-                    </div>
-                </div>
-                <div class="row" style="padding-top: 10px; padding-bottom: 10px">
-                    <div class="col-md-6">
-                        <asp:Label ID="Label17" runat="server" Text="8b. Nontaxable compay pay election"></asp:Label>
-                    </div>
-                    <div class="col-md-6">
-                        <asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtNontaxable" ErrorMessage="* Required" style="color: red;"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator11" runat="server" ControlToValidate="txtNontaxable" ErrorMessage="* Invalid dollar amount" ForeColor="Red" SetFocusOnError="True" ValidationExpression="^\d+(\.\d\d)?$" style="position: relative;" ViewStateMode="Disabled" EnableViewState="False"></asp:RegularExpressionValidator>
-                    </div>
-                </div>
-             </div>
-            <div runat="server" class="col-md-6" id="jointTaxPayerName" style="margin-top: 10px; display: none;">
+           
+            <div runat="server" class="col-md-6" id="jointTaxPayerName" style="margin-top: 10px;">
                 <asp:Label ID="Label18" runat="server" Text="Spouse Last Name:" style="margin-top: 10px; display:block; padding: 5px;"></asp:Label>
                 <asp:TextBox ID="txtSpouseLastName" runat="server" style="display:block; width: 80%;"></asp:TextBox>
                 <asp:Label ID="Label19" runat="server" Text="Spouse First Name:" style="margin-top: 10px; display:block; padding: 5px;"></asp:Label>
                 <asp:TextBox ID="txtSpouseFirstName" runat="server" style="display:block; width: 80%;"></asp:TextBox>
                 <asp:Label ID="Label20" runat="server" Text="Spouse Initial:" style="margin-top: 10px; display:block; padding: 5px;"></asp:Label>
                 <asp:TextBox ID="txtSpouseInitial" runat="server" style="display:block; width: 80%;"></asp:TextBox>
-                <asp:Button ID="btnAddSpouse" runat="server" Text="Add" style="margin: 15px 10px 0 0; width: 80px; display: inline-block;"/>
-                <asp:Button ID="btnUpdateSpouse" runat="server" Text="Update" style="margin: 15px 10px; width: 80px; display: inline-block;" />    
+                <asp:Button ID="btnAddSpouse" runat="server" Text="Add" style="margin: 15px 10px 0 0; width: 80px;"/>
+                <asp:Button ID="btnUpdateSpouse" runat="server" Text="Update" style="margin: 15px 10px; width: 80px;" />    
             </div>
 
         </div>
