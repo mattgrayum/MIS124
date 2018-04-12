@@ -3,19 +3,23 @@ Partial Class _Default
     Inherits Page
 
     Protected Sub btnViewTaxReturn_Click(sender As Object, e As EventArgs) Handles btnViewTaxReturn.Click
+        Try
+            Session("taxPayer") = clsTaxPayerDB.getTaxPayer(lstTaxPayers.SelectedValue)
+            Session("taxYear") = txtTaxYear.Text
+            Dim taxReturn As clsTaxReturn = clsTaxPayerDB.getTaxReturn(lstTaxPayers.SelectedValue, txtTaxYear.Text)
+            If taxReturn Is Nothing Then
+                MsgBox("Tax Return not found. I will take you to the Tax Return form so you can add a new tax return.")
+            Else
+                Session("taxReturn") = taxReturn
+            End If
 
-        Session("taxPayer") = clsTaxPayerDB.getTaxPayer(lstTaxPayers.SelectedValue)
+            ' Redirect to the DisplayTaxReturn Page
+            Response.Redirect(url:="~/DisplayTaxReturn.aspx", endResponse:=False)
+        Catch ex As Exception
+            lblMessage.Text = ex.Message
+            pnlMessage.Attributes.Add("style", "background:red; color:white; display: block;")
+        End Try
 
-        Dim taxReturn As clsTaxReturn = clsTaxPayerDB.getTaxReturn(lstTaxPayers.SelectedValue, txtTaxYear.Text)
-        If taxReturn Is Nothing Then
-            MsgBox("A tax return does not exist for this tax payer and this year." & vbCrLf &
-                   "Please enter the tax return information in the spaces provided on the next page and click 'Insert'.")
-        Else
-            Session("taxReturn") = taxReturn
-        End If
-        Session("taxYear") = txtTaxYear.Text
-        ' Redirect to the DisplayTaxReturn Page
-        Response.Redirect(url:="~/DisplayTaxReturn.aspx", endResponse:=False)
 
 
 

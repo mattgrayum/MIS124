@@ -104,6 +104,9 @@ Public Class clsTaxReturn
             Return mdecWages
         End Get
         Set(ByVal Value As Decimal)
+            If Value > mintMAX_TAXABLE_INCOME_ALLOWED Then
+                Throw New System.Data.InvalidConstraintException("ERROR TR001. Taxable income must be less than $ 100,000")
+            End If
             mdecWages = Value
         End Set
     End Property

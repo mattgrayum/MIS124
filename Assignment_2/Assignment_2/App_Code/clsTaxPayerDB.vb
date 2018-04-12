@@ -43,17 +43,20 @@ Public Class clsTaxPayerDB
     End Function
 
     Public Shared Function updateTaxReturn(ByRef taxReturn As clsTaxReturn) As Integer
+
         Dim connection As SqlConnection = clsDBConnection.getConnection()
         Dim strSQL As String = "UPDATE dbo.tblTaxReturn SET [IsJointTaxReturn]='" & taxReturn.IsJointReturn &
-                               "', [Wages] =" & taxReturn.Wages & ", [TaxableInterest] = " & taxReturn.TaxableInterest &
-                               ", [UnemploymentCompensation]=" & taxReturn.UnemploymentCompensation &
-                               ", [DependentStatus]='" & taxReturn.DependentStatus & "', [IncomeTaxWithheld]=" & taxReturn.IncomeTaxWithheld &
-                               ", [EarnedIncomeCredit]=" & taxReturn.EIC & ", [NontaxableCompatPay]=" & taxReturn.CompatPay &
-                               " WHERE TaxPayerID = " & taxReturn.TaxPayerID & " AND TaxYear = " & taxReturn.Year & ";"
+                                "', [Wages] =" & taxReturn.Wages & ", [TaxableInterest] = " & taxReturn.TaxableInterest &
+                                ", [UnemploymentCompensation]=" & taxReturn.UnemploymentCompensation &
+                                ", [DependentStatus]='" & taxReturn.DependentStatus & "', [IncomeTaxWithheld]=" & taxReturn.IncomeTaxWithheld &
+                                ", [EarnedIncomeCredit]=" & taxReturn.EIC & ", [NontaxableCompatPay]=" & taxReturn.CompatPay &
+                                " WHERE TaxPayerID = " & taxReturn.TaxPayerID & " AND TaxYear = " & taxReturn.Year & ";"
         Dim dbCommand As New SqlCommand(strSQL, connection)
         connection.Open()
-        Return dbCommand.ExecuteNonQuery()
+        Dim result As Integer = dbCommand.ExecuteNonQuery()
         connection.Close()
+
+        Return result
     End Function
 
     Public Shared Function insertTaxReturn(ByRef taxReturn As clsTaxReturn) As Integer
@@ -65,8 +68,10 @@ Public Class clsTaxPayerDB
                                ", " & taxReturn.EIC & ", " & taxReturn.CompatPay & ");"
         Dim dbCommand As New SqlCommand(strSQL, connection)
         connection.Open()
-        Return dbCommand.ExecuteNonQuery()
+        Dim result As Integer = dbCommand.ExecuteNonQuery()
         connection.Close()
+
+        Return result
     End Function
 
     Public Shared Function updateJointTaxPayer(ByVal jointTaxPayer As JointTaxPayer) As Integer
@@ -76,8 +81,10 @@ Public Class clsTaxPayerDB
                                "' WHERE [TaxPayerID]=" & jointTaxPayer.taxPayerID & ";"
         Dim dbCommand As New SqlCommand(strSQL, connection)
         connection.Open()
-        Return dbCommand.ExecuteNonQuery()
+        Dim result As Integer = dbCommand.ExecuteNonQuery()
         connection.Close()
+
+        Return result
     End Function
 
     Public Shared Function insertJointTaxPayer(ByVal jointTaxPayer As JointTaxPayer) As Integer
@@ -86,7 +93,9 @@ Public Class clsTaxPayerDB
                                "', '" & jointTaxPayer.middleInitial & "', " & jointTaxPayer.taxPayerID & ");"
         Dim dbCommand As New SqlCommand(strSQL, connection)
         connection.Open()
-        Return dbCommand.ExecuteNonQuery()
+        Dim result As Integer = dbCommand.ExecuteNonQuery()
         connection.Close()
+
+        Return result
     End Function
 End Class

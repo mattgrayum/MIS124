@@ -4,6 +4,9 @@
     <div style="text-align: center; margin-bottom: 10px; padding: 10px; width: 100%">
                 <h2>2017 Tax Return 1040EZ Version 2.0 - Tax Return Information</h2>
     </div>
+    <asp:Panel ID="pnlMessage" runat="server" style="display: none; border-style: solid; border-width: thin; background-color: #e8f6ff; margin-top: 10px; padding: 5px; text-align: center;">
+        <asp:Label ID="lblMessage" runat="server"></asp:Label>
+    </asp:Panel>
 
     <div style="background-color: #ffe8bf;">
         <div class="row" style="border-bottom: thin solid;  border-top: thin solid black;width: 100%; padding: 15px; margin:0;">
@@ -148,7 +151,7 @@
 
 
            
-            <div runat="server" class="col-md-6" id="jointTaxPayerName" style="margin-top: 10px;">
+            <div runat="server" class="col-md-6" id="jointTaxPayerForm" style="margin-top: 10px;">
                 <asp:Label ID="Label18" runat="server" Text="Spouse Last Name:" style="margin-top: 10px; display:block; padding: 5px;"></asp:Label>
                 <asp:TextBox ID="txtSpouseLastName" runat="server" style="display:block; width: 80%;"></asp:TextBox>
                 <asp:Label ID="Label19" runat="server" Text="Spouse First Name:" style="margin-top: 10px; display:block; padding: 5px;"></asp:Label>
@@ -160,9 +163,7 @@
             </div>
 
         </div>
-        <asp:Panel ID="pnlMessage" runat="server" style="border-style: solid; border-width: thin; background-color: #e8f6ff; margin-top: 10px; padding: 5px; text-align: center;">
-            <asp:Label ID="lblMessage" runat="server" Text="Messages will go here"></asp:Label>
-        </asp:Panel>
+        
     </div>
  
 

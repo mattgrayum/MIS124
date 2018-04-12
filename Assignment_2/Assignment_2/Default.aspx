@@ -5,7 +5,9 @@
         <div style="text-align: center; margin-bottom: 10px; padding: 10px; width: 100%">
                 <h2>2017 Tax Return 1040EZ Version 2.0 - Main Page</h2>
         </div>
-
+    <asp:Panel ID="pnlMessage" runat="server" style="display: none;">
+        <asp:Label ID="lblMessage" runat="server"></asp:Label>
+    </asp:Panel>
      <div style="background-color: oldlace;">
         <div class="row" style="border-bottom: thin solid;  border-top: thin solid black;width: 100%; padding: 15px; margin:0;">
             <div class="col-md-3">
@@ -89,6 +91,7 @@
             <asp:Button ID="btnViewTaxReturn" runat="server" Text="View Tax Return" />
         </div>
     </div>
+    
 
 
 
