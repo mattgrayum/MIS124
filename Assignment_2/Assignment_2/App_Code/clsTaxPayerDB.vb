@@ -4,13 +4,27 @@ Imports System.Data.SqlClient
 Imports Microsoft.VisualBasic
 
 Public Class clsTaxPayerDB
+
+    '*******************************************************************************************************************
+    ' Function getTaxPayer
+    '   This function queries the database for a tax payer record that with the passed ID
+    ' Returns:
+    '   taxPayer as clsTaxPayer
+    ' Parameters:
+    '   ID as Integer - The tax payer ID
+    '*******************************************************************************************************************
     Public Shared Function getTaxPayer(ByVal ID As Integer) As clsTaxPayer
 
+        'Set up a database connection, define the SELECT statement, set up a command object, and open the db connection
         Dim connection As SqlConnection = clsDBConnection.getConnection()
         Dim strSQL As String = "SELECT * FROM dbo.tblTaxPayer WHERE TaxPayerID =" & ID & ";"
         Dim dbCommand As New SqlCommand(strSQL, connection)
         connection.Open()
+
+        'Execute the query
         Dim dbReader As SqlDataReader = dbCommand.ExecuteReader(CommandBehavior.SingleRow)
+
+        'Read in the data and populate a new clsTaxPayer object if a record was found
         Dim taxPayer As clsTaxPayer = Nothing
         If dbReader.Read() Then
             taxPayer = New clsTaxPayer(dbReader.GetInt64(0), dbReader.GetString(1), dbReader.GetString(2),
@@ -20,10 +34,21 @@ Public Class clsTaxPayerDB
             Throw New ArgumentException("ERROR: SQL103. The Tax Payer ID that you entered does not exist in the database." & vbCrLf & vbCrLf &
                                        "Please check your records and enter a valid Tax Payer ID")
         End If
+
+        'Close the db connection
         connection.Close()
+
         Return taxPayer
+
     End Function
 
+    '*******************************************************************************************************************
+    ' Function getTaxReturn
+    '   This function queries the database for a tax payer record that with the passed ID
+    ' Returns:
+    '   taxPayer as clsTaxPayer
+    ' Parameters:
+    '   ID as Integer - The tax payer ID
     Public Shared Function getTaxReturn(ByVal ID As Integer, ByVal Year As String) As clsTaxReturn
         Dim connection As SqlConnection = clsDBConnection.getConnection()
         Dim strSQL As String = "SELECT * FROM dbo.tblTaxReturn WHERE TaxPayerID = " & ID & " AND TaxYear = " & Year & ";"

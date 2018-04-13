@@ -10,8 +10,14 @@
 
     <div style="background-color: #ffe8bf;">
         <div class="row" style="border-bottom: thin solid;  border-top: thin solid black;width: 100%; padding: 15px; margin:0;">
-            <asp:Label ID="Label1" runat="server" Text="Tax Payer ID: " style="display: inline-block;"></asp:Label>
-            <asp:Label ID="lblTaxPayerID" runat="server" style="display: inline-block;"></asp:Label>
+            <div id="taxpayerid" style="position:relative; left: 0; display: inline-block">
+                <asp:Label ID="Label1" runat="server" Text="Tax Payer ID: " style="display: inline-block;"></asp:Label>
+                <asp:Label ID="lblTaxPayerID" runat="server" style="display: inline-block;"></asp:Label>
+            </div>
+            <div id="taxyear" style="position:relative; left: 100px; display: inline-block;">
+                <asp:Label ID="Label8" runat="server" Text="Tax Year: " style="display: inline-block;"></asp:Label>
+                <asp:Label ID="lblTaxYear" runat="server" style="display: inline-block;"></asp:Label>
+            </div>
         </div>
         <div class="row" style="border-bottom: thin solid;  border-top: thin solid black;width: 100%; padding: 15px; margin:0;">
             <div class="col-md-4">
@@ -35,10 +41,9 @@
         </div>
     </div>
         
-    <div style="background-color: oldlace; padding: 15px; border-bottom: thin solid;">
+    <div style="background-color: oldlace; padding: 25px; border-bottom: thin solid;">
         <div class="row" style="padding-top: 10px; padding-bottom: 10px">
             <div runat="server" id="taxReturnDisplay" class="col-md-6" style="display: block;">
-                <asp:Label ID="lblTaxYear" runat="server" Enabled="False" style="display: none;"></asp:Label>
                 <div class="row" style="padding-top: 10px; padding-bottom: 10px">
                     <div class="col-md-6">
                         <asp:Label ID="lblIndivOrJoint" runat="server" Text="Is this an individual or joint tax return?"></asp:Label>
@@ -129,23 +134,18 @@
                 </div>
                 <div class="row" style="padding-top: 10px; padding-bottom: 10px; margin:auto 10px;">
                     
-                    <div class="col-md-2">
-                        <asp:Button ID="btnBack" runat="server" Text="<< Go Back" style="width: 90px; display: inline-block;" />
-                    </div>
-                    <div class="col-md-1"></div>
-                    <div class="col-md-2">
-                        <asp:Button ID="btnCalculate" runat="server" Text="Calculate" style="width: 80px; display: inline-block;"/>
-                    </div>
-                    <div class="col-md-2">
-                        <asp:Button ID="btnUpdate" runat="server" Text="Update" style="width: 80px; display: inline-block;" />
-                    </div>
-                    <div class="col-md-2">
-                        <asp:Button ID="btnInsert" runat="server" Text="Insert" style="width: 80px; display: inline-block" />
-                    </div>
-                    <div class="col-md-2">
-                        <asp:Button ID="btnClear" runat="server" Text="Clear" style="display: inline-block; width: 80px;"/>
-                    </div>
-                    <div class="col-md-1"></div>
+                    
+                    <asp:Button ID="btnBack" runat="server" Text="<< Go Back" style="width: 20%; display: inline-block; margin: 0 5px;" />
+
+                    <asp:Button ID="btnCalculate" runat="server" Text="Calculate" style="width: 20%; display: inline-block; margin: 0 5px;"/>
+                   
+                    <asp:Button ID="btnUpdate" runat="server" Text="Update" style="width: 20%; display: inline-block; margin: 0 5px;" />
+                    
+                    <asp:Button ID="btnInsert" runat="server" Text="Insert" style="width: 20%; display: inline-block; margin: 0 5px;" />
+                 
+                    <asp:Button ID="btnClear" runat="server" Text="Clear" style="display: inline-block; width: 20%; margin: 0 5px;"/>
+                    
+                   
                 </div>
              </div>
 
