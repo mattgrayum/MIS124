@@ -84,6 +84,9 @@
             </div>
             <div class="col-md-3">
                 <asp:TextBox ID="txtTaxYear" runat="server"></asp:TextBox>
+                <asp:RegularExpressionValidator ID="revTaxYear" runat="server" ErrorMessage="* Invalid Year" ControlToValidate="txtTaxYear" ValidationExpression="\d{4}" style="color: red; display: block;"></asp:RegularExpressionValidator>
+                <asp:RangeValidator ID="rvTaxYear" runat="server" ErrorMessage="* Invalid Year" ControlToValidate="txtTaxYear" Type="Integer" MaximumValue="9999" MinimumValue="2007" style="color: red; position:relative; display:block; top:-20px;"></asp:RangeValidator>
+                <asp:RequiredFieldValidator ID="rfvTaxYear" runat="server" ErrorMessage="* Required" ControlToValidate="txtTaxYear" style="color: red; position:relative; display:block; top:-40px;"></asp:RequiredFieldValidator>
             </div>
         </div>
 

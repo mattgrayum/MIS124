@@ -6,6 +6,43 @@
         <h2>2017 Tax Return 1040EZ Version 2.0 - Calculation Results</h2>
     </div>
 
+    <asp:Panel ID="pnlMessage" runat="server" style="display: none; border-style: solid; border-width: thin; background-color: #e8f6ff; margin-top: 10px; padding: 5px; text-align: center;">
+        <asp:Label ID="lblMessage" runat="server"></asp:Label>
+    </asp:Panel>
+
+    <div style="background-color: #ffe8bf;">
+        <div class="row" style="border-bottom: thin solid;  border-top: thin solid black;width: 100%; padding: 15px; margin:0; font-size: 18px;">
+            <div id="taxpayerid" style="position:relative; left: 0; display: inline-block;">
+                <asp:Label ID="Label2" runat="server" Text="Tax Payer ID: " style="display: inline-block;"></asp:Label>
+                <asp:Label ID="lblTaxPayerID" runat="server" style="display: inline-block;"></asp:Label>
+            </div>
+            <div id="taxyear" style="position:relative; left: 100px; display: inline-block;">
+                <asp:Label ID="Label8" runat="server" Text="Tax Year: " style="display: inline-block;"></asp:Label>
+                <asp:Label ID="lblTaxYear" runat="server" style="display: inline-block;"></asp:Label>
+            </div>
+        </div>
+        <div class="row" style="border-bottom: thin solid;  border-top: thin solid black;width: 100%; padding: 15px; margin:0;">
+            <div class="col-md-4">
+                <asp:Label ID="Label3" runat="server" Text="Tax Payer Last Name:" style="display:block; padding: 5px;"></asp:Label>
+                <asp:TextBox ID="txtLastName" runat="server" style="display:block; width: 80%;"></asp:TextBox>
+                <asp:Label ID="Label5" runat="server" Text="Tax Payer City:" style="display:block; padding: 5px;"></asp:Label>
+                <asp:TextBox ID="txtCity" runat="server" style="display:block; width: 80%;"></asp:TextBox>
+            </div>
+            <div class="col-md-4">
+                <asp:Label ID="Label4" runat="server" Text="Tax Payer First Name:" style="display:block; padding: 5px;"></asp:Label>
+                <asp:TextBox ID="txtFirstName" runat="server" style="display:block; width: 80%;"></asp:TextBox>
+                <asp:Label ID="Label6" runat="server" Text="Tax Payer State:" style="display:block; padding: 5px;"></asp:Label>
+                <asp:TextBox ID="txtState" runat="server" style="display:block; width: 80%;"></asp:TextBox>
+            </div>
+            <div class="col-md-4">
+                <asp:Label ID="Label7" runat="server" Text="Tax Payer MI:" style="display:block; padding: 5px;"></asp:Label>
+                <asp:TextBox ID="txtMI" runat="server" style="display:block; width: 80%;"></asp:TextBox>
+                <asp:Label ID="Label9" runat="server" Text="Tax Payer Zip Code:" style="display:block; padding: 5px;"></asp:Label>
+                <asp:TextBox ID="txtZipCode" runat="server" style="display:block; width: 80%;"></asp:TextBox>
+            </div>
+        </div>
+    </div>
+
     <div style="border-bottom: solid; border-width: thin; padding: 15px; background-color: oldlace">
         <div class="row" style="padding-top: 10px; padding-bottom: 10px">
             <div class="col-md-6">
@@ -183,10 +220,6 @@
             </div>
         </div>
 
-    </div>
-
-    <div style="border-style: solid; border-width: thin; background-color: oldlace; margin-top: 10px; padding: 5px; text-align: center;">
-        <asp:Label ID="lblSuccessMessage" runat="server" Text="Your tax return has been succussfully calculated."></asp:Label>
     </div>
 
 </asp:Content>

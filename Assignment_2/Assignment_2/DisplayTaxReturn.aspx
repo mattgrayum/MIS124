@@ -135,7 +135,7 @@
                 <div class="row" style="padding-top: 10px; padding-bottom: 10px; margin:auto 10px;">
                     
                     
-                    <asp:Button ID="btnBack" runat="server" Text="<< Go Back" style="width: 20%; display: inline-block; margin: 0 5px;" />
+                    <asp:Button ID="btnBack" runat="server" Text="<< Go Back" style="width: 20%; display: inline-block; margin: 0 5px;" CausesValidation="False" />
 
                     <asp:Button ID="btnCalculate" runat="server" Text="Calculate" style="width: 20%; display: inline-block; margin: 0 5px;"/>
                    
@@ -143,7 +143,7 @@
                     
                     <asp:Button ID="btnInsert" runat="server" Text="Save" style="width: 20%; display: inline-block; margin: 0 5px;" />
                  
-                    <asp:Button ID="btnClear" runat="server" Text="Clear" style="display: inline-block; width: 20%; margin: 0 5px;"/>
+                    <asp:Button ID="btnClear" runat="server" Text="Clear" style="display: inline-block; width: 20%; margin: 0 5px;" CausesValidation="False"/>
                     
                    
                 </div>
@@ -157,7 +157,7 @@
                 <asp:Label ID="Label19" runat="server" Text="Spouse First Name:" style="margin-top: 10px; display:block; padding: 5px;"></asp:Label>
                 <asp:TextBox ID="txtSpouseFirstName" runat="server" style="display:block; width: 80%;"></asp:TextBox>
                 <asp:Label ID="Label20" runat="server" Text="Spouse Initial:" style="margin-top: 10px; display:block; padding: 5px;"></asp:Label>
-                <asp:TextBox ID="txtSpouseInitial" runat="server" style="display:block; width: 80%;"></asp:TextBox>
+                <asp:TextBox ID="txtSpouseInitial" runat="server" style="display:block; width: 80%;" MaxLength="1"></asp:TextBox>
                 <asp:Button ID="btnAddSpouse" runat="server" Text="Add" style="margin: 15px 10px 0 0; width: 80px;"/>
                 <asp:Button ID="btnUpdateSpouse" runat="server" Text="Update" style="margin: 15px 10px; width: 80px;" />    
             </div>

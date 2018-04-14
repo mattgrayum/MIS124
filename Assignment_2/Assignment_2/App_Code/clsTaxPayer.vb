@@ -122,6 +122,13 @@ Public Class clsTaxPayer
             jointTaxPayer.taxPayerID = mintTaxPayerID
         End If
 
+        'If there is no middle initial, the database will have saved it as a single space
+        'We remove that space so it will display as nothing in the single-character text box so the user can 
+        'enter a value in there if they want
+        If jointTaxPayer.middleInitial = " " Then
+            jointTaxPayer.middleInitial = ""
+        End If
+
         'Close the connection
         connection.Close()
 

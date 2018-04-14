@@ -68,8 +68,27 @@ Partial Class DisplayTaxReturn
             End If
 
         Catch ex As Exception
-            showErrorMessage(lblMessage, pnlMessage, ex)
+            Utlilties.showErrorMessage(lblMessage, pnlMessage, ex)
         End Try
+
+    End Sub
+
+    '*******************************************************************************************************************
+    'ACTION ON CLEAR BUTTON CLICK
+    '*******************************************************************************************************************
+    Protected Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+
+        'Set Individual/Joint dropdown to Individual, hide Joint Tax Payer form, and clear all other controls
+        lstIndividualOrJoint.SelectedIndex = 0
+        jointTaxPayerForm.Visible = False
+        txtWages.Text = ""
+        txtInterest.Text = ""
+        txtUnemployment.Text = ""
+        txtWithholding.Text = ""
+        txtEarnedIncome.Text = ""
+        txtNontaxable.Text = ""
+        chkYou.Checked = False
+        chkSpouse.Checked = False
 
     End Sub
 
@@ -78,8 +97,24 @@ Partial Class DisplayTaxReturn
     '*******************************************************************************************************************
     Protected Sub btnCalculate_Click(sender As Object, e As EventArgs) Handles btnCalculate.Click
 
-        ' Redirect to the Result Page
-        Response.Redirect(url:="~/Result.aspx", endResponse:=False)
+        Try
+            Session("taxReturn") = CollectTaxReturnDataFromPage()
+
+            If Session("taxReturn") Is Nothing Then
+                Exit Sub
+            Else
+                'If the record exists, update it - otherwise insert a new record
+                If clsTaxPayerDB.updateTaxReturn(Session("taxReturn")) = 0 Then
+                    Dim updatedRows = clsTaxPayerDB.insertTaxReturn(Session("taxReturn"))
+                End If
+            End If
+
+            ' Redirect to the Result Page
+            Response.Redirect(url:="~/Result.aspx", endResponse:=False)
+
+        Catch ex As Exception
+            Utlilties.showErrorMessage(lblMessage, pnlMessage, ex)
+        End Try
 
     End Sub
 
@@ -107,12 +142,12 @@ Partial Class DisplayTaxReturn
                 Dim updatedRows As Integer = clsTaxPayerDB.updateTaxReturn(taxReturn)
                 Session("taxReturn") = clsTaxPayerDB.getTaxReturn(Session("taxPayerID"), Session("taxYear"))
                 If updatedRows > 0 Then
-                    showSuccessMessage(lblMessage, pnlMessage, "This Tax Return information has been updated in our records.")
+                    Utlilties.showSuccessMessage(lblMessage, pnlMessage, "This Tax Return information has been updated in our records.")
                 End If
             End If
 
         Catch ex As Exception
-            showErrorMessage(lblMessage, pnlMessage, ex)
+            Utlilties.showErrorMessage(lblMessage, pnlMessage, ex)
         End Try
 
     End Sub
@@ -131,12 +166,12 @@ Partial Class DisplayTaxReturn
                 Dim insertedRows As Integer = clsTaxPayerDB.insertTaxReturn(CollectTaxReturnDataFromPage())
                 Session("taxReturn") = clsTaxPayerDB.getTaxReturn(Session("taxPayerID"), Session("Year"))
                 If insertedRows > 0 Then
-                    showSuccessMessage(lblMessage, pnlMessage, "this Tax Return has been saved to our records.")
+                    Utlilties.showSuccessMessage(lblMessage, pnlMessage, "this Tax Return has been saved to our records.")
                 End If
             End If
 
         Catch ex As Exception
-            showErrorMessage(lblMessage, pnlMessage, ex)
+            Utlilties.showErrorMessage(lblMessage, pnlMessage, ex)
         End Try
 
     End Sub
@@ -173,7 +208,7 @@ Partial Class DisplayTaxReturn
                                     CType(txtNontaxable.Text, Decimal))
 
         Catch ex As Exception
-            showErrorMessage(lblMessage, pnlMessage, ex)
+            Utlilties.showErrorMessage(lblMessage, pnlMessage, ex)
         End Try
 
     End Function
@@ -187,11 +222,11 @@ Partial Class DisplayTaxReturn
             Dim addedRows As Integer = clsTaxPayerDB.insertJointTaxPayer(CollectJointTaxPayerDataFromPage())
 
             If addedRows > 0 Then
-                showSuccessMessage(lblMessage, pnlMessage, "Your Joint Tax Payer has been added to our records.")
+                Utlilties.showSuccessMessage(lblMessage, pnlMessage, "Your Joint Tax Payer has been added to our records.")
             End If
 
         Catch ex As Exception
-            showErrorMessage(lblMessage, pnlMessage, ex)
+            Utlilties.showErrorMessage(lblMessage, pnlMessage, ex)
         End Try
 
     End Sub
@@ -204,7 +239,7 @@ Partial Class DisplayTaxReturn
         Dim updatedRows As Integer = clsTaxPayerDB.updateJointTaxPayer(CollectJointTaxPayerDataFromPage())
 
         If updatedRows > 0 Then
-            showSuccessMessage(lblMessage, pnlMessage, "Your Joint Tax Payer's information has been updated.")
+            Utlilties.showSuccessMessage(lblMessage, pnlMessage, "Your Joint Tax Payer's information has been updated.")
         End If
 
     End Sub
@@ -229,7 +264,7 @@ Partial Class DisplayTaxReturn
             Return jointTaxPayer
 
         Catch ex As Exception
-            showErrorMessage(lblMessage, pnlMessage, ex)
+            Utlilties.showErrorMessage(lblMessage, pnlMessage, ex)
         End Try
 
     End Function
@@ -247,7 +282,7 @@ Partial Class DisplayTaxReturn
             End If
 
         Catch ex As Exception
-            showErrorMessage(lblMessage, pnlMessage, ex)
+            Utlilties.showErrorMessage(lblMessage, pnlMessage, ex)
         End Try
 
     End Sub
@@ -287,45 +322,11 @@ Partial Class DisplayTaxReturn
             txtSpouseInitial.Text = jointTaxPayer.middleInitial
 
         Catch ex As Exception
-            showErrorMessage(lblMessage, pnlMessage, ex)
+            Utlilties.showErrorMessage(lblMessage, pnlMessage, ex)
         End Try
 
     End Sub
 
-    '*******************************************************************************************************************
-    '  Method showSuccessMessage
-    '   This method displays an exception message in a panel with a red background
-    '   and white text. 
-    ' Returns:
-    '   Nothing
-    ' Parameters:
-    '   lbl as Label
-    '   pnl as Panel
-    '   ex as Exception
-    '*******************************************************************************************************************
-    Public Sub showErrorMessage(ByRef lbl As Label, ByRef pnl As Panel, ByRef ex As Exception)
 
-        lblMessage.Text = ex.Message
-        pnlMessage.Attributes.Add("style", "background:#b20000; color:white; display: block; padding: 10px; text-align: center;")
-
-    End Sub
-
-    '*******************************************************************************************************************
-    ' Method showSuccessMessage
-    '   This method displays a success message in a panel with a green background
-    '   and white text. The message that is passed will be displayed in the panel.
-    ' Returns:
-    '   Nothing
-    ' Parameters:
-    '   lbl as Label
-    '   pnl as Panel
-    '   msg as String
-    '*******************************************************************************************************************
-    Public Sub showSuccessMessage(ByRef lbl As Label, ByRef pnl As Panel, ByVal msg As String)
-
-        lbl.Text = "SUCCESS!! " & msg
-        pnl.Attributes.Add("style", "background:#ccffb2; padding: 10px; text-align: center;")
-
-    End Sub
 
 End Class
