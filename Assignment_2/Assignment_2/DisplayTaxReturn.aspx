@@ -9,8 +9,8 @@
     </asp:Panel>
 
     <div style="background-color: #ffe8bf;">
-        <div class="row" style="border-bottom: thin solid;  border-top: thin solid black;width: 100%; padding: 15px; margin:0;">
-            <div id="taxpayerid" style="position:relative; left: 0; display: inline-block">
+        <div class="row" style="border-bottom: thin solid;  border-top: thin solid black;width: 100%; padding: 15px; margin:0; font-size: 18px;">
+            <div id="taxpayerid" style="position:relative; left: 0; display: inline-block;">
                 <asp:Label ID="Label1" runat="server" Text="Tax Payer ID: " style="display: inline-block;"></asp:Label>
                 <asp:Label ID="lblTaxPayerID" runat="server" style="display: inline-block;"></asp:Label>
             </div>
@@ -61,8 +61,8 @@
                     </div>
                     <div class="col-md-6">
                         <asp:TextBox ID="txtWages" runat="server"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="rfvWages" runat="server" ControlToValidate="txtWages" ErrorMessage="* Required" style="color: red; position: relative;"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="revWages" runat="server" ControlToValidate="txtWages" ErrorMessage="* Invalid dollar amount" ForeColor="Red" SetFocusOnError="True" ValidationExpression="^\d+(\.\d\d)?$" style="position: relative;" ViewStateMode="Disabled" EnableViewState="False"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="rfvWages" runat="server" ControlToValidate="txtWages" ErrorMessage="* Required" style="display: block; color: red; position: relative;"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="revWages" runat="server" ControlToValidate="txtWages" ErrorMessage="* Invalid dollar amount" ForeColor="Red" SetFocusOnError="True" ValidationExpression="^\d+(\.\d\d)?$" style="display: block; position: relative; top: -20px;" ViewStateMode="Disabled" EnableViewState="False"></asp:RegularExpressionValidator>
                     </div>
                 </div>
                 <div class="row" style="padding-top: 10px; padding-bottom: 10px">
@@ -71,8 +71,8 @@
                     </div>
                     <div class="col-md-6">
                         <asp:TextBox ID="txtInterest" runat="server"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="rfvInterest" runat="server" ControlToValidate="txtInterest" ErrorMessage="* Required" style="color: red;"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtInterest" ErrorMessage="* Invalid dollar amount" ForeColor="Red" SetFocusOnError="True" ValidationExpression="^\d+(\.\d\d)?$" style="position: relative;" ViewStateMode="Disabled" EnableViewState="False"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="rfvInterest" runat="server" ControlToValidate="txtInterest" ErrorMessage="* Required" style="display: block; color: red;"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtInterest" ErrorMessage="* Invalid dollar amount" ForeColor="Red" SetFocusOnError="True" ValidationExpression="^\d+(\.\d\d)?$" style="position: relative; display: block;  top: -20px;" ViewStateMode="Disabled" EnableViewState="False"></asp:RegularExpressionValidator>
                     </div>
                 </div>
                 <div class="row" style="padding-top: 10px; padding-bottom: 10px">
@@ -81,8 +81,8 @@
                     </div>
                     <div class="col-md-6">
                         <asp:TextBox ID="txtUnemployment" runat="server"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="rfvUnemployment" runat="server" ControlToValidate="txtUnemployment" ErrorMessage="* Required" style="color: red;"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txtUnemployment" ErrorMessage="* Invalid dollar amount" ForeColor="Red" SetFocusOnError="True" ValidationExpression="^\d+(\.\d\d)?$" style="position: relative;" ViewStateMode="Disabled" EnableViewState="False"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="rfvUnemployment" runat="server" ControlToValidate="txtUnemployment" ErrorMessage="* Required" style="display: block; color: red;"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txtUnemployment" ErrorMessage="* Invalid dollar amount" ForeColor="Red" SetFocusOnError="True" ValidationExpression="^\d+(\.\d\d)?$" style="display: block; position: relative; top: -20px;" ViewStateMode="Disabled" EnableViewState="False"></asp:RegularExpressionValidator>
                     </div>
                 </div>
                 <div class="row" style="padding-top: 10px; padding-bottom: 10px">
@@ -108,8 +108,8 @@
                     </div>
                     <div class="col-md-6">
                         <asp:TextBox ID="txtWithholding" runat="server"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="rfvWithholding" runat="server" ControlToValidate="txtWithholding" ErrorMessage="* Required" style="color: red;"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="txtWithholding" ErrorMessage="* Invalid dollar amount" ForeColor="Red" SetFocusOnError="True" ValidationExpression="^\d+(\.\d\d)?$" style="position: relative;" ViewStateMode="Disabled" EnableViewState="False"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="rfvWithholding" runat="server" ControlToValidate="txtWithholding" ErrorMessage="* Required" style="display: block; color: red;"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="txtWithholding" ErrorMessage="* Invalid dollar amount" ForeColor="Red" SetFocusOnError="True" ValidationExpression="^\d+(\.\d\d)?$" style="display: block; position: relative; top: -20px;" ViewStateMode="Disabled" EnableViewState="False"></asp:RegularExpressionValidator>
                     </div>
                 </div>
                 <div class="row" style="padding-top: 10px; padding-bottom: 10px">
@@ -118,8 +118,8 @@
                     </div>
                     <div class="col-md-6">
                         <asp:TextBox ID="txtEarnedIncome" runat="server"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="rfvEarnedIncome" runat="server" ControlToValidate="txtEarnedIncome" ErrorMessage="* Required" style="color: red;"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="txtEarnedIncome" ErrorMessage="* Invalid dollar amount" ForeColor="Red" SetFocusOnError="True" ValidationExpression="^\d+(\.\d\d)?$" style="position: relative;" ViewStateMode="Disabled" EnableViewState="False"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="rfvEarnedIncome" runat="server" ControlToValidate="txtEarnedIncome" ErrorMessage="* Required" style="display: block; color: red;"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="txtEarnedIncome" ErrorMessage="* Invalid dollar amount" ForeColor="Red" SetFocusOnError="True" ValidationExpression="^\d+(\.\d\d)?$" style="display: block; position: relative; top: -20px;" ViewStateMode="Disabled" EnableViewState="False"></asp:RegularExpressionValidator>
                     </div>
                 </div>
                 <div class="row" style="padding-top: 10px; padding-bottom: 10px">
@@ -128,8 +128,8 @@
                     </div>
                     <div class="col-md-6">
                         <asp:TextBox ID="txtNontaxable" runat="server"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="rfvNontaxable" runat="server" ControlToValidate="txtNontaxable" ErrorMessage="* Required" style="color: red;"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="txtNontaxable" ErrorMessage="* Invalid dollar amount" ForeColor="Red" SetFocusOnError="True" ValidationExpression="^\d+(\.\d\d)?$" style="position: relative;" ViewStateMode="Disabled" EnableViewState="False"></asp:RegularExpressionValidator>
+                        <asp:RequiredFieldValidator ID="rfvNontaxable" runat="server" ControlToValidate="txtNontaxable" ErrorMessage="* Required" style="display: block; color: red;"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="txtNontaxable" ErrorMessage="* Invalid dollar amount" ForeColor="Red" SetFocusOnError="True" ValidationExpression="^\d+(\.\d\d)?$" style="display: block; position: relative; top: -20px;" ViewStateMode="Disabled" EnableViewState="False"></asp:RegularExpressionValidator>
                     </div>
                 </div>
                 <div class="row" style="padding-top: 10px; padding-bottom: 10px; margin:auto 10px;">

@@ -45,25 +45,25 @@ Partial Class DisplayTaxReturn
 
                 'Populate the tax return form controls
                 lstIndividualOrJoint.SelectedIndex = 0
-                    jointTaxPayerForm.Visible = False
-                    If taxReturn.IsJointReturn Then
-                        setupJointReturnForm(taxPayer)
-                    End If
+                jointTaxPayerForm.Visible = False
+                If taxReturn.IsJointReturn Then
+                    setupJointReturnForm(taxPayer)
+                End If
 
-                    txtWages.Text = taxReturn.Wages.ToString("0.00")
-                    txtInterest.Text = taxReturn.TaxableInterest.ToString("0.00")
-                    txtUnemployment.Text = taxReturn.UnemploymentCompensation.ToString("0.00")
+                txtWages.Text = taxReturn.Wages.ToString("0.00")
+                txtInterest.Text = taxReturn.TaxableInterest.ToString("0.00")
+                txtUnemployment.Text = taxReturn.UnemploymentCompensation.ToString("0.00")
 
-                    If taxReturn.DependentStatus(0) = "1" Then
-                        chkYou.Checked = True
-                    End If
-                    If taxReturn.DependentStatus(1) = "1" Then
-                        chkSpouse.Checked = True
-                    End If
+                If taxReturn.DependentStatus(0) = "1" Then
+                    chkYou.Checked = True
+                End If
+                If taxReturn.DependentStatus(1) = "1" Then
+                    chkSpouse.Checked = True
+                End If
 
-                    txtWithholding.Text = taxReturn.IncomeTaxWithheld.ToString("0.00")
-                    txtEarnedIncome.Text = taxReturn.EIC.ToString("0.00")
-                    txtNontaxable.Text = taxReturn.CompatPay.ToString("0.00")
+                txtWithholding.Text = taxReturn.IncomeTaxWithheld.ToString("0.00")
+                txtEarnedIncome.Text = taxReturn.EIC.ToString("0.00")
+                txtNontaxable.Text = taxReturn.CompatPay.ToString("0.00")
 
             End If
 
@@ -107,7 +107,7 @@ Partial Class DisplayTaxReturn
                 Dim updatedRows As Integer = clsTaxPayerDB.updateTaxReturn(taxReturn)
                 Session("taxReturn") = clsTaxPayerDB.getTaxReturn(Session("taxPayerID"), Session("taxYear"))
                 If updatedRows > 0 Then
-                    showSuccessMessage(lblMessage, pnlMessage, "The database was successfully updated.")
+                    showSuccessMessage(lblMessage, pnlMessage, "This Tax Return information has been updated in our records.")
                 End If
             End If
 
@@ -131,7 +131,7 @@ Partial Class DisplayTaxReturn
                 Dim insertedRows As Integer = clsTaxPayerDB.insertTaxReturn(CollectTaxReturnDataFromPage())
                 Session("taxReturn") = clsTaxPayerDB.getTaxReturn(Session("taxPayerID"), Session("Year"))
                 If insertedRows > 0 Then
-                    showSuccessMessage(lblMessage, pnlMessage, "Your tax return was successfully added to the database.")
+                    showSuccessMessage(lblMessage, pnlMessage, "this Tax Return has been saved to our records.")
                 End If
             End If
 
@@ -187,7 +187,7 @@ Partial Class DisplayTaxReturn
             Dim addedRows As Integer = clsTaxPayerDB.insertJointTaxPayer(CollectJointTaxPayerDataFromPage())
 
             If addedRows > 0 Then
-                showSuccessMessage(lblMessage, pnlMessage, "Your tax return was successfully added to the database.")
+                showSuccessMessage(lblMessage, pnlMessage, "Your Joint Tax Payer has been added to our records.")
             End If
 
         Catch ex As Exception
@@ -204,7 +204,7 @@ Partial Class DisplayTaxReturn
         Dim updatedRows As Integer = clsTaxPayerDB.updateJointTaxPayer(CollectJointTaxPayerDataFromPage())
 
         If updatedRows > 0 Then
-            showSuccessMessage(lblMessage, pnlMessage, "Your joint tax payer was successfully added to the database.")
+            showSuccessMessage(lblMessage, pnlMessage, "Your Joint Tax Payer's information has been updated.")
         End If
 
     End Sub
@@ -306,7 +306,7 @@ Partial Class DisplayTaxReturn
     Public Sub showErrorMessage(ByRef lbl As Label, ByRef pnl As Panel, ByRef ex As Exception)
 
         lblMessage.Text = ex.Message
-        pnlMessage.Attributes.Add("style", "background:red; color:white; display: block; padding: 10px; text-align: center;")
+        pnlMessage.Attributes.Add("style", "background:#b20000; color:white; display: block; padding: 10px; text-align: center;")
 
     End Sub
 
@@ -324,7 +324,7 @@ Partial Class DisplayTaxReturn
     Public Sub showSuccessMessage(ByRef lbl As Label, ByRef pnl As Panel, ByVal msg As String)
 
         lbl.Text = "SUCCESS!! " & msg
-        pnl.Attributes.Add("style", "background:green; color:white; padding: 10px; text-align: center;")
+        pnl.Attributes.Add("style", "background:#ccffb2; padding: 10px; text-align: center;")
 
     End Sub
 
