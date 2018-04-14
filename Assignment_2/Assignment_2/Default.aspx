@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Home Page" Language="VB" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="Default.aspx.vb" Inherits="_Default" %>
+﻿<%@ Page Title="Home Page" Language="VB" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="Default.aspx.vb" Inherits="_Default"%>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -8,21 +8,21 @@
     <asp:Panel ID="pnlMessage" runat="server" style="display: none;">
         <asp:Label ID="lblMessage" runat="server"></asp:Label>
     </asp:Panel>
-     <div style="background-color: oldlace;">
-        <div class="row" style="border-bottom: thin solid;  border-top: thin solid black;width: 100%; padding: 15px; margin:0;">
-            <div class="col-md-3">
+     <div style="background-color: #ffe8bf;">
+        <div class="row" style="border-bottom: thin solid;  border-top: thin solid black;width: 100%; padding: 15px; margin:0; font-weight: 700; font-size: 16px">
+            <div class="col-md-3" style="text-align: center">
                 <p>Step 1: Select your Tax Payer ID</p>
             </div>
-            <div class="col-md-6">
-                <p>Step 2. Verify your Information. If your information has changed, please provide your current information.</p>
+            <div class="col-md-6" style="text-align: center">
+                <p>Step 2. Verify your Information and update anything that has changed.</p>
             </div>
-            <div class="col-md-3">
-                <p>Step 3: Type your Tax Year</p>
+            <div class="col-md-3" style="text-align: center;"">
+                <p>Step 3: Enter your Tax Year</p>
             </div>
         </div>
 
         <div class="row" style="border-bottom: thin solid; width: 100%; padding: 15px; margin:0;">
-            <div class="col-md-3">
+            <div class="col-md-3" style="text-align: center">
                 <asp:DropDownList ID="lstTaxPayers" runat="server" 
                     Width="200px"
                     DataSourceID="SqlDataSource1" 
@@ -37,23 +37,24 @@
             <div class="col-md-6">
                 <asp:DetailsView ID="dtlTaxPayer" runat="server" 
                     Height="50px" 
-                    Width="500px" 
+                     
                     AutoGenerateRows="False" 
                     DataKeyNames="TaxPayerID" 
                     DataSourceID="SqlDataSource2" 
                     AutoGenerateEditButton="True"
-                    cellpadding="5"
+                    cellpadding="8"
+                    style="width: 80%; margin: auto; background-color: oldlace"
                     >
                     
                     <Fields>
-                        <asp:BoundField ItemStyle-Width="300px" DataField="TaxPayerID" HeaderText="TaxPayerID" ReadOnly="True" SortExpression="TaxPayerID"/>
-                        <asp:BoundField DataField="TaxPayerLastName" HeaderText="TaxPayerLastName" SortExpression="TaxPayerLastName" />
-                        <asp:BoundField DataField="TaxPayerFirstName" HeaderText="TaxPayerFirstName" SortExpression="TaxPayerFirstName" />
-                        <asp:BoundField DataField="TaxPayerInitial" HeaderText="TaxPayerInitial" SortExpression="TaxPayerInitial" />
-                        <asp:BoundField DataField="TaxPayerAddress" HeaderText="TaxPayerAddress" SortExpression="TaxPayerAddress" />
-                        <asp:BoundField DataField="TaxPayerCity" HeaderText="TaxPayerCity" SortExpression="TaxPayerCity" />
-                        <asp:BoundField DataField="TaxPayerState" HeaderText="TaxPayerState" SortExpression="TaxPayerState" />
-                        <asp:BoundField DataField="TaxPayerZip" HeaderText="TaxPayerZip" SortExpression="TaxPayerZip" />
+                        <asp:BoundField ItemStyle-Width="300px" DataField="TaxPayerID" HeaderText="ID Number" ReadOnly="True" SortExpression="TaxPayerID"/>
+                        <asp:BoundField DataField="TaxPayerLastName" HeaderText="Last Name" SortExpression="TaxPayerLastName" />
+                        <asp:BoundField DataField="TaxPayerFirstName" HeaderText="First Name" SortExpression="TaxPayerFirstName" />
+                        <asp:BoundField DataField="TaxPayerInitial" HeaderText="Middle Initial" SortExpression="TaxPayerInitial" />
+                        <asp:BoundField DataField="TaxPayerAddress" HeaderText="Street Address" SortExpression="TaxPayerAddress" />
+                        <asp:BoundField DataField="TaxPayerCity" HeaderText="City" SortExpression="TaxPayerCity" />
+                        <asp:BoundField DataField="TaxPayerState" HeaderText="State" SortExpression="TaxPayerState" />
+                        <asp:BoundField DataField="TaxPayerZip" HeaderText="Zip Code" SortExpression="TaxPayerZip" />
                     </Fields>
                 </asp:DetailsView>
                 <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:TaxReturn2014_Rodger %>" SelectCommand="SELECT [TaxPayerID], [TaxPayerLastName], [TaxPayerFirstName], [TaxPayerInitial], [TaxPayerAddress], [TaxPayerCity], [TaxPayerState], [TaxPayerZip] FROM [tblTaxPayer] WHERE ([TaxPayerID] = @TaxPayerID)" ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [tblTaxPayer] WHERE [TaxPayerID] = @original_TaxPayerID AND [TaxPayerLastName] = @original_TaxPayerLastName AND [TaxPayerFirstName] = @original_TaxPayerFirstName AND [TaxPayerInitial] = @original_TaxPayerInitial AND [TaxPayerAddress] = @original_TaxPayerAddress AND [TaxPayerCity] = @original_TaxPayerCity AND [TaxPayerState] = @original_TaxPayerState AND [TaxPayerZip] = @original_TaxPayerZip" InsertCommand="INSERT INTO [tblTaxPayer] ([TaxPayerID], [TaxPayerLastName], [TaxPayerFirstName], [TaxPayerInitial], [TaxPayerAddress], [TaxPayerCity], [TaxPayerState], [TaxPayerZip]) VALUES (@TaxPayerID, @TaxPayerLastName, @TaxPayerFirstName, @TaxPayerInitial, @TaxPayerAddress, @TaxPayerCity, @TaxPayerState, @TaxPayerZip)" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE [tblTaxPayer] SET [TaxPayerLastName] = @TaxPayerLastName, [TaxPayerFirstName] = @TaxPayerFirstName, [TaxPayerInitial] = @TaxPayerInitial, [TaxPayerAddress] = @TaxPayerAddress, [TaxPayerCity] = @TaxPayerCity, [TaxPayerState] = @TaxPayerState, [TaxPayerZip] = @TaxPayerZip WHERE [TaxPayerID] = @original_TaxPayerID AND [TaxPayerLastName] = @original_TaxPayerLastName AND [TaxPayerFirstName] = @original_TaxPayerFirstName AND [TaxPayerInitial] = @original_TaxPayerInitial AND [TaxPayerAddress] = @original_TaxPayerAddress AND [TaxPayerCity] = @original_TaxPayerCity AND [TaxPayerState] = @original_TaxPayerState AND [TaxPayerZip] = @original_TaxPayerZip">
@@ -99,11 +100,8 @@
                     </UpdateParameters>
                 </asp:SqlDataSource>
             </div>
-            <div class="col-md-3">
-                <asp:TextBox ID="txtTaxYear" runat="server"></asp:TextBox>
-                <asp:RegularExpressionValidator ID="revTaxYear" runat="server" ErrorMessage="* Invalid Year" ControlToValidate="txtTaxYear" ValidationExpression="\d{4}" style="color: red; display: block;"></asp:RegularExpressionValidator>
-                <asp:RangeValidator ID="rvTaxYear" runat="server" ErrorMessage="* Invalid Year" ControlToValidate="txtTaxYear" Type="Integer" MaximumValue="9999" MinimumValue="2007" style="color: red; position:relative; display:block; top:-20px;"></asp:RangeValidator>
-                <asp:RequiredFieldValidator ID="rfvTaxYear" runat="server" ErrorMessage="* Required" ControlToValidate="txtTaxYear" style="color: red; position:relative; display:block; top:-40px;"></asp:RequiredFieldValidator>
+            <div class="col-md-3" style="text-align: center">
+                <asp:DropDownList ID="lstTaxYear" runat="server" style="width: 100px;"></asp:DropDownList>
             </div>
         </div>
 

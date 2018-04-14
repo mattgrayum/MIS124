@@ -8,6 +8,15 @@ Partial Class _Default
     '*******************************************************************************************************************
     Sub Page_Load(ByVal Sender As Object, ByVal E As EventArgs) Handles MyBase.Load
 
+        Using myReader As New Microsoft.VisualBasic.FileIO.TextFieldParser(Server.MapPath(path:=".") & "\App_Data\Years.csv")
+            myReader.SetDelimiters({","})
+            While Not myReader.EndOfData
+                lstTaxYear.Items.Add(myReader.ReadFields(0))
+            End While
+        End Using
+
+
+
         'Populate the tax payer dropdown and tax year with values that were last chosen during this session
         If Not IsPostBack Then
 
@@ -19,7 +28,7 @@ Partial Class _Default
 
             If Not Session("taxYear") Is Nothing Then
 
-                txtTaxYear.Text = Session("taxYear")
+                lstTaxYear.SelectedValue = Session("taxYear")
 
             End If
 
@@ -37,13 +46,13 @@ Partial Class _Default
             'Populate session variables with a tax payer object and the tax year
             Session("taxPayer") = clsTaxPayerDB.getTaxPayer(lstTaxPayers.SelectedValue)
             Session("taxPayerID") = lstTaxPayers.SelectedValue
-            Session("taxYear") = txtTaxYear.Text
+            Session("taxYear") = lstTaxYear.SelectedValue
 
             'Attempt to get a tax return for the chosen tax payer and year
-            If clsTaxPayerDB.isTaxReturn(lstTaxPayers.SelectedValue, txtTaxYear.Text) Then
+            If clsTaxPayerDB.isTaxReturn(lstTaxPayers.SelectedValue, lstTaxYear.SelectedValue) Then
                 Session("taxReturn") = clsTaxPayerDB.getTaxReturn(Session("taxPayerID"), Session("taxYear"))
             Else
-                Session("taxReturn") = New clsTaxReturn(lstTaxPayers.SelectedValue, txtTaxYear.Text, False, 0, 0, 0, {"0", "0"}, 0, 0, 0)
+                Session("taxReturn") = New clsTaxReturn(lstTaxPayers.SelectedValue, lstTaxYear.SelectedValue, False, 0, 0, 0, {"0", "0"}, 0, 0, 0)
                 MsgBox("Tax Return not found. I will take you to the Tax Return form so you can add a new tax return.")
             End If
             'Present the user with a notice if there is no tax return for the chosen

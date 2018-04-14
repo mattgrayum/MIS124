@@ -8,52 +8,54 @@ Partial Class DisplayTaxReturn
     '*******************************************************************************************************************
     Sub Page_Load(ByVal Sender As Object, ByVal E As EventArgs) Handles MyBase.Load
 
+        Page.Form.DefaultButton = btnCalculate.UniqueID
+
         'Try
         If Not IsPostBack Then
 
-                Dim taxPayer As clsTaxPayer = Session("taxPayer")
-                Dim taxReturn As clsTaxReturn = Session("taxReturn")
+            Dim taxPayer As clsTaxPayer = Session("taxPayer")
+            Dim taxReturn As clsTaxReturn = Session("taxReturn")
 
-                'Populate tax payer form controls 
-                lblTaxPayerID.Text = taxPayer.TaxPayerID.ToString
-                lblTaxYear.Text = Session("taxYear")
-                txtFirstName.Text = taxPayer.FirstName
-                txtLastName.Text = taxPayer.LastName
-                txtState.Text = taxPayer.State
-                txtCity.Text = taxPayer.City
-                txtMI.Text = taxPayer.MidInitial
-                txtZipCode.Text = taxPayer.Zip
+            'Populate tax payer form controls 
+            lblTaxPayerID.Text = taxPayer.TaxPayerID.ToString
+            lblTaxYear.Text = Session("taxYear")
+            txtFirstName.Text = taxPayer.FirstName
+            txtLastName.Text = taxPayer.LastName
+            txtState.Text = taxPayer.State
+            txtCity.Text = taxPayer.City
+            txtMI.Text = taxPayer.MidInitial
+            txtZipCode.Text = taxPayer.Zip
 
-                'Only make the 'Update' button visible if the tax return exists in the database
-                btnUpdate.Visible = False
-                btnInsert.Visible = True
-                If clsTaxPayerDB.isTaxReturn(taxReturn.TaxPayerID, taxReturn.Year) Then
-                    btnUpdate.Visible = True
-                    btnInsert.Visible = False
-                End If
-
-                'Populate the tax return form controls
-                lstIndividualOrJoint.SelectedIndex = 0
-                jointTaxPayerForm.Visible = False
-                If taxReturn.IsJointReturn Then
-                    setupJointReturnForm(taxPayer)
-                End If
-
-                If taxReturn.DependentStatus(0) = "1" Then
-                    chkYou.Checked = True
-                End If
-                If taxReturn.DependentStatus(1) = "1" Then
-                    chkSpouse.Checked = True
-                End If
-
-                txtWages.Text = taxReturn.Wages.ToString("0.00")
-                txtInterest.Text = taxReturn.TaxableInterest.ToString("0.00")
-                txtUnemployment.Text = taxReturn.UnemploymentCompensation.ToString("0.00")
-                txtWithholding.Text = taxReturn.IncomeTaxWithheld.ToString("0.00")
-                txtEarnedIncome.Text = taxReturn.EIC.ToString("0.00")
-                txtNontaxable.Text = taxReturn.CompatPay.ToString("0.00")
-
+            'Only make the 'Update' button visible if the tax return exists in the database
+            btnUpdate.Visible = False
+            btnInsert.Visible = True
+            If clsTaxPayerDB.isTaxReturn(taxReturn.TaxPayerID, taxReturn.Year) Then
+                btnUpdate.Visible = True
+                btnInsert.Visible = False
             End If
+
+            'Populate the tax return form controls
+            lstIndividualOrJoint.SelectedIndex = 0
+            jointTaxPayerForm.Visible = False
+            If taxReturn.IsJointReturn Then
+                setupJointReturnForm(taxPayer)
+            End If
+
+            If taxReturn.DependentStatus(0) = "1" Then
+                chkYou.Checked = True
+            End If
+            If taxReturn.DependentStatus(1) = "1" Then
+                chkSpouse.Checked = True
+            End If
+
+            txtWages.Text = taxReturn.Wages.ToString("0.00")
+            txtInterest.Text = taxReturn.TaxableInterest.ToString("0.00")
+            txtUnemployment.Text = taxReturn.UnemploymentCompensation.ToString("0.00")
+            txtWithholding.Text = taxReturn.IncomeTaxWithheld.ToString("0.00")
+            txtEarnedIncome.Text = taxReturn.EIC.ToString("0.00")
+            txtNontaxable.Text = taxReturn.CompatPay.ToString("0.00")
+
+        End If
 
         'Catch ex As Exception
         '    Utlilties.showErrorMessage(lblMessage, pnlMessage, ex)
