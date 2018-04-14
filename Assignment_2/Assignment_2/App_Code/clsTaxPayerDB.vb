@@ -127,6 +127,21 @@ Public Class clsTaxPayerDB
         Return result
     End Function
 
+    Public Shared Function updateTaxPayer(ByRef taxPayer As clsTaxPayer) As Integer
+
+        Dim connection As SqlConnection = clsDBConnection.getConnection()
+        Dim strSQL As String = "UPDATE dbo.tblTaxPayer SET [TaxPayerLastName]='" & taxPayer.LastName & "', [TaxPayerFirstName]='" & taxPayer.FirstName &
+                                "', [TaxPayerInitial]='" & taxPayer.MidInitial & "', [TaxPayerAddress]='" & taxPayer.Address & "', [TaxPayerCity]='" & taxPayer.City &
+                                "', [TaxPayerState]='" & taxPayer.State & "', [TaxPayerZip]='" & taxPayer.Zip & "' WHERE [TaxPayerID] = " & taxPayer.TaxPayerID & ";"
+        Dim dbCommand As New SqlCommand(strSQL, connection)
+        connection.Open()
+        Dim result As Integer = dbCommand.ExecuteNonQuery()
+        connection.Close()
+
+        Return result
+
+    End Function
+
     Public Shared Function updateJointTaxPayer(ByVal jointTaxPayer As JointTaxPayer) As Integer
         Dim connection As SqlConnection = clsDBConnection.getConnection()
         Dim strSQL As String = "UPDATE dbo.tblJointTaxPayer SET [JointLastName]='" & jointTaxPayer.lastName &

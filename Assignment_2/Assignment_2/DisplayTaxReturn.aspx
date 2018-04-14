@@ -132,25 +132,15 @@
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="txtNontaxable" ErrorMessage="* Invalid dollar amount" ForeColor="Red" SetFocusOnError="True" ValidationExpression="^\d+(\.\d\d)?$" style="display: block; position: relative; top: -20px;" ViewStateMode="Disabled" EnableViewState="False"></asp:RegularExpressionValidator>
                     </div>
                 </div>
-                <div class="row" style="padding-top: 10px; padding-bottom: 10px; margin:auto 10px;">
-                    
-                    
-                    <asp:Button ID="btnBack" runat="server" Text="<< Go Back" style="width: 20%; display: inline-block; margin: 0 5px;" CausesValidation="False" />
-
-                    <asp:Button ID="btnCalculate" runat="server" Text="Calculate" style="width: 20%; display: inline-block; margin: 0 5px;"/>
-                   
+                <div class="row" style="padding-top: 10px; padding-bottom: 10px; margin:auto 10px;">    
+                    <asp:Button ID="btnBack" runat="server" Text="<< Go Back" style="width: 20%; display: inline-block; margin: 0 5px;" CausesValidation="False" /> 
                     <asp:Button ID="btnUpdate" runat="server" Text="Update" style="width: 20%; display: inline-block; margin: 0 5px;" />
-                    
                     <asp:Button ID="btnInsert" runat="server" Text="Save" style="width: 20%; display: inline-block; margin: 0 5px;" />
-                 
                     <asp:Button ID="btnClear" runat="server" Text="Clear" style="display: inline-block; width: 20%; margin: 0 5px;" CausesValidation="False"/>
-                    
-                   
+                    <asp:Button ID="btnCalculate" runat="server" Text="Calculate >>" style="width: 20%; display: inline-block; margin: 0 5px;"/>
                 </div>
              </div>
 
-
-           
             <div runat="server" class="col-md-6" id="jointTaxPayerForm" style="margin-top: 10px;">
                 <asp:Label ID="Label18" runat="server" Text="Spouse Last Name:" style="margin-top: 10px; display:block; padding: 5px;"></asp:Label>
                 <asp:TextBox ID="txtSpouseLastName" runat="server" style="display:block; width: 80%;"></asp:TextBox>

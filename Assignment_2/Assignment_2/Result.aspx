@@ -214,10 +214,9 @@
 
         <div class="row" style="padding-top: 10px; padding-bottom: 10px;">
             <div class="col-md-6">
+                <asp:Button ID="btnBack" runat="server" Text="<< Go Back" style="width: 100px" />
             </div>
-            <div class="col-md-6">
-                <asp:Button ID="btnBack" runat="server" Text="Go Back" style="width: 80px" />
-            </div>
+            <div class="col-md-6"></div>
         </div>
 
     </div>

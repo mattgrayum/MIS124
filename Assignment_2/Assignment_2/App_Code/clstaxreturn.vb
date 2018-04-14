@@ -6,17 +6,17 @@
 'Purpose:           Perform the necessary calculations for the 1040EZ tax return.
 '***********************************************************************************************************************
 Imports MIS124ClassLibrary
-
+Imports System.Data
 Public Class clsTaxReturn
 
     '*******************************************************************************************************************
     'DECLARATION OF CONSTANT VARIABLES
     '*******************************************************************************************************************
     ' -- Constants declared and values initialized
-    Private Const mintSTANDARD_DEDUCTION As Integer = 6350, _
-              mintEXCEMPTION_DEDUCTION As Integer = 4050, _
-              mintMAX_TAXABLE_INCOME_ALLOWED As Integer = 100000, _
-              mintMAX_INTEREST_INCOME_ALLOWED As Integer = 1500
+    Private Const mintSTANDARD_DEDUCTION As Integer = 6350,
+              mintEXCEMPTION_DEDUCTION As Integer = 4050,
+              mdecMAX_TAXABLE_INCOME_ALLOWED As Decimal = 100000,
+              mdecMAX_INTEREST_INCOME_ALLOWED As Decimal = 1500
 
     '*******************************************************************************************************************
     'DECLARATION OF MODULE VARIABLES
@@ -74,6 +74,23 @@ Public Class clsTaxReturn
         EIC = decEIC
         mdecCompatPay = decCompatPay
 
+        mintNumberOfTaxpayers = 1
+        If IsJointReturn Then
+            mintNumberOfTaxpayers = 2
+        End If
+
+        mintNumberOfDependentTaxpayers = 0
+        If chrDependentStatus(0) = "1" Then
+            mintNumberOfDependentTaxpayers += 1
+        End If
+        If chrDependentStatus(1) = "1" Then
+            mintNumberOfDependentTaxpayers += 1
+        End If
+
+        If mdecWages + mdecTaxableInterest + mdecUnemploymentCompensation > mdecMAX_TAXABLE_INCOME_ALLOWED Then
+            Throw New InvalidConstraintException("ERROR TR001. Taxable income must be less than $ 100,000")
+        End If
+
     End Sub
 
     '*******************************************************************************************************************
@@ -104,8 +121,8 @@ Public Class clsTaxReturn
             Return mdecWages
         End Get
         Set(ByVal Value As Decimal)
-            If Value > mintMAX_TAXABLE_INCOME_ALLOWED Then
-                Throw New System.Data.InvalidConstraintException("ERROR TR001. Taxable income must be less than $ 100,000")
+            If Value > mdecMAX_TAXABLE_INCOME_ALLOWED Then
+                Throw New InvalidConstraintException("ERROR TR001. Taxable income must be less than $ 100,000")
             End If
             mdecWages = Value
         End Set
@@ -115,8 +132,8 @@ Public Class clsTaxReturn
             Return mdecTaxableInterest
         End Get
         Set(ByVal Value As Decimal)
-            If Value > mintMAX_INTEREST_INCOME_ALLOWED Then
-                Throw New System.Data.InvalidConstraintException("ERROR TR002. Taxable interest must not be over $ 1,500.00")
+            If Value > mdecMAX_INTEREST_INCOME_ALLOWED Then
+                Throw New InvalidConstraintException("ERROR TR002. Taxable interest must not be over $ 1,500.00")
             End If
             mdecTaxableInterest = Value
         End Set
@@ -271,7 +288,7 @@ Public Class clsTaxReturn
     '*******************************************************************************************************************
     ' -- Calculates total payments
     Private Sub calculateTotalPayments()
-        Me.mdblTotalPayments = Me.mdecIncomeTaxWithheld + Me.mdecEIC + mdecCompatPay
+        Me.mdblTotalPayments = Me.mdecIncomeTaxWithheld + Me.mdecEIC
     End Sub
 
     'Calculate LINE 10
@@ -298,7 +315,7 @@ Public Class clsTaxReturn
         calculateAdjustedGrossIncome()
         calculateExcemptionAmount()
         calculateTaxableIncome()
-        If Me.mdblTaxableIncome > mintMAX_TAXABLE_INCOME_ALLOWED Then
+        If Me.mdblTaxableIncome > mdecMAX_TAXABLE_INCOME_ALLOWED Then
             Throw New System.InvalidOperationException("ERROR TR001. Taxable Income cannot exceed $100,000")
         End If
         calculateTotalPayments()

@@ -91,7 +91,7 @@
         </div>
 
         <div class="row" style="border-bottom: thin solid; width: 100%; padding: 15px; margin:0;">
-            <asp:Button ID="btnViewTaxReturn" runat="server" Text="View Tax Return" />
+            <asp:Button ID="btnViewTaxReturn" runat="server" Text="View Tax Return >>" />
         </div>
     </div>
     

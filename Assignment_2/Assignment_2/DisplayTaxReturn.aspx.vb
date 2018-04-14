@@ -8,8 +8,8 @@ Partial Class DisplayTaxReturn
     '*******************************************************************************************************************
     Sub Page_Load(ByVal Sender As Object, ByVal E As EventArgs) Handles MyBase.Load
 
-        Try
-            If Not IsPostBack Then
+        'Try
+        If Not IsPostBack Then
 
                 Dim taxPayer As clsTaxPayer = Session("taxPayer")
                 Dim taxReturn As clsTaxReturn = Session("taxReturn")
@@ -24,16 +24,6 @@ Partial Class DisplayTaxReturn
                 txtMI.Text = taxPayer.MidInitial
                 txtZipCode.Text = taxPayer.Zip
 
-                'Hide the Joint Tax Payer form if this is a new tax return or an 
-                'existing 'Individual' tax return
-                'If taxReturn Is Nothing Or Not taxReturn.IsJointReturn Then
-
-                '    jointTaxPayerForm.Visible = False
-
-                'End If
-
-
-
                 'Only make the 'Update' button visible if the tax return exists in the database
                 btnUpdate.Visible = False
                 btnInsert.Visible = True
@@ -42,17 +32,12 @@ Partial Class DisplayTaxReturn
                     btnInsert.Visible = False
                 End If
 
-
                 'Populate the tax return form controls
                 lstIndividualOrJoint.SelectedIndex = 0
                 jointTaxPayerForm.Visible = False
                 If taxReturn.IsJointReturn Then
                     setupJointReturnForm(taxPayer)
                 End If
-
-                txtWages.Text = taxReturn.Wages.ToString("0.00")
-                txtInterest.Text = taxReturn.TaxableInterest.ToString("0.00")
-                txtUnemployment.Text = taxReturn.UnemploymentCompensation.ToString("0.00")
 
                 If taxReturn.DependentStatus(0) = "1" Then
                     chkYou.Checked = True
@@ -61,15 +46,18 @@ Partial Class DisplayTaxReturn
                     chkSpouse.Checked = True
                 End If
 
+                txtWages.Text = taxReturn.Wages.ToString("0.00")
+                txtInterest.Text = taxReturn.TaxableInterest.ToString("0.00")
+                txtUnemployment.Text = taxReturn.UnemploymentCompensation.ToString("0.00")
                 txtWithholding.Text = taxReturn.IncomeTaxWithheld.ToString("0.00")
                 txtEarnedIncome.Text = taxReturn.EIC.ToString("0.00")
                 txtNontaxable.Text = taxReturn.CompatPay.ToString("0.00")
 
             End If
 
-        Catch ex As Exception
-            Utlilties.showErrorMessage(lblMessage, pnlMessage, ex)
-        End Try
+        'Catch ex As Exception
+        '    Utlilties.showErrorMessage(lblMessage, pnlMessage, ex)
+        'End Try
 
     End Sub
 
@@ -134,18 +122,7 @@ Partial Class DisplayTaxReturn
     Protected Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
 
         Try
-            Dim taxReturn As clsTaxReturn = CollectTaxReturnDataFromPage()
-
-            If taxReturn Is Nothing Then
-                Exit Sub
-            Else
-                Dim updatedRows As Integer = clsTaxPayerDB.updateTaxReturn(taxReturn)
-                Session("taxReturn") = clsTaxPayerDB.getTaxReturn(Session("taxPayerID"), Session("taxYear"))
-                If updatedRows > 0 Then
-                    Utlilties.showSuccessMessage(lblMessage, pnlMessage, "This Tax Return information has been updated in our records.")
-                End If
-            End If
-
+            DatabaseUpdate("update", "DB001")
         Catch ex As Exception
             Utlilties.showErrorMessage(lblMessage, pnlMessage, ex)
         End Try
@@ -158,18 +135,7 @@ Partial Class DisplayTaxReturn
     Protected Sub btnInsert_Click(sender As Object, e As EventArgs) Handles btnInsert.Click
 
         Try
-            Dim taxReturn As clsTaxReturn = CollectTaxReturnDataFromPage()
-
-            If taxReturn Is Nothing Then
-                Exit Sub
-            Else
-                Dim insertedRows As Integer = clsTaxPayerDB.insertTaxReturn(CollectTaxReturnDataFromPage())
-                Session("taxReturn") = clsTaxPayerDB.getTaxReturn(Session("taxPayerID"), Session("Year"))
-                If insertedRows > 0 Then
-                    Utlilties.showSuccessMessage(lblMessage, pnlMessage, "this Tax Return has been saved to our records.")
-                End If
-            End If
-
+            DatabaseUpdate("insert", "DB002")
         Catch ex As Exception
             Utlilties.showErrorMessage(lblMessage, pnlMessage, ex)
         End Try
@@ -214,6 +180,52 @@ Partial Class DisplayTaxReturn
     End Function
 
     '*******************************************************************************************************************
+    ' Method CollectJointTaxPayerDataFromPage
+    '   This function collects the data from the joint tax payer form controls and builds a 
+    '   jointTaxPayer structure with it.
+    ' Returns:
+    '   jointTaxPayer
+    ' Parameters:
+    '   None
+    '*******************************************************************************************************************
+    Public Function CollectJointTaxPayerDataFromPage() As JointTaxPayer
+
+        Try
+            Dim jointTaxPayer As JointTaxPayer
+            jointTaxPayer.lastName = txtSpouseLastName.Text
+            jointTaxPayer.firstName = txtSpouseFirstName.Text
+            jointTaxPayer.middleInitial = txtSpouseInitial.Text
+            jointTaxPayer.taxPayerID = Int(lblTaxPayerID.Text)
+            Return jointTaxPayer
+
+        Catch ex As Exception
+            Utlilties.showErrorMessage(lblMessage, pnlMessage, ex)
+        End Try
+
+    End Function
+
+    '*******************************************************************************************************************
+    ' Method CollectTaxPayerDataFromPage
+    '   This function collects the data from the tax payer form controls intstantiates a
+    '   tax payer object with it.
+    ' Returns:
+    '   clsTaxPayer
+    ' Parameters:
+    '   None
+    '*******************************************************************************************************************
+    Public Function CollectTaxPayerDataFromPage() As clsTaxPayer
+
+        Try
+            Dim oldTaxPayer As clsTaxPayer = Session("taxPayer")
+            Return New clsTaxPayer(Int(lblTaxPayerID.Text), txtLastName.Text, txtFirstName.Text, txtMI.Text, oldTaxPayer.Address, txtCity.Text, txtState.Text, txtZipCode.Text)
+
+        Catch ex As Exception
+            Utlilties.showErrorMessage(lblMessage, pnlMessage, ex)
+        End Try
+
+    End Function
+
+    '*******************************************************************************************************************
     'ACTION ON ADD SPOUSE BUTTON CLICK
     '*******************************************************************************************************************
     Protected Sub btnAddSpouse_Click(sender As Object, e As EventArgs) Handles btnAddSpouse.Click
@@ -243,31 +255,6 @@ Partial Class DisplayTaxReturn
         End If
 
     End Sub
-
-    '*******************************************************************************************************************
-    ' Method CollectJointTaxPayerDataFromPage
-    '   This function collects the data from the joint tax payer form controls and builds a 
-    '   jointTaxPayer structure with it.
-    ' Returns:
-    '   jointTaxPayer
-    ' Parameters:
-    '   None
-    '*******************************************************************************************************************
-    Public Function CollectJointTaxPayerDataFromPage() As JointTaxPayer
-
-        Try
-            Dim jointTaxPayer As JointTaxPayer
-            jointTaxPayer.lastName = txtSpouseLastName.Text
-            jointTaxPayer.firstName = txtSpouseFirstName.Text
-            jointTaxPayer.middleInitial = txtSpouseInitial.Text
-            jointTaxPayer.taxPayerID = Int(lblTaxPayerID.Text)
-            Return jointTaxPayer
-
-        Catch ex As Exception
-            Utlilties.showErrorMessage(lblMessage, pnlMessage, ex)
-        End Try
-
-    End Function
 
     '*******************************************************************************************************************
     'ACTION ON lstIndividualOrJoint SELECTED INDEX CHANGE
@@ -327,6 +314,43 @@ Partial Class DisplayTaxReturn
 
     End Sub
 
+    Public Sub DatabaseUpdate(ByVal updateType As String, ByVal errorCode As String)
 
+        Try
+            'Collect the data from the page
+            Dim taxReturn As clsTaxReturn = CollectTaxReturnDataFromPage()
+            Dim taxPayer As clsTaxPayer = CollectTaxPayerDataFromPage()
+
+            'Make sure these objects are set
+            If taxReturn Is Nothing Or taxPayer Is Nothing Then
+                Exit Sub
+            Else
+                'Update the database
+                Dim updatedTaxReturnRows As Integer = 0
+                If updateType = "update" Then
+                    updatedTaxReturnRows = clsTaxPayerDB.updateTaxReturn(taxReturn)
+                Else
+                    updatedTaxReturnRows = clsTaxPayerDB.insertTaxReturn(taxReturn)
+                End If
+
+                Dim updatedTaxPayerRows As Integer = clsTaxPayerDB.updateTaxPayer(taxPayer)
+
+                'Refresh Session variables with new Tax Return and Tax Payer data
+                Session("taxReturn") = clsTaxPayerDB.getTaxReturn(Session("taxPayerID"), Session("Year"))
+                Session("taxPayer") = clsTaxPayerDB.getTaxPayer(taxPayer.TaxPayerID)
+
+
+                If updatedTaxReturnRows > 0 And updatedTaxPayerRows > 0 Then
+                    Utlilties.showSuccessMessage(lblMessage, pnlMessage, "This Tax Return data has been saved to our records.")
+                Else
+                    Throw New Exception("ERROR " & errorCode & " - There was a problem saving this data. Contact the site administrator for assistance.")
+                End If
+            End If
+
+        Catch ex As Exception
+            Utlilties.showErrorMessage(lblMessage, pnlMessage, ex)
+        End Try
+
+    End Sub
 
 End Class
