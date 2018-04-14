@@ -83,7 +83,7 @@
                 </asp:SqlDataSource>
             </div>
             <div class="col-md-3">
-                <asp:TextBox ID="txtTaxYear" runat="server" value="2014"></asp:TextBox>
+                <asp:TextBox ID="txtTaxYear" runat="server"></asp:TextBox>
             </div>
         </div>
 

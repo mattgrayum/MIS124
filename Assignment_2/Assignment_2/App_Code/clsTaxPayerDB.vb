@@ -43,6 +43,34 @@ Public Class clsTaxPayerDB
     End Function
 
     '*******************************************************************************************************************
+    ' Function isTaxReturn
+    '   This function checks the database to see if a tax return exists for the given tax payer and year
+    ' Returns:
+    '   isReturn as Boolean
+    ' Parameters:
+    '   ID as Integer - The tax payer ID
+    '   year as String - The year of the tax return
+
+    Public Shared Function isTaxReturn(ByVal ID As Integer, ByVal year As String) As Boolean
+
+        Dim connection As SqlConnection = clsDBConnection.getConnection()
+        Dim strSQL As String = "SELECT * FROM dbo.tblTaxReturn WHERE TaxPayerID = " & ID & " AND TaxYear = " & year & ";"
+        Dim dbCommand As New SqlCommand(strSQL, connection)
+        connection.Open()
+
+        'Check if a tax return exists in the database
+        Dim isReturn As Boolean = True
+        If dbCommand.ExecuteScalar = Nothing Then
+            isReturn = False
+        End If
+
+        connection.Close()
+
+        Return isReturn
+
+    End Function
+
+    '*******************************************************************************************************************
     ' Function getTaxReturn
     '   This function queries the database for a tax payer record that with the passed ID
     ' Returns:
@@ -51,7 +79,7 @@ Public Class clsTaxPayerDB
     '   ID as Integer - The tax payer ID
     Public Shared Function getTaxReturn(ByVal ID As Integer, ByVal Year As String) As clsTaxReturn
         Dim connection As SqlConnection = clsDBConnection.getConnection()
-        Dim strSQL As String = "SELECT * FROM dbo.tblTaxReturn WHERE TaxPayerID = " & ID & " AND TaxYear = " & Year & ";"
+        Dim strSQL As String = "SELECT * FROM dbo.tblTaxReturn WHERE TaxPayerID = " & ID & " AND TaxYear = '" & Year & "';"
         Dim dbCommand As New SqlCommand(strSQL, connection)
         connection.Open()
         Dim dbReader As SqlDataReader = dbCommand.ExecuteReader(CommandBehavior.SingleRow)
@@ -61,7 +89,7 @@ Public Class clsTaxPayerDB
                                          dbReader.GetDecimal(3), dbReader.GetDecimal(4), dbReader.GetDecimal(5),
                                          dbReader.GetString(6), dbReader.GetDecimal(7), dbReader.GetDecimal(8), dbReader.GetDecimal(9))
         Else
-            taxReturn = Nothing
+            taxReturn = New clsTaxReturn(ID, Year, False, 0, 0, 0, {"0", "0"}, 0, 0, 0)
         End If
         connection.Close()
         Return taxReturn
@@ -75,7 +103,7 @@ Public Class clsTaxPayerDB
                                 ", [UnemploymentCompensation]=" & taxReturn.UnemploymentCompensation &
                                 ", [DependentStatus]='" & taxReturn.DependentStatus & "', [IncomeTaxWithheld]=" & taxReturn.IncomeTaxWithheld &
                                 ", [EarnedIncomeCredit]=" & taxReturn.EIC & ", [NontaxableCompatPay]=" & taxReturn.CompatPay &
-                                " WHERE TaxPayerID = " & taxReturn.TaxPayerID & " AND TaxYear = " & taxReturn.Year & ";"
+                                " WHERE TaxPayerID = " & taxReturn.TaxPayerID & " AND TaxYear = '" & taxReturn.Year & "';"
         Dim dbCommand As New SqlCommand(strSQL, connection)
         connection.Open()
         Dim result As Integer = dbCommand.ExecuteNonQuery()

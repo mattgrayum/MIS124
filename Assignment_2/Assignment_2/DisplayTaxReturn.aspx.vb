@@ -8,9 +8,9 @@ Partial Class DisplayTaxReturn
     '*******************************************************************************************************************
     Sub Page_Load(ByVal Sender As Object, ByVal E As EventArgs) Handles MyBase.Load
 
-        If Not IsPostBack Then
+        Try
+            If Not IsPostBack Then
 
-            Try
                 Dim taxPayer As clsTaxPayer = Session("taxPayer")
                 Dim taxReturn As clsTaxReturn = Session("taxReturn")
 
@@ -24,22 +24,27 @@ Partial Class DisplayTaxReturn
                 txtMI.Text = taxPayer.MidInitial
                 txtZipCode.Text = taxPayer.Zip
 
-                If taxReturn Is Nothing Or Not taxReturn.IsJointReturn Then
+                'Hide the Joint Tax Payer form if this is a new tax return or an 
+                'existing 'Individual' tax return
+                'If taxReturn Is Nothing Or Not taxReturn.IsJointReturn Then
 
-                    jointTaxPayerForm.Visible = False
+                '    jointTaxPayerForm.Visible = False
 
+                'End If
+
+
+
+                'Only make the 'Update' button visible if the tax return exists in the database
+                btnUpdate.Visible = False
+                btnInsert.Visible = True
+                If clsTaxPayerDB.isTaxReturn(taxReturn.TaxPayerID, taxReturn.Year) Then
+                    btnUpdate.Visible = True
+                    btnInsert.Visible = False
                 End If
 
 
-                If Not taxReturn Is Nothing Then
-
-                    'Only make the 'Update' button visible if the tax return exists in the database
-                    jointTaxPayerForm.Visible = True
-                    btnUpdate.Visible = True
-                    btnInsert.Visible = False
-
-                    'Populate the tax return form controls
-                    lstIndividualOrJoint.SelectedIndex = 0
+                'Populate the tax return form controls
+                lstIndividualOrJoint.SelectedIndex = 0
                     jointTaxPayerForm.Visible = False
                     If taxReturn.IsJointReturn Then
                         setupJointReturnForm(taxPayer)
@@ -60,13 +65,11 @@ Partial Class DisplayTaxReturn
                     txtEarnedIncome.Text = taxReturn.EIC.ToString("0.00")
                     txtNontaxable.Text = taxReturn.CompatPay.ToString("0.00")
 
-                End If
+            End If
 
-            Catch ex As Exception
-                showErrorMessage(lblMessage, pnlMessage, ex)
-            End Try
-
-        End If
+        Catch ex As Exception
+            showErrorMessage(lblMessage, pnlMessage, ex)
+        End Try
 
     End Sub
 
@@ -102,6 +105,7 @@ Partial Class DisplayTaxReturn
                 Exit Sub
             Else
                 Dim updatedRows As Integer = clsTaxPayerDB.updateTaxReturn(taxReturn)
+                Session("taxReturn") = clsTaxPayerDB.getTaxReturn(Session("taxPayerID"), Session("taxYear"))
                 If updatedRows > 0 Then
                     showSuccessMessage(lblMessage, pnlMessage, "The database was successfully updated.")
                 End If
@@ -125,6 +129,7 @@ Partial Class DisplayTaxReturn
                 Exit Sub
             Else
                 Dim insertedRows As Integer = clsTaxPayerDB.insertTaxReturn(CollectTaxReturnDataFromPage())
+                Session("taxReturn") = clsTaxPayerDB.getTaxReturn(Session("taxPayerID"), Session("Year"))
                 If insertedRows > 0 Then
                     showSuccessMessage(lblMessage, pnlMessage, "Your tax return was successfully added to the database.")
                 End If
@@ -300,7 +305,7 @@ Partial Class DisplayTaxReturn
     '*******************************************************************************************************************
     Public Sub showErrorMessage(ByRef lbl As Label, ByRef pnl As Panel, ByRef ex As Exception)
 
-        lblMessage.Text = "** ERROR ** " & ex.Message
+        lblMessage.Text = ex.Message
         pnlMessage.Attributes.Add("style", "background:red; color:white; display: block; padding: 10px; text-align: center;")
 
     End Sub

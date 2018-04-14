@@ -141,7 +141,7 @@
                    
                     <asp:Button ID="btnUpdate" runat="server" Text="Update" style="width: 20%; display: inline-block; margin: 0 5px;" />
                     
-                    <asp:Button ID="btnInsert" runat="server" Text="Insert" style="width: 20%; display: inline-block; margin: 0 5px;" />
+                    <asp:Button ID="btnInsert" runat="server" Text="Save" style="width: 20%; display: inline-block; margin: 0 5px;" />
                  
                     <asp:Button ID="btnClear" runat="server" Text="Clear" style="display: inline-block; width: 20%; margin: 0 5px;"/>
                     
