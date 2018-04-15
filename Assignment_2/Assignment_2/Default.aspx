@@ -42,7 +42,6 @@
                     DataSourceID="SqlDataSource2"
                     cellpadding="8"
                     style="width: 100%; margin: auto; background-color: #f6f2db; font-size: 20px;">
-                    
                     <Fields>
                         <asp:BoundField ItemStyle-Width="300px" DataField="TaxPayerID" HeaderText="ID Number" ReadOnly="True" SortExpression="TaxPayerID">
                             
@@ -71,7 +70,6 @@
                                     ValidationGroup="myValidationGroup"
                                     style="display:block;color:red;" 
                                     OnServerValidate="ValidateStateName">
-
                                 </asp:CustomValidator>
                             </EditItemTemplate>
                             <InsertItemTemplate>
@@ -153,9 +151,11 @@
                     </UpdateParameters>
                 </asp:SqlDataSource>
             </div>
+
             <div class="col-md-3" style="text-align: center">
                 <asp:DropDownList ID="lstTaxYear" runat="server" style="width: 100px; font-size: 20px;"></asp:DropDownList>
             </div>
+
         </div>
 
         <div class="row" style="border-bottom: thin solid; width: 100%; padding: 15px; margin:0;  font-size: 20px;">
@@ -163,7 +163,9 @@
                 <asp:Button ID="btnViewTaxReturn" runat="server" Text="View Tax Return >>" />
             </div>
         </div>
+
     </div>
+
     <div id="noTaxReturnMsg" runat="server" 
         style="text-align:center; background: linear-gradient(#497a63, #cac592); color: white; width: 100%; margin: auto; 
                height: 590px; padding: 30px; box-shadow: 5px 10px 8px 10px #888888; position: relative; top: -590px;">
@@ -172,4 +174,5 @@
         <asp:Button ID="btnModalBack" runat="server" Text="<< Back" style="display:inline-block; margin: 30px; font-size: 30px; padding: 0 40px;"/>
         <asp:Button ID="btnModalOk" runat="server" Text="Ok >>" style="display:inline-block;margin: 30px; font-size: 30px; padding: 0 40px;"/>
     </div>
+
 </asp:Content>

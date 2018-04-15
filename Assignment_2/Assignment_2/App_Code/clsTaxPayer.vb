@@ -102,7 +102,7 @@ Public Class clsTaxPayer
     ' Parameters:
     '   None
     '*******************************************************************************************************************
-    Public Function getJointTaxPayer() As JointTaxPayer
+    Public Function getJointTaxPayer() As structJointTaxPayer
 
         'Set up a database connection, define the SELECT statement, set up a command object, and open the db connection
         Dim connection As SqlConnection = clsDBConnection.getConnection()
@@ -114,7 +114,7 @@ Public Class clsTaxPayer
         Dim dbReader As SqlDataReader = dbCommand.ExecuteReader(CommandBehavior.SingleRow)
 
         'Read in the data and assign each data point to a member of jointTaxPayer
-        Dim jointTaxPayer As JointTaxPayer = Nothing
+        Dim jointTaxPayer As structJointTaxPayer = Nothing
         If dbReader.Read() Then
             jointTaxPayer.lastName = dbReader.GetString(0)
             jointTaxPayer.firstName = dbReader.GetString(1)

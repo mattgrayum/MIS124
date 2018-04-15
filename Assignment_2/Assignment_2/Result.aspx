@@ -180,7 +180,7 @@
 
         <div class="row" style="padding-top: 10px; padding-bottom: 10px">
             <div class="col-md-6">
-                <asp:Label ID="lblCalculatedTax" runat="server" Text="10. Calculated your tax."></asp:Label>
+                <asp:Label ID="lblCalculatedTax" runat="server" Text="10. Your tax."></asp:Label>
             </div>
             <div class="col-md-6">
                 <div class="row">

@@ -206,10 +206,10 @@ Partial Class DisplayTaxReturn
     ' Parameters:
     '   None
     '*******************************************************************************************************************
-    Public Function CollectJointTaxPayerDataFromPage() As JointTaxPayer
+    Public Function CollectJointTaxPayerDataFromPage() As structJointTaxPayer
 
         Try
-            Dim jointTaxPayer As JointTaxPayer
+            Dim jointTaxPayer As structJointTaxPayer
 
             jointTaxPayer.lastName = txtSpouseLastName.Text
             jointTaxPayer.firstName = txtSpouseFirstName.Text
@@ -321,7 +321,7 @@ Partial Class DisplayTaxReturn
     Public Sub setupJointReturnForm(ByRef taxPayer As clsTaxPayer)
 
         Try
-            Dim jointTaxPayer As JointTaxPayer = taxPayer.getJointTaxPayer()
+            Dim jointTaxPayer As structJointTaxPayer = taxPayer.getJointTaxPayer()
 
             'Make sure that the tax return is set to 'joint' if we are showing this form
             lstIndividualOrJoint.SelectedIndex = 1

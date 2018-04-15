@@ -78,7 +78,7 @@ Public Class clsTaxPayerDB
     ' Parameters:
     '   jointTaxPayer as JointTaxPayer
     '*******************************************************************************************************************
-    Public Shared Function updateJointTaxPayer(ByVal jointTaxPayer As JointTaxPayer) As Integer
+    Public Shared Function updateJointTaxPayer(ByVal jointTaxPayer As structJointTaxPayer) As Integer
 
         'Set up a database connection, define the SELECT statement, set up a command object, and open the db connection
         Dim connection As SqlConnection = clsDBConnection.getConnection()
@@ -106,7 +106,7 @@ Public Class clsTaxPayerDB
     ' Parameters:
     '   jointTaxPayer as JointTaxPayer
     '*******************************************************************************************************************
-    Public Shared Function insertJointTaxPayer(ByVal jointTaxPayer As JointTaxPayer) As Integer
+    Public Shared Function insertJointTaxPayer(ByVal jointTaxPayer As structJointTaxPayer) As Integer
 
         'Set up a database connection, define the SELECT statement, set up a command object, and open the db connection
         Dim connection As SqlConnection = clsDBConnection.getConnection()
