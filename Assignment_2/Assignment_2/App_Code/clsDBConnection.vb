@@ -5,7 +5,12 @@ Public Class clsDBConnection
 
     Public Shared Function getConnection() As SqlConnection
 
-        Return New SqlConnection(ConfigurationManager.ConnectionStrings("TaxReturn2014_Rodger").ConnectionString)
+        'local DB
+        'Return New SqlConnection(ConfigurationManager.ConnectionStrings("TaxReturn2014_Rodger").ConnectionString)
+
+        'Spiros DB server
+        Return New SqlConnection(ConfigurationManager.ConnectionStrings("TaxReturn2014ConnectionString").ConnectionString)
+
 
     End Function
 
