@@ -93,4 +93,30 @@ Partial Class _Default
         noTaxReturnMsg.Visible = False
 
     End Sub
+
+    '*******************************************************************************************************************
+    ' Method ValidateStateName
+    '   This function checks that an entered State abbreviation is valid
+    '   For hooking to a custom validator
+    ' Returns:
+    '   Nothing
+    ' Parameters:
+    '   source as Object
+    '   args as ServerValidateEventArgs
+    '*******************************************************************************************************************
+    Sub ValidateStateName(source As Object, args As ServerValidateEventArgs)
+
+        'List of valid States
+        Dim validStates() As String = {"AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "HI", "IA",
+                                       "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS",
+                                       "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA",
+                                       "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VT", "WA", "WI", "WV", "WY"}
+
+        args.IsValid = False
+        If validStates.Contains(args.Value) Then
+            args.IsValid = True
+        End If
+
+    End Sub
+
 End Class
