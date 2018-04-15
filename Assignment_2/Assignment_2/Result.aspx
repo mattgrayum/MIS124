@@ -2,7 +2,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div style="text-align: center; margin-bottom: 10px; padding: 10px; width: 100%">
+    <div style="color: #5c5536; text-align: center; margin-bottom: 10px; padding: 10px; width: 100%">
         <h2>2017 Tax Return 1040EZ Version 2.0 - Calculation Results</h2>
     </div>
 
@@ -10,7 +10,7 @@
         <asp:Label ID="lblMessage" runat="server"></asp:Label>
     </asp:Panel>
 
-    <div style="background-color: #ffe8bf;">
+    <div style="color: white; background-color: #497a63;">
         <div class="row" style="border-bottom: thin solid;  border-top: thin solid black;width: 100%; padding: 15px; margin:0; font-size: 18px;">
             <div id="taxpayerid" style="position:relative; left: 0; display: inline-block;">
                 <asp:Label ID="Label2" runat="server" Text="Tax Payer ID: " style="display: inline-block;"></asp:Label>
@@ -43,7 +43,7 @@
         </div>
     </div>
 
-    <div style="border-bottom: solid; border-width: thin; padding: 15px; background-color: oldlace">
+    <div style="border-bottom: solid; border-width: thin; padding: 15px; background-color: #d0c697; color: #5c5536;">
         <div class="row" style="padding-top: 10px; padding-bottom: 10px">
             <div class="col-md-6">
                 <asp:Label ID="lblIndivOrJoint" runat="server" Text="Individual or joint tax return?"></asp:Label>
@@ -197,7 +197,7 @@
         <div class="row" style="padding-top: 10px; padding-bottom: 10px">
             <div class="col-md-6">
                 <asp:Label ID="lblRefundMsg" runat="server" Text="" style="color: black; font-weight: 700;"></asp:Label>
-                <asp:Label ID="lblTaxOwedMsg" runat="server" Text="" style="color: red; font-weight: 700;"></asp:Label>
+                <asp:Label ID="lblTaxOwedMsg" runat="server" Text="" style="color: #b20000; font-weight: 700;"></asp:Label>
             </div>
             <div class="col-md-6">
                 <div class="row">
@@ -206,7 +206,7 @@
                     </div>
                     <div class="col-md-6">
                         <asp:Label ID="lblTaxRefund" runat="server" Text="" style="color: black; font-weight: 700;"></asp:Label>
-                        <asp:Label ID="lblTaxOwed" runat="server" Text="" style="color: red; font-weight: 700;"></asp:Label>
+                        <asp:Label ID="lblTaxOwed" runat="server" Text="" style="color: #b20000; font-weight: 700;"></asp:Label>
                     </div>
                 </div>
             </div>

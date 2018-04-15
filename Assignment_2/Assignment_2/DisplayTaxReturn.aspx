@@ -1,14 +1,14 @@
 ﻿<%@ Page Title="Display Tax Return" Language="VB" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeFile="DisplayTaxReturn.aspx.vb" Inherits="DisplayTaxReturn" %>
 
-<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <div style="text-align: center; margin-bottom: 10px; padding: 10px; width: 100%">
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server" style="color: #5c5536">
+    <div style="color: #5c5536; text-align: center; margin-bottom: 10px; padding: 10px; width: 100%">
                 <h2>2017 Tax Return 1040EZ Version 2.0 - Tax Return Information</h2>
     </div>
     <asp:Panel ID="pnlMessage" runat="server" style="display: none; border-style: solid; border-width: thin; background-color: #e8f6ff; margin-top: 10px; padding: 5px; text-align: center;">
         <asp:Label ID="lblMessage" runat="server"></asp:Label>
     </asp:Panel>
 
-    <div style="background-color: #ffe8bf;">
+    <div style="color: white; background-color: #497a63;">
         <div class="row" style="border-bottom: thin solid;  border-top: thin solid black;width: 100%; padding: 15px; margin:0; font-size: 18px;">
             <div id="taxpayerid" style="position:relative; left: 0; display: inline-block;">
                 <asp:Label ID="Label1" runat="server" Text="Tax Payer ID: " style="display: inline-block;"></asp:Label>
@@ -41,7 +41,7 @@
         </div>
     </div>
         
-    <div style="background-color: oldlace; padding: 25px; border-bottom: thin solid;">
+    <div style="background-color: #d0c697; color: #5c5536; padding: 25px; border-bottom: thin solid;">
         <div class="row" style="padding-top: 10px; padding-bottom: 10px">
             <div runat="server" id="taxReturnDisplay" class="col-md-6" style="display: block;">
                 <div class="row" style="padding-top: 10px; padding-bottom: 10px">

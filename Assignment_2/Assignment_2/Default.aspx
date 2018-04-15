@@ -2,14 +2,14 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-        <div style="text-align: center; margin-bottom: 10px; padding: 10px; width: 100%">
+        <div style="color: #5c5536; text-align: center; margin-bottom: 10px; padding: 10px; width: 100%">
                 <h2>2017 Tax Return 1040EZ Version 2.0 - Main Page</h2>
         </div>
     <asp:Panel ID="pnlMessage" runat="server" style="display: none;">
         <asp:Label ID="lblMessage" runat="server"></asp:Label>
     </asp:Panel>
-     <div style="background-color: #ffe8bf;">
-        <div class="row" style="border-bottom: thin solid;  border-top: thin solid black;width: 100%; padding: 15px; margin:0; font-weight: 700; font-size: 16px">
+     <div style="color: #5c5536; background-color: #d0c697;">
+        <div class="row" style="color: white; background-color: #497a63; border-bottom: thin solid;  border-top: thin solid black;width: 100%; padding: 15px; margin:0; font-weight: 700; font-size: 16px">
             <div class="col-md-3" style="text-align: center">
                 <p>Step 1: Select your Tax Payer ID</p>
             </div>
@@ -28,8 +28,7 @@
                     DataSourceID="SqlDataSource1" 
                     DataTextField="TaxPayerLastName" 
                     DataValueField="TaxPayerID" 
-                    AutoPostBack="True"
-                    itempadding="0">
+                    AutoPostBack="True">
                     
                 </asp:DropDownList>
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:TaxReturn2014_Rodger %>" SelectCommand="SELECT [TaxPayerID], [TaxPayerLastName] FROM [tblTaxPayer]"></asp:SqlDataSource>
@@ -43,7 +42,7 @@
                     DataSourceID="SqlDataSource2" 
                     AutoGenerateEditButton="True"
                     cellpadding="8"
-                    style="width: 80%; margin: auto; background-color: oldlace"
+                    style="width: 80%; margin: auto; background-color: #f6f2db"
                     >
                     
                     <Fields>
@@ -109,10 +108,10 @@
             <asp:Button ID="btnViewTaxReturn" runat="server" Text="View Tax Return >>" />
         </div>
     </div>
-    
-
-
-
-
-
+    <div id="noTaxReturnMsg" runat="server" style="text-align:center; background-color: #497a63; color: white; width: 100%; margin: auto; height: 500px; padding: 30px; box-shadow: 5px 10px 8px 10px #888888; position: relative; top: -500px;">
+        <p style="margin: 40px 0; font-size: 40px;">We couldn't find that tax return.</p>
+        <p style="font-size: 30px; margin-bottom: 30px;">Click Ok to enter a new tax return or go back to the Home page.</p>
+        <asp:Button ID="btnModalBack" runat="server" Text="<< Back" style="display:inline-block; margin: 30px; font-size: 30px; padding: 0 40px;"/>
+        <asp:Button ID="btnModalOk" runat="server" Text="Ok >>" style="display:inline-block;margin: 30px; font-size: 30px; padding: 0 40px;"/>
+    </div>
 </asp:Content>

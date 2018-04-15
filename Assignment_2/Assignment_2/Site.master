@@ -38,7 +38,7 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #30342d; color: white !important;">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -74,7 +74,7 @@
             </div>
         </div>
 
-        <div class="row" style="background-color: #fff; border-bottom: solid; border-width: thin;"">
+        <div class="row" style="background-color: #fff; color: #5c5536; border-bottom: solid; border-width: thin;"">
             <div class="col-sm-12 col-xs-12 col-md-9">
                 <img src="images/th.jpg" style="width: 167px; height: 150px" />
                 <h1 style="display: inline-block; position: relative; left: -17px; top: 35px;">Sacramento State</h1>
@@ -91,10 +91,10 @@
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
-            <footer style="text-align:center;">
-                <p>&copy; <%: DateTime.Now.Year %> - Matthew Grayum</p>
-            </footer>
         </div>
+        <footer style="text-align:center; background-color: #30342d; color: #999; padding: 15px;">
+                <p>&copy; <%: DateTime.Now.Year %> - Matthew Grayum</p>
+        </footer>
     </form>
 </body>
 </html>
