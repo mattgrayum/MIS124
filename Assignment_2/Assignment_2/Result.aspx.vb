@@ -2,11 +2,6 @@
 Partial Class Result
     Inherits System.Web.UI.Page
 
-    Protected Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        ' Redirect back to the DisplayTaxReturn Page
-        Response.Redirect(url:="~/DisplayTaxReturn.aspx", endResponse:=False)
-    End Sub
-
     '*******************************************************************************************************************
     'ACTION ON PAGE LOAD
     '*******************************************************************************************************************
@@ -43,10 +38,7 @@ Partial Class Result
                     lblIndividualOrJointResult.Text = "Joint"
                 End If
 
-                txtWagesResult.Text = FormatCurrency(taxReturn.Wages, 2)
-                txtInterestResult.Text = FormatCurrency(taxReturn.TaxableInterest, 2)
-                txtUnemploymentResult.Text = FormatCurrency(taxReturn.UnemploymentCompensation, 2)
-
+                'Set up intnumberOfDependentTaxpayers with the correct value
                 Dim intnumberOfDependentTaxpayers As Integer = 0
                 If taxReturn.DependentStatus(0) = "1" Then
                     intnumberOfDependentTaxpayers += 1
@@ -55,6 +47,10 @@ Partial Class Result
                     intnumberOfDependentTaxpayers += 1
                 End If
 
+                'Populate the calculated tax return form controls
+                txtWagesResult.Text = FormatCurrency(taxReturn.Wages, 2)
+                txtInterestResult.Text = FormatCurrency(taxReturn.TaxableInterest, 2)
+                txtUnemploymentResult.Text = FormatCurrency(taxReturn.UnemploymentCompensation, 2)
                 lblNumDependents.Text = intnumberOfDependentTaxpayers.ToString
                 txtWithholdingResult.Text = FormatCurrency(taxReturn.IncomeTaxWithheld, 2)
                 txtEarnedIncomeResult.Text = FormatCurrency(taxReturn.EIC, 2)
@@ -74,6 +70,7 @@ Partial Class Result
                     lblTaxOwed.Text = FormatCurrency(dblFinalTax, 2)
                 End If
 
+                'Provide a success message
                 Utlilties.showSuccessMessage(lblMessage, pnlMessage, "Here are your calculated tax return results.")
 
             Catch ex As Exception
@@ -83,4 +80,15 @@ Partial Class Result
         End If
 
     End Sub
+
+    '*******************************************************************************************************************
+    'ACTION ON BACK BUTTON CLICK
+    '*******************************************************************************************************************
+    Protected Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+
+        ' Redirect back to the DisplayTaxReturn Page
+        Response.Redirect(url:="~/DisplayTaxReturn.aspx", endResponse:=False)
+
+    End Sub
+
 End Class

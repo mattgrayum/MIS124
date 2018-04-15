@@ -6,6 +6,8 @@ Partial Class _Default
     '*******************************************************************************************************************
     'ACTION ON PAGE LOAD
     '*******************************************************************************************************************
+
+    ' -- Popluates form controls
     Sub Page_Load(ByVal Sender As Object, ByVal E As EventArgs) Handles MyBase.Load
 
         'Render the pop-up message invisible
@@ -41,6 +43,8 @@ Partial Class _Default
     '*******************************************************************************************************************
     'ACTION ON VIEW TAX RETURN BUTTON CLICK
     '*******************************************************************************************************************
+
+    ' -- Uses selected values to set up Tax Payer and Tax Return objects sends user to the Display Tax Return page
     Protected Sub btnViewTaxReturn_Click(sender As Object, e As EventArgs) Handles btnViewTaxReturn.Click
 
         Try
@@ -51,8 +55,8 @@ Partial Class _Default
             Session("taxYear") = lstTaxYear.SelectedValue
 
             'Attempt to get a tax return for the chosen tax payer and year
-            If clsTaxPayerDB.isTaxReturn(lstTaxPayers.SelectedValue, lstTaxYear.SelectedValue) Then
-                Session("taxReturn") = clsTaxPayerDB.getTaxReturn(Session("taxPayerID"), Session("taxYear"))
+            If clsTaxReturnDB.isTaxReturn(lstTaxPayers.SelectedValue, lstTaxYear.SelectedValue) Then
+                Session("taxReturn") = clsTaxReturnDB.getTaxReturn(Session("taxPayerID"), Session("taxYear"))
 
                 ' Redirect to the DisplayTaxReturn Page
                 Response.Redirect(url:="~/DisplayTaxReturn.aspx", endResponse:=False)
@@ -72,15 +76,21 @@ Partial Class _Default
     'ACTION ON MODAL OK BUTTON CLICK
     '*******************************************************************************************************************
     Protected Sub btnModalOK_Click(sender As Object, e As EventArgs) Handles btnModalOk.Click
+
         ' Redirect to the DisplayTaxReturn Page
         Response.Redirect(url:="~/DisplayTaxReturn.aspx", endResponse:=False)
+
     End Sub
 
     '*******************************************************************************************************************
     'ACTION ON MODAL BACK BUTTON CLICK
     '*******************************************************************************************************************
+
+    ' -- Takes the user 'back' to the home page by hiding the modal window
     Protected Sub btnModalBack_Click(sender As Object, e As EventArgs) Handles btnModalBack.Click
+
         'Make the modal window disapear
         noTaxReturnMsg.Visible = False
+
     End Sub
 End Class

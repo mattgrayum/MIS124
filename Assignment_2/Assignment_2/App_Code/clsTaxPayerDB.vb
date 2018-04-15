@@ -21,7 +21,7 @@ Public Class clsTaxPayerDB
         Dim dbCommand As New SqlCommand(strSQL, connection)
         connection.Open()
 
-        'Execute the query
+        'Set up a reader object to read a single row from the database
         Dim dbReader As SqlDataReader = dbCommand.ExecuteReader(CommandBehavior.SingleRow)
 
         'Read in the data and populate a new clsTaxPayer object if a record was found
@@ -35,7 +35,7 @@ Public Class clsTaxPayerDB
                                        "Please check your records and enter a valid Tax Payer ID")
         End If
 
-        'Close the db connection
+        'Close the database connection
         connection.Close()
 
         Return taxPayer
@@ -43,127 +43,86 @@ Public Class clsTaxPayerDB
     End Function
 
     '*******************************************************************************************************************
-    ' Function isTaxReturn
-    '   This function checks the database to see if a tax return exists for the given tax payer and year
+    ' Function updateTaxPayer
+    '   This function updates the TaxPayer table with new data from a web form
     ' Returns:
-    '   isReturn as Boolean
+    '   result as Integer - The number of rows affected by the operation.
     ' Parameters:
-    '   ID as Integer - The tax payer ID
-    '   year as String - The year of the tax return
-
-    Public Shared Function isTaxReturn(ByVal ID As Integer, ByVal year As String) As Boolean
-
-        Dim connection As SqlConnection = clsDBConnection.getConnection()
-        Dim strSQL As String = "SELECT * FROM dbo.tblTaxReturn WHERE TaxPayerID = " & ID & " AND TaxYear = " & year & ";"
-        Dim dbCommand As New SqlCommand(strSQL, connection)
-        connection.Open()
-
-        'Check if a tax return exists in the database
-        Dim isReturn As Boolean = True
-        If dbCommand.ExecuteScalar = Nothing Then
-            isReturn = False
-        End If
-
-        connection.Close()
-
-        Return isReturn
-
-    End Function
-
-    '*******************************************************************************************************************
-    ' Function getTaxReturn
-    '   This function queries the database for a tax payer record that with the passed ID
-    ' Returns:
     '   taxPayer as clsTaxPayer
-    ' Parameters:
-    '   ID as Integer - The tax payer ID
-    Public Shared Function getTaxReturn(ByVal ID As Integer, ByVal Year As String) As clsTaxReturn
-        Dim connection As SqlConnection = clsDBConnection.getConnection()
-        Dim strSQL As String = "SELECT * FROM dbo.tblTaxReturn WHERE TaxPayerID = " & ID & " AND TaxYear = '" & Year & "';"
-        Dim dbCommand As New SqlCommand(strSQL, connection)
-        connection.Open()
-        Dim dbReader As SqlDataReader = dbCommand.ExecuteReader(CommandBehavior.SingleRow)
-        Dim taxReturn As clsTaxReturn = Nothing
-        If dbReader.Read() Then
-            taxReturn = New clsTaxReturn(dbReader.GetInt64(0), dbReader.GetString(1), dbReader.GetBoolean(2),
-                                         dbReader.GetDecimal(3), dbReader.GetDecimal(4), dbReader.GetDecimal(5),
-                                         dbReader.GetString(6), dbReader.GetDecimal(7), dbReader.GetDecimal(8), dbReader.GetDecimal(9))
-        Else
-            taxReturn = New clsTaxReturn(ID, Year, False, 0, 0, 0, {"0", "0"}, 0, 0, 0)
-        End If
-        connection.Close()
-        Return taxReturn
-    End Function
-
-    Public Shared Function updateTaxReturn(ByRef taxReturn As clsTaxReturn) As Integer
-
-        Dim connection As SqlConnection = clsDBConnection.getConnection()
-        Dim strSQL As String = "UPDATE dbo.tblTaxReturn SET [IsJointTaxReturn]='" & taxReturn.IsJointReturn &
-                                "', [Wages] =" & taxReturn.Wages & ", [TaxableInterest] = " & taxReturn.TaxableInterest &
-                                ", [UnemploymentCompensation]=" & taxReturn.UnemploymentCompensation &
-                                ", [DependentStatus]='" & taxReturn.DependentStatus & "', [IncomeTaxWithheld]=" & taxReturn.IncomeTaxWithheld &
-                                ", [EarnedIncomeCredit]=" & taxReturn.EIC & ", [NontaxableCompatPay]=" & taxReturn.CompatPay &
-                                " WHERE TaxPayerID = " & taxReturn.TaxPayerID & " AND TaxYear = '" & taxReturn.Year & "';"
-        Dim dbCommand As New SqlCommand(strSQL, connection)
-        connection.Open()
-        Dim result As Integer = dbCommand.ExecuteNonQuery()
-        connection.Close()
-
-        Return result
-    End Function
-
-    Public Shared Function insertTaxReturn(ByRef taxReturn As clsTaxReturn) As Integer
-        Dim connection As SqlConnection = clsDBConnection.getConnection()
-        Dim strSQL As String = "INSERT INTO dbo.tblTaxReturn (TaxPayerID, TaxYear, IsJointTaxReturn, Wages, TaxableInterest, UnemploymentCompensation" &
-                               ", DependentStatus, IncomeTaxWithheld, EarnedIncomeCredit, NontaxableCompatPay) VALUES (" & taxReturn.TaxPayerID &
-                               ", " & taxReturn.Year & ", '" & taxReturn.IsJointReturn & "', " & taxReturn.Wages & ", " & taxReturn.TaxableInterest &
-                               ", " & taxReturn.UnemploymentCompensation & ", '" & taxReturn.DependentStatus & "', " & taxReturn.IncomeTaxWithheld &
-                               ", " & taxReturn.EIC & ", " & taxReturn.CompatPay & ");"
-        Dim dbCommand As New SqlCommand(strSQL, connection)
-        connection.Open()
-        Dim result As Integer = dbCommand.ExecuteNonQuery()
-        connection.Close()
-
-        Return result
-    End Function
-
+    '*******************************************************************************************************************
     Public Shared Function updateTaxPayer(ByRef taxPayer As clsTaxPayer) As Integer
 
+        'Set up a database connection, define the SELECT statement, set up a command object, and open the db connection
         Dim connection As SqlConnection = clsDBConnection.getConnection()
         Dim strSQL As String = "UPDATE dbo.tblTaxPayer SET [TaxPayerLastName]='" & taxPayer.LastName & "', [TaxPayerFirstName]='" & taxPayer.FirstName &
                                 "', [TaxPayerInitial]='" & taxPayer.MidInitial & "', [TaxPayerAddress]='" & taxPayer.Address & "', [TaxPayerCity]='" & taxPayer.City &
                                 "', [TaxPayerState]='" & taxPayer.State & "', [TaxPayerZip]='" & taxPayer.Zip & "' WHERE [TaxPayerID] = " & taxPayer.TaxPayerID & ";"
         Dim dbCommand As New SqlCommand(strSQL, connection)
         connection.Open()
+
+        'Execute the update
         Dim result As Integer = dbCommand.ExecuteNonQuery()
+
+        'Close the database connection
         connection.Close()
 
         Return result
 
     End Function
 
+    '*******************************************************************************************************************
+    ' Function updateJointTaxPayer
+    '   This function updates the Joint Tax Payer table with new data from web form
+    ' Returns:
+    '   result as Integer - The number of rows affected by the operation.
+    ' Parameters:
+    '   jointTaxPayer as JointTaxPayer
+    '*******************************************************************************************************************
     Public Shared Function updateJointTaxPayer(ByVal jointTaxPayer As JointTaxPayer) As Integer
+
+        'Set up a database connection, define the SELECT statement, set up a command object, and open the db connection
         Dim connection As SqlConnection = clsDBConnection.getConnection()
         Dim strSQL As String = "UPDATE dbo.tblJointTaxPayer SET [JointLastName]='" & jointTaxPayer.lastName &
                                "', [JointFirstName]='" & jointTaxPayer.firstName & "', [JointInitial]='" & jointTaxPayer.middleInitial &
                                "' WHERE [TaxPayerID]=" & jointTaxPayer.taxPayerID & ";"
         Dim dbCommand As New SqlCommand(strSQL, connection)
         connection.Open()
+
+        'Execute the update
         Dim result As Integer = dbCommand.ExecuteNonQuery()
+
+        'Close the database connection
         connection.Close()
 
         Return result
+
     End Function
 
+    '*******************************************************************************************************************
+    ' Function insertJointTaxPayer
+    '   This function adds a new Joint Tax Payer to the database
+    ' Returns:
+    '   result as Integer - The number of rows affected by the operation.
+    ' Parameters:
+    '   jointTaxPayer as JointTaxPayer
+    '*******************************************************************************************************************
     Public Shared Function insertJointTaxPayer(ByVal jointTaxPayer As JointTaxPayer) As Integer
+
+        'Set up a database connection, define the SELECT statement, set up a command object, and open the db connection
         Dim connection As SqlConnection = clsDBConnection.getConnection()
         Dim strSQL As String = "INSERT INTO dbo.tblJointTaxPayer VALUES ('" & jointTaxPayer.lastName & "', '" & jointTaxPayer.firstName &
                                "', '" & jointTaxPayer.middleInitial & "', " & jointTaxPayer.taxPayerID & ");"
         Dim dbCommand As New SqlCommand(strSQL, connection)
         connection.Open()
+
+        'Execute the insert
         Dim result As Integer = dbCommand.ExecuteNonQuery()
+
+        'Close the database connection
         connection.Close()
 
         Return result
+
     End Function
+
 End Class
