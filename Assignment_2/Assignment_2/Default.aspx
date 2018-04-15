@@ -69,7 +69,7 @@
                                     ErrorMessage="* Invalid State"
                                     ControlToValidate="txtEditState"  
                                     ValidationGroup="myValidationGroup"
-                                    style="display: block;color:red;" 
+                                    style="display:block;color:red;" 
                                     OnServerValidate="ValidateStateName">
 
                                 </asp:CustomValidator>
@@ -89,9 +89,8 @@
                                     ControlToValidate="txtEditZipCode" 
                                     ValidationExpression="(\d{5})([\-]\d{4})?\s*" 
                                     ValidationGroup="myValidationGroup"
-                                    style="display: block;color:red;">
+                                    style="display:block;color:red;">
                                 </asp:RegularExpressionValidator>
-
                             </EditItemTemplate>
                             <InsertItemTemplate>
                                 <asp:TextBox ID="txtInsertZipCode" runat="server" Text='<%# Bind("TaxPayerZip") %>'></asp:TextBox>
@@ -102,11 +101,11 @@
                         </asp:TemplateField>
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <asp:Button runat="server" Text="Edit" CommandName="Edit" />
+                                <asp:Button runat="server" Text="Edit" CommandName="Edit" style="width: 100px;"/>
                             </ItemTemplate>
                             <EditItemTemplate>
-                                <asp:Button runat="server" Text="Update" CommandName="Update" ValidationGroup="myValidationGroup" />
-                                <asp:Button runat="server" Text="Cancel" CommandName="Cancel" />
+                                <asp:Button runat="server" Text="Update" CommandName="Update" ValidationGroup="myValidationGroup" style="width: 100px;"/>
+                                <asp:Button runat="server" Text="Cancel" CommandName="Cancel" style="width: 100px; float: right;"/>
                             </EditItemTemplate>
                         </asp:TemplateField>
                     </Fields>
