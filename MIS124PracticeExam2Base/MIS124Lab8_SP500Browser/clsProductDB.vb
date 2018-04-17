@@ -24,13 +24,19 @@ Public Class clsProductDB
         Return product
     End Function
 
-    Public Shared Function updateProduct(ByVal ID As Integer, ByVal retailPrice As Decimal)
+    Public Shared Function updateProduct(ByVal ID As Integer, ByVal retailPrice As Decimal) As Integer
 
         Dim connection As SqlConnection = clsDBConnection.getConnection()
         Dim strSQL As String = "UPDATE dbo.Products SET [Retail Price]=" & retailPrice & " WHERE [Product ID] = " & ID & ";"
         Dim dbCommand As New SqlCommand(strSQL, connection)
         connection.Open()
-        Return dbCommand.ExecuteNonQuery()
+
+        Dim result As Integer = dbCommand.ExecuteNonQuery()
+
+        connection.Close()
+
+        Return result
 
     End Function
+
 End Class
