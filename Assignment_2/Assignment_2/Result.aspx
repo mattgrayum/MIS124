@@ -65,7 +65,7 @@
                 <asp:Label ID="lblWages" runat="server" Text="1. Wages, salaries, and tips"></asp:Label>
             </div>
             <div class="col-md-6">
-                <asp:TextBox ID="txtWagesResult" runat="server" EnableViewState="true" ReadOnly="True" Enabled="False"></asp:TextBox>
+                <asp:TextBox ID="txtWagesResult" runat="server" EnableViewState="true"></asp:TextBox>
             </div>
         </div>
 
