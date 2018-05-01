@@ -73,6 +73,28 @@ Partial Class Result
                 'Provide a success message
                 Utlilties.showSuccessMessage(lblMessage, pnlMessage, "Here are your calculated tax return results.")
 
+                'Pie Chart
+
+
+                Dim myPieChartValue1 As New AjaxControlToolkit.PieChartValue
+                myPieChartValue1.Category = "You"
+                myPieChartValue1.PieChartValueColor = RGB(0, 0, 0)
+                myPieChartValue1.Data = 5
+
+                Dim myPieChartValue2 As New AjaxControlToolkit.PieChartValue
+                myPieChartValue2.Category = "Me"
+                myPieChartValue2.PieChartValueColor = RGB(100, 100, 100)
+                myPieChartValue2.Data = 10
+
+                Dim pieChart As New AjaxControlToolkit.PieChart
+                pieChart = myPieChart
+
+                pieChart.PieChartValues.Add(myPieChartValue1)
+                pieChart.PieChartValues.Add(myPieChartValue2)
+
+
+
+
             Catch ex As Exception
                 Utlilties.showErrorMessage(lblMessage, pnlMessage, ex)
             End Try

@@ -30,8 +30,10 @@
                     DataValueField="TaxPayerID" 
                     AutoPostBack="True"
                     style="font-size: 20px;">
-                    
                 </asp:DropDownList>
+                <ajaxToolkit:BalloonPopupExtender ID="BalloonPopupExtender1" runat="server" BalloonPopupControlID="lblPopup" DisplayOnClick="False" DisplayOnMouseOver="True" TargetControlID="lstTaxPayers"></ajaxToolkit:BalloonPopupExtender>
+                <asp:Label ID="lblPopup" runat="server" Text="Select a Tax Payer from the list."></asp:Label>
+
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:TaxReturn2014ConnectionString %>" SelectCommand="SELECT [TaxPayerID], [TaxPayerLastName] FROM [tblTaxPayer]"></asp:SqlDataSource>
             </div>
             <div class="col-md-6">

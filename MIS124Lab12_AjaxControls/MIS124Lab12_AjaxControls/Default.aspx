@@ -31,13 +31,15 @@
         <div class="col-md-4">
             <h2>Get more libraries
                 <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/Refresh.png" />
-            </h2>
+                <asp:Label ID="lblTooltip2" runat="server" Text="Click here to see panel content"></asp:Label>
             <asp:Panel ID="Panel2" runat="server" BackColor="#CCCCFF">
                 NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</asp:Panel>
         </div>
         <div class="col-md-4">
             <h2>Web Hosting
                 <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/Images/Refresh.png" />
+                <ajaxToolkit:ModalPopupExtender ID="ImageButton1_ModalPopupExtender" runat="server" PopupControlID="panel4" TargetControlID="ImageButton1">
+                </ajaxToolkit:ModalPopupExtender>
             </h2>
             <asp:Panel ID="Panel3" runat="server" BackColor="#CCCCCC">
                 You can easily find a web hosting company that offers the right mix of features and price for your applications.

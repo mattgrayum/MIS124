@@ -104,6 +104,15 @@ Partial Public Class _Default
     Protected WithEvents Image2 As Global.System.Web.UI.WebControls.Image
     
     '''<summary>
+    '''lblTooltip2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblTooltip2 As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''Panel2 control.
     '''</summary>
     '''<remarks>
@@ -120,6 +129,15 @@ Partial Public Class _Default
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ImageButton1 As Global.System.Web.UI.WebControls.ImageButton
+    
+    '''<summary>
+    '''ImageButton1_ModalPopupExtender control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ImageButton1_ModalPopupExtender As Global.AjaxControlToolkit.ModalPopupExtender
     
     '''<summary>
     '''Panel3 control.

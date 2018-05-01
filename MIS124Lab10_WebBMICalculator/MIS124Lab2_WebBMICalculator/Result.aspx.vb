@@ -1,4 +1,4 @@
-﻿Imports BMICalculator
+﻿'Imports BMICalculator
 
 Public Class Result
     Inherits System.Web.UI.Page
@@ -20,7 +20,7 @@ Public Class Result
 
                 lblCategory.Text = clsBMI.getRating(objMyBMI.BMI)
             Catch ex As Exception
-                Me.lblErrorMessages.Text = ex.Message
+                Response.Redirect("error.aspx?error=" & ex.Message)
             End Try
 
         End If
@@ -49,5 +49,8 @@ Public Class Result
         End Try
     End Sub
 
+    Private Sub displayAlert(ByVal strMessageToDisplay As String)
+        System.Web.HttpContext.Current.Response.Write("<SCRIPT LANGUAGE=""JavaScript"">alert('" & strMessageToDisplay & "')</SCRIPT>")
+    End Sub
 
 End Class

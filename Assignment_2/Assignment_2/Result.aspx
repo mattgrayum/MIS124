@@ -43,6 +43,12 @@
         </div>
     </div>
 
+    <asp:Panel ID="pnlPieChart" runat="server">
+        <ajaxToolkit:PieChart ID="myPieChart" runat="server">
+
+        </ajaxToolkit:PieChart>
+    </asp:Panel>
+
     <div style="border-bottom: solid; border-width: thin; padding: 15px; background-color: #d0c697; color: #5c5536;">
         <div class="row" style="padding-top: 10px; padding-bottom: 10px">
             <div class="col-md-6">
