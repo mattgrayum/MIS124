@@ -106,13 +106,27 @@ Partial Class Result
 
     End Sub
 
-    '*******************************************************************************************************************
-    'ACTION ON EMAIL IMAGE BUTTON CLICK
-    '*******************************************************************************************************************
-    Protected Sub imgbtnEmail_Click(sender As Object, e As EventArgs) Handles imgbtnEmail.Click
+    'Sends out an e-mail message
+    Private Sub emailTaxResults()
+        Try
+            Dim myMailServer As String = "smtp.saclink.csus.edu"
+            Dim emailBody As String = "Hello World!"
+            Dim objMyMailMessage As New System.Net.Mail.MailMessage("mattgrayum@gmail.com", txtEmail.Text, "Tax Return Information", emailBody)
+            Dim objMyWebServer As New System.Net.Mail.SmtpClient(myMailServer)
+            objMyWebServer.Send(objMyMailMessage)
+            lblMessage.Text = "Mail was sent"
+        Catch ex As Exception
+            lblMessage.Text = ex.Message()
+        End Try
+    End Sub
 
-        ' Redirect back to the DisplayTaxReturn Page
-        Response.Redirect(url:="~/DisplayTaxReturn.aspx", endResponse:=False)
+    '*******************************************************************************************************************
+    'ACTION ON OK BUTTON CLICK
+    '*******************************************************************************************************************
+    Protected Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click
+        lblMessage.Text = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        emailTaxResults()
+        System.Web.HttpContext.Current.Response.Write("<SCRIPT LANGUAGE=""JavaScript"">alert('Your tax return information has been emailed to you')</SCRIPT>")
 
     End Sub
 

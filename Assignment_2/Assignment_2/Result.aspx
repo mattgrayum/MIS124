@@ -306,9 +306,10 @@
                                         </div>
                                         
                                         <asp:ImageButton ID="imgbtnEmail" runat="server" ImageUrl="~/images/emailimage.png" Height="50px" Width="75px" />
-                                        <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" TargetControlID="imgbtnEmail" PopupControlID="pnlEmail" CancelControlID="btnCancel" OkControlID="btnOk"></ajaxToolkit:ModalPopupExtender>
+                                        <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" TargetControlID="imgbtnEmail" PopupControlID="pnlEmail" CancelControlID="btnCancel"></ajaxToolkit:ModalPopupExtender>
                                         <asp:Panel ID="pnlEmail" runat="server" style="border: solid thin black; background-color: lightskyblue; z-index: 999;  ">
-                                            <p>Hello World!</p>
+                                            <asp:Label ID="lblEmail" runat="server" Text="Enter your email address: "></asp:Label>
+                                            <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
                                             <asp:Button ID="btnOk" runat="server" Text="Ok" />
                                             <asp:Button ID="btnCancel" runat="server" Text="Cancel" />
                                         </asp:Panel>
