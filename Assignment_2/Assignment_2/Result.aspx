@@ -46,6 +46,28 @@
             background-color: #f6f2db; 
             border: solid thin black;
         }
+        .mg-email-container{
+            padding: 20px;
+            text-align: center;
+        }
+       .mg-email-row{
+           padding: 10px;
+       }
+       .mg-email-title{
+           font-size: 18px;
+           font-weight: 700;
+       }
+       .mg-popup{
+           border: solid thin black; 
+           background-color: lightskyblue; 
+           z-index: 999;
+           box-shadow: 10px 20px 8px #888888;
+       }
+       .mg-btn{
+           width: 100px;
+           margin: 0 10px;
+       }
+    
     </style> 
 
     <div style="color: #5c5536; text-align: center; margin-bottom: 10px; padding: 10px; width: 100%">
@@ -307,11 +329,22 @@
                                         
                                         <asp:ImageButton ID="imgbtnEmail" runat="server" ImageUrl="~/images/emailimage.png" Height="50px" Width="75px" />
                                         <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" TargetControlID="imgbtnEmail" PopupControlID="pnlEmail" CancelControlID="btnCancel"></ajaxToolkit:ModalPopupExtender>
-                                        <asp:Panel ID="pnlEmail" runat="server" style="border: solid thin black; background-color: lightskyblue; z-index: 999;  ">
-                                            <asp:Label ID="lblEmail" runat="server" Text="Enter your email address: "></asp:Label>
-                                            <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
-                                            <asp:Button ID="btnOk" runat="server" Text="Ok" />
-                                            <asp:Button ID="btnCancel" runat="server" Text="Cancel" />
+                                        <asp:Panel ID="pnlEmail" runat="server" class="mg-popup">
+                                            <div class="mg-email-container">
+                                                <div class="row mg-email-row mg-email-title">
+                                                    <p>Receive an email with your tax return information</p>
+                                                    <asp:Image ID="imgEmail" runat="server" ImageUrl="~/images/email_image.jpg" Height="100px" Width="150px" />
+                                                </div>
+                                                <div class="row mg-email-row">
+                                                    <asp:Label ID="lblEmail" runat="server" Text="Enter your email address: "></asp:Label>
+                                                    <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
+                                                </div>
+                                                   <div class="row mg-email-row"> 
+                                                    <asp:Button ID="btnOk" class="mg-btn" runat="server" Text="Ok" />
+                                                    <asp:Button ID="btnCancel" class="mg-btn" runat="server" Text="Cancel" />
+                                                    
+                                                </div> 
+                                            </div>
                                         </asp:Panel>
                                     </div>
                                 </div>
@@ -325,7 +358,7 @@
 
         <div class="row" style="padding-top: 10px; padding-bottom: 10px;">
             <div class="col-md-6">
-                <asp:Button ID="btnBack" runat="server" Text="<< Go Back" style="width: 100px" />
+                <asp:Button ID="btnBack" class="mg-btn" runat="server" Text="<< Go Back"/>
             </div>
             <div class="col-md-6"></div>
         </div>
