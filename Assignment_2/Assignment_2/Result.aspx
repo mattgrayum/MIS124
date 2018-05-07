@@ -256,6 +256,7 @@
                                             <p class="col-md-6">Taxes Withheld to Taxes Owed Ratio: </p>
                                             <asp:Label  class="col-md-6" ID="lblWithheldOwedRatio" runat="server" Text="Label" style="display: inline-block;"></asp:Label>
                                         </div>
+                                        <asp:ImageButton ID="imgbtnEmail" runat="server" ImageUrl="~/images/emailimage.png" Height="50px" Width="75px" />
                                     </div>
                                 </div>
                             </asp:Panel>
