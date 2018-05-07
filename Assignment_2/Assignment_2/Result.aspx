@@ -256,7 +256,14 @@
                                             <p class="col-md-6">Taxes Withheld to Taxes Owed Ratio: </p>
                                             <asp:Label  class="col-md-6" ID="lblWithheldOwedRatio" runat="server" Text="Label" style="display: inline-block;"></asp:Label>
                                         </div>
+                                        
                                         <asp:ImageButton ID="imgbtnEmail" runat="server" ImageUrl="~/images/emailimage.png" Height="50px" Width="75px" />
+                                        <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" TargetControlID="imgbtnEmail" PopupControlID="pnlEmail" CancelControlID="btnCancel" OkControlID="btnOk"></ajaxToolkit:ModalPopupExtender>
+                                        <asp:Panel ID="pnlEmail" runat="server" style="border: solid thin black; background-color: lightskyblue; z-index: 999;">
+                                            <p>Hello World!</p>
+                                            <asp:Button ID="btnOk" runat="server" Text="Ok" />
+                                            <asp:Button ID="btnCancel" runat="server" Text="Cancel" />
+                                        </asp:Panel>
                                     </div>
                                 </div>
                             </asp:Panel>
@@ -265,6 +272,7 @@
                 </ajaxToolkit:AccordionPane>  
             </Panes>  
         </ajaxToolkit:Accordion>
+        
 
         <div class="row" style="padding-top: 10px; padding-bottom: 10px;">
             <div class="col-md-6">

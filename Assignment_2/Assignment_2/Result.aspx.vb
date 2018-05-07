@@ -107,6 +107,16 @@ Partial Class Result
     End Sub
 
     '*******************************************************************************************************************
+    'ACTION ON EMAIL IMAGE BUTTON CLICK
+    '*******************************************************************************************************************
+    Protected Sub imgbtnEmail_Click(sender As Object, e As EventArgs) Handles imgbtnEmail.Click
+
+        ' Redirect back to the DisplayTaxReturn Page
+        Response.Redirect(url:="~/DisplayTaxReturn.aspx", endResponse:=False)
+
+    End Sub
+
+    '*******************************************************************************************************************
     'ACTION ON BACK BUTTON CLICK
     '*******************************************************************************************************************
     Protected Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
