@@ -77,14 +77,14 @@ Partial Class Result
 
 
                 Dim myPieChartValue1 As New AjaxControlToolkit.PieChartValue
-                myPieChartValue1.Category = "You"
+                myPieChartValue1.Category = "Adjusted Gross Income"
                 myPieChartValue1.PieChartValueColor = RGB(0, 0, 0)
-                myPieChartValue1.Data = 5
+                myPieChartValue1.Data = taxReturn.AdjustedGrossIncome()
 
                 Dim myPieChartValue2 As New AjaxControlToolkit.PieChartValue
-                myPieChartValue2.Category = "Me"
+                myPieChartValue2.Category = "Taxes"
                 myPieChartValue2.PieChartValueColor = RGB(100, 100, 100)
-                myPieChartValue2.Data = 10
+                myPieChartValue2.Data = taxReturn.Tax()
 
                 Dim pieChart As New AjaxControlToolkit.PieChart
                 pieChart = myPieChart
@@ -93,6 +93,9 @@ Partial Class Result
                 pieChart.PieChartValues.Add(myPieChartValue2)
 
 
+                lblAdjustedGrossIncomeRatio.Text = FormatPercent(taxReturn.Tax / taxReturn.AdjustedGrossIncome, 2)
+                lblTaxesWagesRatio.Text = FormatPercent(taxReturn.Tax / taxReturn.Wages, 2)
+                lblWithheldOwedRatio.Text = FormatPercent(taxReturn.IncomeTaxWithheld / dblFinalTax, 2)
 
 
             Catch ex As Exception
