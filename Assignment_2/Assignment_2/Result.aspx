@@ -2,6 +2,52 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
+    <style type="text/css" media="screen">
+        .mg-accordion-headder{
+            margin: 10px; 
+        }
+        .mg-accordion-headder:hover{
+            cursor: pointer;
+        }
+        .mg-accordion-headder p{
+            margin: auto 0; 
+            font-size: 18px; 
+            display: inline-block; 
+            padding: 5px;
+        }
+        .mg-accordion-headder span, .mg-income-stats-item label{
+            display: inline-block;
+        }
+        .mg-accordion-content{
+            padding: 10px 40px;
+        }
+        #mg-income-stats-heading{
+            font-size: 18px; 
+            margin-bottom: 20px; 
+            text-align: center; 
+        }
+        #mg-income-stats-heading p{
+            margin: auto auto;
+        }
+        #mg-income-stats{
+            border: solid thin black; 
+            padding: 10px;
+        }
+        .mg-income-stats-item {
+            padding: 10px;
+        }
+        #mg-income-stats-heading, .mg-accordion-headder{
+            color: white; 
+            background-color: #497a63;
+            border: solid thin black;  
+            padding: 5px; 
+        }
+        .mg-item-container{
+            background-color: #f6f2db; 
+            border: solid thin black;
+        }
+    </style> 
+
     <div style="color: #5c5536; text-align: center; margin-bottom: 10px; padding: 10px; width: 100%">
         <h2>2017 Tax Return 1040EZ Version 2.0 - Calculation Results</h2>
     </div>
@@ -51,12 +97,13 @@
             <Panes> 
                 <ajaxToolkit:AccordionPane ID="AccordionPane3" runat="server">  
                     <Header>
-                        <div style="margin: 10px; border: solid thin black; padding: 5px; color: white; background-color: #497a63;">
-                            <p style="margin: auto 0; font-size: 18px; display: inline-block; padding: 5px;">Tax Return Information</p><span style="display: inline-block;">(click to expand)</span>
+                        <div class="mg-accordion-headder">
+                            <p>Tax Return Information</p>
+                            <span>(click to expand/collapse)</span>
                         </div>
                     </Header>  
                     <Content>
-                        <div style="padding: 10px 40px;">
+                        <div class="mg-accordion-content">
                             <div class="row" style="padding-top: 10px; padding-bottom: 10px">
                                 <div class="col-md-6">
                                     <asp:Label ID="lblIndivOrJoint" runat="server" Text="Individual or joint tax return?"></asp:Label>
@@ -229,37 +276,38 @@
                 </ajaxToolkit:AccordionPane>  
                 <ajaxToolkit:AccordionPane ID="AccordionPane1" runat="server">  
                     <Header>
-                        <div style="margin: 10px; border: solid thin black; padding: 5px; color: white; background-color: #497a63;">
-                            <p style="margin: auto 0; font-size: 18px; display: inline-block; padding: 5px;">Pie Chart</p><span style="display: inline-block;">(click to expand)</span>
+                        <div class="mg-accordion-headder">
+                            <p>Pie Chart</p>
+                            <span>(click to expand/collapse)</span>
                         </div>
                     </Header> 
                     <Content>
-                        <div style="padding: 10px 40px;">
+                        <div class="mg-accordion-content">
                             <asp:Panel ID="Panel1" runat="server">
                                 <div class="col-md-5">
-                                    <ajaxToolkit:PieChart ID="myPieChart" runat="server" style="background-color: #f6f2db; " ChartTitle="Taxes to Adjusted Gross Income Ratio"></ajaxToolkit:PieChart> 
+                                    <ajaxToolkit:PieChart ID="myPieChart" runat="server" ChartTitle="Taxes to Adjusted Gross Income Ratio" class="mg-item-container"></ajaxToolkit:PieChart> 
                                 </div>
                                 <div class="col-md-7">
-                                    <div style="font-size: 18px; margin-bottom: 20px; border: solid thin black; text-align: center; padding: 5px; margin: auto auto; color: white; background-color: #497a63;">
+                                    <div id="mg-income-stats-heading">
                                         <p>Income Statistics</p>
                                     </div>
-                                    <div style="border: solid thin black; background-color: #f6f2db; padding: 10px;">
-                                        <div class="row" style="padding: 10px;">
+                                    <div class="mg-item-container">
+                                        <div class="row mg-income-stats-item">
                                             <p class="col-md-6">Taxes to Adjusted Gross Income Ratio: </p>
-                                            <asp:Label  class="col-md-6" ID="lblAdjustedGrossIncomeRatio" runat="server" Text="Label" style="display: inline-block;"></asp:Label>
+                                            <asp:Label  class="col-md-6" ID="lblAdjustedGrossIncomeRatio" runat="server" Text="Label"></asp:Label>
                                         </div>
-                                        <div class="row" style="padding: 10px;">
+                                        <div class="row mg-income-stats-item">
                                             <p class="col-md-6">Taxes to Wages Ratio: </p>
-                                            <asp:Label  class="col-md-6" ID="lblTaxesWagesRatio" runat="server" Text="Label" style="display: inline-block;"></asp:Label>
+                                            <asp:Label  class="col-md-6" ID="lblTaxesWagesRatio" runat="server" Text="Label"></asp:Label>
                                         </div>
-                                        <div class="row" style="padding: 10px;">
+                                        <div class="row mg-income-stats-item">
                                             <p class="col-md-6">Taxes Withheld to Taxes Owed Ratio: </p>
-                                            <asp:Label  class="col-md-6" ID="lblWithheldOwedRatio" runat="server" Text="Label" style="display: inline-block;"></asp:Label>
+                                            <asp:Label  class="col-md-6" ID="lblWithheldOwedRatio" runat="server" Text="Label"></asp:Label>
                                         </div>
                                         
                                         <asp:ImageButton ID="imgbtnEmail" runat="server" ImageUrl="~/images/emailimage.png" Height="50px" Width="75px" />
                                         <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server" TargetControlID="imgbtnEmail" PopupControlID="pnlEmail" CancelControlID="btnCancel" OkControlID="btnOk"></ajaxToolkit:ModalPopupExtender>
-                                        <asp:Panel ID="pnlEmail" runat="server" style="border: solid thin black; background-color: lightskyblue; z-index: 999;">
+                                        <asp:Panel ID="pnlEmail" runat="server" style="border: solid thin black; background-color: lightskyblue; z-index: 999;  ">
                                             <p>Hello World!</p>
                                             <asp:Button ID="btnOk" runat="server" Text="Ok" />
                                             <asp:Button ID="btnCancel" runat="server" Text="Cancel" />
