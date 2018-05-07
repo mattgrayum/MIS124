@@ -110,11 +110,33 @@ Partial Class Result
     Private Sub emailTaxResults()
         Try
             Dim myMailServer As String = "smtp.saclink.csus.edu"
-            Dim emailBody As String = "Hello World!"
-            Dim objMyMailMessage As New System.Net.Mail.MailMessage("mattgrayum@gmail.com", txtEmail.Text, "Tax Return Information", emailBody)
-            Dim objMyWebServer As New System.Net.Mail.SmtpClient(myMailServer)
-            objMyWebServer.Send(objMyMailMessage)
-            lblMessage.Text = "Mail was sent"
+            Dim taxReturn As clsTaxReturn
+            If Not Session("taxReturn") Is Nothing Then
+                taxReturn = Session("taxReturn")
+                Dim decFinalTax As Decimal = taxReturn.calculateTaxReturn()
+                Dim finalTaxMessage As String = "This is the amount you owe:_____________"
+                If decFinalTax > 0 Then
+                    finalTaxMessage = "This is the amount of your tax return:__"
+                End If
+                Dim emailBody As String = "Wages, salaries, and tips:______________" & FormatCurrency(taxReturn.Wages, 2).PadLeft(12) & vbCrLf &
+                                          "Taxable interest:_______________________" & FormatCurrency(taxReturn.TaxableInterest, 2).PadLeft(12) & vbCrLf &
+                                          "Unemployment compensation:______________" & FormatCurrency(taxReturn.UnemploymentCompensation, 2).PadLeft(12) & vbCrLf &
+                                          "Adjusted gross income:__________________" & FormatCurrency(taxReturn.AdjustedGrossIncome, 2).PadLeft(12) & vbCrLf &
+                                          "Number of dependent tax payers:_________" & taxReturn.NumberOfDependentTaxpayers.ToString.PadLeft(12) & vbCrLf &
+                                          "Taxable income:_________________________" & FormatCurrency(taxReturn.TaxableIncome, 2).PadLeft(12) & vbCrLf &
+                                          "Withholding:____________________________" & FormatCurrency(taxReturn.IncomeTaxWithheld, 2).PadLeft(12) & vbCrLf &
+                                          "Earned Income Credit:___________________" & FormatCurrency(taxReturn.EIC, 2).PadLeft(12) & vbCrLf &
+                                          "Nontaxable combat pay:__________________" & FormatCurrency(taxReturn.CompatPay, 2).PadLeft(12) & vbCrLf &
+                                          "Total payments:_________________________" & FormatCurrency(taxReturn.TotalPayments, 2).PadLeft(12) & vbCrLf &
+                                          "Your tax:_______________________________" & FormatCurrency(taxReturn.Tax, 2).PadLeft(12) & vbCrLf &
+                                          finalTaxMessage.PadRight(40) & FormatCurrency(taxReturn.calculateTaxReturn(), 2).PadLeft(12)
+
+
+                Dim objMyMailMessage As New System.Net.Mail.MailMessage("mattgrayum@gmail.com", txtEmail.Text, "Tax Return Information", emailBody)
+                Dim objMyWebServer As New System.Net.Mail.SmtpClient(myMailServer)
+                objMyWebServer.Send(objMyMailMessage)
+                lblMessage.Text = "Mail was sent"
+            End If
         Catch ex As Exception
             lblMessage.Text = ex.Message()
         End Try

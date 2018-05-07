@@ -59,7 +59,7 @@
        }
        .mg-popup{
            border: solid thin black; 
-           background-color: lightskyblue; 
+           background: linear-gradient(#5fa8dd, #fff); 
            z-index: 999;
            box-shadow: 10px 20px 8px #888888;
        }
