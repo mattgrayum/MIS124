@@ -30,9 +30,32 @@ Public Class Result
                 lblBMI.Text = FormatNumber(objMyBMI.BMI)
 
                 lblCategory.Text = clsBMI.getRating(objMyBMI.BMI) 'call the class shared method to get the BMI rating
+
+                Dim myBarChartSeries1 As New AjaxControlToolkit.BarChartSeries
+                myBarChartSeries1.Name = "National Average"
+                myBarChartSeries1.Data = {27}
+                BarChart1.Series.Add(myBarChartSeries1)
+
+                Dim myBarChartSeries2 As New AjaxControlToolkit.BarChartSeries
+                myBarChartSeries2.Name = "Your BMI"
+                myBarChartSeries2.Data = {FormatNumber(objMyBMI.BMI, 2)}
+                BarChart1.Series.Add(myBarChartSeries2)
             End If
+
         Catch ex As Exception
             Me.lblErrorMessages.Text = ex.Message
         End Try
     End Sub
+
+    Protected Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click
+        Dim myMailServer As String = "smtp.saclink.csus.edu"
+        Dim emailBody As String = "Your BMI is " & lblBMI.Text
+        Dim objMyMailMessage As New System.Net.Mail.MailMessage("mattgrayum@gmail.com", txtEmail.Text, "Tax Return Information", emailBody)
+        objMyMailMessage.IsBodyHtml = True
+        Dim objMyWebServer As New System.Net.Mail.SmtpClient(myMailServer)
+        objMyWebServer.Send(objMyMailMessage)
+        lblErrorMessages.Text = "Mail was sent"
+    End Sub
+
+
 End Class
