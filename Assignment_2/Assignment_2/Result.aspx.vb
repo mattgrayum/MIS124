@@ -71,11 +71,14 @@ Partial Class Result
                 End If
 
                 'Provide a success message
-                Utlilties.showSuccessMessage(lblMessage, pnlMessage, "Here are your calculated tax return results.")
+                If Request("email_sent") = "true" Then
+                    Utlilties.showSuccessMessage(lblMessage, pnlMessage, "Email was sent.")
+                Else
+                    Utlilties.showSuccessMessage(lblMessage, pnlMessage, "Here are your calculated tax return results.")
+                End If
+
 
                 'Pie Chart
-
-
                 Dim myPieChartValue1 As New AjaxControlToolkit.PieChartValue
                 myPieChartValue1.Category = "Adjusted Gross Income"
                 myPieChartValue1.PieChartValueColor = RGB(0, 0, 0)
@@ -95,7 +98,7 @@ Partial Class Result
 
                 lblAdjustedGrossIncomeRatio.Text = FormatPercent(taxReturn.Tax / taxReturn.AdjustedGrossIncome, 2)
                 lblTaxesWagesRatio.Text = FormatPercent(taxReturn.Tax / taxReturn.Wages, 2)
-                lblWithheldOwedRatio.Text = FormatPercent(taxReturn.IncomeTaxWithheld / dblFinalTax, 2)
+                lblWithheldOwedRatio.Text = FormatPercent(taxReturn.IncomeTaxWithheld / taxReturn.Tax, 2)
 
 
             Catch ex As Exception
@@ -106,130 +109,65 @@ Partial Class Result
 
     End Sub
 
-    'Sends out an e-mail message
+    '*******************************************************************************************************************
+    '  Method emailTaxResults
+    '   This method composes an email based on the calculated tax information and sends it to the address provided by
+    '   the user. 
+    ' Returns:
+    '   Nothing
+    ' Parameters:
+    '   None
+    '*******************************************************************************************************************
     Private Sub emailTaxResults()
+
         Try
+
             Dim myMailServer As String = "smtp.saclink.csus.edu"
 
-            'Dim fileName As String = Server.MapPath(path:=".") & "\App_Data\Assignment3_email.html"
-            'Dim emailBody As String = ""
-            'Using reader As New System.IO.StreamReader(fileName)
-
-            '    While Not reader.ReadLine() Is Nothing
-
-            '        emailBody = emailBody & reader.ReadLine()
-
-            '    End While
-
-            'End Using
-
             Dim taxReturn As clsTaxReturn
-            If Not Session("taxReturn") Is Nothing Then
-                taxReturn = Session("taxReturn")
-                Dim decFinalTax As Decimal = taxReturn.calculateTaxReturn()
-                Dim finalTaxMessage As String = "This is the amount you owe:__________________"
-                If decFinalTax > 0 Then
-                    finalTaxMessage = "This is the amount of your tax return:__"
-                End If
-                Dim emailBody As String = "<!DOCTYPE html>" &
-                                            "<html>" &
-                                                "<head>" &
-                                                    "<style>" &
-                                                        ".matt-header matt-footer{" &
-                                                            "color: white;" &
-                                                            "background: black;" &
-                                                            "position: relative;" &
-                                                            "text-align: center;" &
-                                                        "}" &
-                                                        ".box{" &
-                                                            "padding: 21px;" &
-                                                            "text-align: center;" &
-                                                        "}" &
-                                                        "table td{" &
-                                                            "padding: 0px 10px;" &
-                                                            "margin-right: 20px;" &
-                                                        "}" &
-                                                    "</style>" &
-                                                "</head>" &
-                                                "<body>" &
-                                                    "<header class='matt-header box' style='text-align: center;'><p>2018 Tax Information for Matt Grayum</p></header>" &
-                                                    "<div class='wrapper'>" &
-                                                        "<Table>" &
-                                                            "<tr>" &
-                                                                "<td> Wages, salaries, and tips:</td>" &
-                                                                "<td style='float: right;'>" & FormatCurrency(taxReturn.Wages, 2) & "</td>" &
-                                                            "</tr>" &
-                                                            "<tr>" &
-                                                                "<td> Taxable interest:</td>" &
-                                                                "<td style='float: right;'>" & FormatCurrency(taxReturn.TaxableInterest, 2) & "</td>" &
-                                                            "</tr>" &
-                                                            "<tr>" &
-                                                                "<td> Unemployment compensation</td>" &
-                                                                "<td style='float: right;'>" & FormatCurrency(taxReturn.UnemploymentCompensation, 2) & "</td>" &
-                                                            "</tr>" &
-                                                            "<tr>" &
-                                                                "<td> Adjusted gross income:</td>" &
-                                                                "<td style='float: right;'>" & FormatCurrency(taxReturn.AdjustedGrossIncome, 2) & "</td>" &
-                                                            "</tr>" &
-                                                            "<tr>" &
-                                                                "<td> Number Of dependent tax payers:</td>" &
-                                                                "<td style='float: right;'>" & FormatNumber(taxReturn.NumberOfDependentTaxpayers, 0) & "</td>" &
-                                                            "</tr>" &
-                                                            "<tr>" &
-                                                                "<td> Taxable income:</td>" &
-                                                                "<td style='float: right;'>" & FormatCurrency(taxReturn.TaxableIncome, 2) & "</td>" &
-                                                            "</tr>" &
-                                                            "<tr>" &
-                                                                "<td> Withholding : </td>" &
-                                                                "<td style='float: right;'>" & FormatCurrency(taxReturn.IncomeTaxWithheld, 2) & "</td>" &
-                                                            "</tr>" &
-                                                            "<tr>" &
-                                                                "<td> Earned Income Credit:</td>" &
-                                                                "<td style='float: right;'>" & FormatCurrency(taxReturn.EIC, 2) & "</td>" &
-                                                            "</tr>" &
-                                                            "<tr>" &
-                                                                "<td> Nontaxable combat pay:</td>" &
-                                                                "<td style='float: right;'>" & FormatCurrency(taxReturn.CompatPay, 2) & "</td>" &
-                                                            "</tr>" &
-                                                            "<tr>" &
-                                                                "<td> Total payments:</td>" &
-                                                                "<td style='float: right;'>" & FormatCurrency(taxReturn.TotalPayments, 2) & "</td>" &
-                                                            "</tr>" &
-                                                            "<tr>" &
-                                                                "<td> Your tax:</td>" &
-                                                                "<td style='float: right;'>" & FormatCurrency(taxReturn.Tax, 2) & "</td>" &
-                                                            "</tr>" &
-                                                            "<tr>" &
-                                                                "<td>" & finalTaxMessage & "</td>" &
-                                                                "<td style='float: right;'>" & decFinalTax & "</td>" &
-                                                            "</tr>" &
-                                                        "</table>" &
-                                                    "</div>" &
-                                                    "<footer class='matt-footer box'><p>Footer will go here</p></footer>" &
-                                                "</body>" &
-                                            "</html>"
-                'Dim emailBody As String = "Wages, salaries, and tips:___________________" & FormatCurrency(taxReturn.Wages, 2).PadLeft(20 - Len(FormatCurrency(taxReturn.Wages, 2))) & vbCrLf &
-                '                          "Taxable interest:___________________________" & FormatCurrency(taxReturn.TaxableInterest, 2).PadLeft(20 - Len(FormatCurrency(taxReturn.TaxableInterest, 2))) & vbCrLf &
-                '                          "Unemployment compensation:_______________" & String.Format("{0,12:C}", taxReturn.UnemploymentCompensation) & vbCrLf &
-                '                          "Adjusted gross income:_____________________" & String.Format("{0,12:C}", taxReturn.AdjustedGrossIncome) & vbCrLf &
-                '                          "Number of dependent tax payers:__________" & String.Format("{0,12:N}", taxReturn.NumberOfDependentTaxpayers) & vbCrLf &
-                '                          "Taxable income:___________________________" & String.Format("{0,12:C}", taxReturn.TaxableIncome) & vbCrLf &
-                '                          "Withholding:______________________________" & String.Format("{0,12:C}", taxReturn.IncomeTaxWithheld) & vbCrLf &
-                '                          "Earned Income Credit:___________________" & String.Format("{0,12:C}", taxReturn.EIC) & vbCrLf &
-                '                          "Nontaxable combat pay:__________________" & String.Format("{0,12:C}", taxReturn.CompatPay) & vbCrLf &
-                '                          "Total payments:___________________________" & String.Format("{0,12:C}", taxReturn.TotalPayments) & vbCrLf &
-                '                          "Your tax:_________________________________" & String.Format("{0,12:C}", taxReturn.Tax) & vbCrLf &
-                '                          finalTaxMessage.PadRight(40) & String.Format("{0,12:C}", taxReturn.calculateTaxReturn())
 
+            If Not Session("taxReturn") Is Nothing Then
+
+                taxReturn = Session("taxReturn")
+
+                Dim decFinalTax As Decimal = taxReturn.calculateTaxReturn()
+
+                Dim finalTaxMessage As String = "This is the amount you owe:"
+                If decFinalTax > 0 Then
+                    finalTaxMessage = "This is the amount of your tax return:"
+                End If
+
+                Dim emailBody As String
+                emailBody = "<!DOCTYPE html><html><head><style>table td{padding: 0px 10px;margin-right: 20px;}</style></head>" &
+                            "<body><header><h2>" & lblTaxYear.Text & " Tax Information for " & txtFirstName.Text & " " & txtLastName.Text & "</h2></header>" &
+                            "<div><table><tr><td> Wages, salaries, and tips:</td><td style='float: right;'>" & FormatCurrency(taxReturn.Wages, 2) & "</td></tr>" &
+                            "<tr><td> Taxable interest:</td><td style='float: right;'>" & FormatCurrency(taxReturn.TaxableInterest, 2) & "</td></tr>" &
+                            "<tr><td> Unemployment compensation:</td><td style='float: right;'>" & FormatCurrency(taxReturn.UnemploymentCompensation, 2) & "</td></tr>" &
+                            "<tr><td> Adjusted gross income:</td><td style='float: right;'>" & FormatCurrency(taxReturn.AdjustedGrossIncome, 2) & "</td></tr>" &
+                            "<tr><td> Number of dependent tax payers:</td><td style='float: right;'>" & FormatNumber(taxReturn.NumberOfDependentTaxpayers, 0) & "</td></tr>" &
+                            "<tr><td> Taxable income:</td><td style='float: right;'>" & FormatCurrency(taxReturn.TaxableIncome, 2) & "</td></tr>" &
+                            "<tr><td> Withholding : </td><td style='float: right;'>" & FormatCurrency(taxReturn.IncomeTaxWithheld, 2) & "</td></tr>" &
+                            "<tr><td> Earned Income Credit:</td><td style='float: right;'>" & FormatCurrency(taxReturn.EIC, 2) & "</td></tr>" &
+                            "<tr><td> Nontaxable combat pay:</td><td style='float: right;'>" & FormatCurrency(taxReturn.CompatPay, 2) & "</td></tr>" &
+                            "<tr><td> Total payments:</td><td style='float: right;'>" & FormatCurrency(taxReturn.TotalPayments, 2) & "</td></tr>" &
+                            "<tr><td> Your tax:</td><td style='float: right;'>" & FormatCurrency(taxReturn.Tax, 2) & "</td></tr>" &
+                            "<tr><td>" & finalTaxMessage & "</td><td style='float: right;'>" & decFinalTax & "</td></tr><br>" &
+                            "<tr><td>Taxes to Adjusted Gross Income Ratio:</td><td style='float: right;'>" & FormatPercent(taxReturn.Tax / taxReturn.AdjustedGrossIncome, 2) & "</td></tr>" &
+                            "<tr><td>Taxes to Wages Ratio:</td><td style='float: right;'>" & FormatPercent(taxReturn.Tax / taxReturn.Wages, 2) & "</td></tr>" &
+                            "<tr><td>Taxes Withheld to Taxes Owed Ratio:</td><td style='float: right;'>" & FormatPercent(taxReturn.IncomeTaxWithheld / taxReturn.Tax, 2) & "</td></tr>" &
+                            "</table></div></body></html>"
 
                 Dim objMyMailMessage As New System.Net.Mail.MailMessage("mattgrayum@gmail.com", txtEmail.Text, "Tax Return Information", emailBody)
                 objMyMailMessage.IsBodyHtml = True
                 Dim objMyWebServer As New System.Net.Mail.SmtpClient(myMailServer)
                 objMyWebServer.Send(objMyMailMessage)
-                lblMessage.Text = "Mail was sent"
+
+            Else
+                Utlilties.showErrorMessage(lblMessage, pnlMessage, "There is no tax information to send. Please contact the site administrator for assistance")
             End If
+
         Catch ex As Exception
-            lblMessage.Text = ex.Message()
+            Utlilties.showErrorMessage(lblMessage, pnlMessage, ex)
         End Try
     End Sub
 
@@ -237,9 +175,12 @@ Partial Class Result
     'ACTION ON OK BUTTON CLICK
     '*******************************************************************************************************************
     Protected Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click
-        lblMessage.Text = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+
         emailTaxResults()
         System.Web.HttpContext.Current.Response.Write("<SCRIPT LANGUAGE=""JavaScript"">alert('Your tax return information has been emailed to you')</SCRIPT>")
+
+        ' Reload the Result Page
+        Response.Redirect(url:="~/Result.aspx?email_sent=true", endResponse:=False)
 
     End Sub
 

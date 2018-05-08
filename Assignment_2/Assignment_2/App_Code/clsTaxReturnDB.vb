@@ -24,16 +24,22 @@ Public Class clsTaxReturnDB
         Dim dbCommand As New SqlCommand(strSQL, connection)
         connection.Open()
 
+        'Set up a reader object to read a single value from the database
+        Dim dbReader As SqlDataReader = dbCommand.ExecuteReader(CommandBehavior.SingleResult)
+
         'Check if a tax return exists in the database
-        Dim isReturn As Boolean = True
-        If dbCommand.ExecuteScalar = Nothing Then
-            isReturn = False
+        Dim isRecord As Boolean = False
+        If dbReader.Read() Then
+            Dim result As Long = dbReader.GetInt64(0)
+            isRecord = True
+        Else
+            isRecord = False
         End If
+
+        Return isRecord
 
         'Close the database connection
         connection.Close()
-
-        Return isReturn
 
     End Function
 
