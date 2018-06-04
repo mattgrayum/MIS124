@@ -1,2 +1,2 @@
 # MIS124
-Projects and assignments for MIS 124 at CSUS 
+Projects and Exams for MIS 124 at CSUS 

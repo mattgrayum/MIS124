@@ -31,10 +31,19 @@ Public Class Result
 
                 lblCategory.Text = clsBMI.getRating(objMyBMI.BMI) 'call the class shared method to get the BMI rating
 
+                ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+                ' Instantiate a new BarChartSeries object
                 Dim myBarChartSeries1 As New AjaxControlToolkit.BarChartSeries
+
+                ' Give the Series a name
                 myBarChartSeries1.Name = "National Average"
+
+                ' Give the Series a value
                 myBarChartSeries1.Data = {27}
+
+                ' Add the Series to the BarChart that has already been added to the page
                 BarChart1.Series.Add(myBarChartSeries1)
+                '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
                 Dim myBarChartSeries2 As New AjaxControlToolkit.BarChartSeries
                 myBarChartSeries2.Name = "Your BMI"
